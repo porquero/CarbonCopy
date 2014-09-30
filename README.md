@@ -1,4 +1,4 @@
-cccm
+CarbonCopy
 ====
 
 CarbonCopy - Colaboration Manager
