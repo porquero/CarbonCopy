@@ -1,0 +1,9 @@
+<?php
+$attributes = array('class' => 'gf', 'id' => 'login_form');
+echo form_open('/cc/user/login/' . $redirect, $attributes);
+?>
+<label><span><?php echo lang('email') ?></span><input type="email" name="email" maxlength="254" class="focus" /></label>
+<label><span><?php echo lang('password') ?></span><input type="password" name="password" maxlength="75" /></label>
+<label><button type="submit" name="submit" value="connect"><?php echo lang('connect') ?></button></label>
+<?php
+echo form_close();

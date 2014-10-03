@@ -1,0 +1,13 @@
+<?php
+$attributes = array('class' => 'gf', 'id' => 'add_topic_form');
+echo form_open_multipart('/cc/topic/modify', $attributes);
+include dirname(__FILE__) . '/_inc/common_form.phtml';
+?>
+<label><span><?php echo lang('responsible') ?></span>
+	<?php echo Modules::run('account/participant/html_select_for_context', $context, 'responsible', $responsible, TRUE) ?>
+</label>
+<div class="argt">
+	<button type="submit" name="submit" value="cancel"><?php echo lang('cancel') ?></button>
+	<button type="submit" value="<?php echo $mode_edition ?>"><?php echo $mode_edition ?></button>
+</div>
+</form>

@@ -1,0 +1,9 @@
+<h3><?php echo lang('invite_new_participant') ?></h3>
+<?php
+$attributes = array('class' => 'gf', 'id' => 'invite-form');
+echo form_open('/account/participant/invite', $attributes);
+?>
+<label class="inline"><input placeholder="<?php echo lang('email') ?>" type="email" name="email" id="email" maxlength="254" /></label>
+<label class="inline"><button type="submit" name="submit" value="invite"><?php echo lang('invite') ?></button></label>
+<?php
+echo form_close();

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title><?php echo @$title ?></title>
+		<meta name="keywords" content="<?php echo @$meta_keywords ?>">
+		<meta name="description" content="<?php echo @$meta_description ?>">
+		<meta name="author" content="Playa Soluciones">
+		<?php
+		echo
+		link_tag('pub/css/reset.css')
+		. link_tag('pub/css/ui-lightness/jquery-ui-1.10.3.custom.min.css')
+		. link_tag('pub/formalize/css/formalize.css')
+		. @$head . @$_head;
+		?>
+	</head>
+	<body>
+		<div class="content">
+			<?php
+			echo '<h2>' . @$title . '</h2>';
+			echo @$_view;
+			?>
+		</div>
+		<div><?php echo @$_footer ?></div>
+		<?php
+		echo
+		js_tag('pub/js/jquery-1.9.1.js')
+		. js_tag('pub/js/jquery-ui-1.10.3.custom.min.js')
+		. @$footer;
+		?>
+
+		<script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-36981510-1']);
+			_gaq.push(['_setDomainName', 'huevohost.com']);
+			_gaq.push(['_setAllowLinker', true]);
+			_gaq.push(['_setAllowAnchor', true]);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script');
+				ga.type = 'text/javascript';
+				ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+	</body>
+</html>

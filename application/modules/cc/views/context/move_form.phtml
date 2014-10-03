@@ -1,0 +1,23 @@
+<b><?php echo lang('move_context'); ?></b>
+<ul>
+	<?php
+	$from = $id_context . '|' . $from_context;
+	$i = 0;
+
+	foreach ($contexts as $path => $info) {
+		$i ++;
+
+		$path_trunc = $path;
+		if (strlen($path) > 12) {
+			$path_trunc = substr($path, 0, 12) . '...';
+		}
+
+		$link = site_url("/cc/context/move/{$from}|{$info['context']}");
+		echo <<<PQR
+<li><a href="{$link}" class="context" title="{$path}">{$info['title']}</a> <a href="{$link}" title="{$path}">[{$path_trunc}]</a></li>
+PQR;
+	}
+
+	echo $i === 0 ? lang('no_contexts_move') : NULL;
+	?>
+</ul>

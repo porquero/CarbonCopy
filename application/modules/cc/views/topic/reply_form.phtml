@@ -1,0 +1,15 @@
+<?php
+$attributes = array('class' => 'gf', 'id' => 'reply_topic');
+echo form_open_multipart('/cc/topic/reply', $attributes);
+?>
+<input type="hidden" name="context" id="context" value="<?php echo $context ?>" />
+<input type="hidden" name="id_topic" value="<?php echo $id_topic ?>" />
+<input type="hidden" name="title" value="<?php echo $title ?>" />
+<label><span><?php echo lang('message') ?></span><div class="clear"></div><textarea name="message" id="message"></textarea></label>
+<label><span><?php echo lang('attach_file') ?></span><input type="file" name="userfile" /></label>
+<div class="argt">
+	<button type="submit" name="submit" value="cancel"><?php echo lang('cancel') ?></button>
+	<button type="submit" value="send" class="action_button"><?php echo lang('send') ?></button>
+</div>
+<?php
+echo form_close();

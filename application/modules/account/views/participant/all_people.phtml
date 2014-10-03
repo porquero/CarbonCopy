@@ -1,0 +1,10 @@
+<ul id="all_we_are">
+	<?php foreach ($info_participants as $participant): ?>
+		<li>
+			<b><?php echo $participant->name ?></b>
+			<a href="mailto:<?php echo $participant->email ?>"><?php echo $participant->email ?></a>
+			<p><?php echo $participant->ts ?></p>
+			<a href="<?php echo site_url('account/participant/profile/' . $participant->username) ?>"><?php echo $participant->username ?></a>
+		</li>
+	<?php endforeach; ?>
+</ul>

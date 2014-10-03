@@ -1,0 +1,37 @@
+<div id="contexts">
+	<h3><?php echo $context_label . nbs() . logged_data($participants, '<a href="' . site_url('/cc/context/create_form/') . '">[+]</a>') ?></h3>
+	<ul>
+		<?php
+		foreach ($contexts as $context) {
+			if ( ! ($context['info']['visibility'] == 'public' || belongs_to('context', $context['info']['id'], connected_user()))) {
+				continue;
+			}
+			$icon = context_icon($context);
+			$context_link = site_url('/cc/context/resume/' . $context['info']['id']);
+			echo <<<PQR
+<li><a href="{$context_link}">{$context['info']['title']} <span class="{$icon}"></span></a></li>
+PQR;
+		}
+		?>
+	</ul>
+</div>
+<?php
+include_once _INC . 'modules/cc/views/_inc/participants.phtml';
+if (count($accounts) > 1 AND connected_user() !== FALSE):
+	?>
+	<div id="accounts">
+		<h3><?php echo lang('acoounts'); ?></h3>
+		<ul>
+			<?php
+			foreach ($accounts as $account) {
+				$url = site_url('/account/manage/set_current/' . $account['id']);
+				echo <<<PQR
+<li><a href="{$url}" class="usr">{$account['name']}</a></li>
+PQR;
+			}
+			?>
+		</ul>
+	</div>
+	<?php
+
+ endif;

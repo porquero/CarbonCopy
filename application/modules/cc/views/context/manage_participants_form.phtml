@@ -1,0 +1,9 @@
+<?php
+
+echo '<b>' . $title . '</b>';
+$attributes = array('class' => 'gf', 'id' => 'manage_participants_form');
+echo form_open('/cc/context/manage_participants/' . $context, $attributes);
+echo Modules::run('account/participant/html_checkbox_for_context', $context, 'participants', $participants);
+echo form_button('submit', lang('cancel'), 'submit', 'value="cancel"') . nbs();
+echo form_button('submit', lang('ok'), 'submit', 'value="ok"');
+echo form_close();

@@ -1,0 +1,18 @@
+<div id="timeline-s">
+	<h3><?php echo lang('timeline') ?></h3>
+	<ul>
+		<?php
+		if (count($full_timeline) === 0) {
+			echo '<li style="text-align:center">' . lang('nothing_happens') . '</li>';
+		}
+
+		foreach ((array) $full_timeline as $action):
+			?>
+			<li>
+				<a href="<?php echo site_url('/account/participant/profile/' . $action->from_participant) . '/all/' . $action->sql_date; ?>"><span><?php echo $action->ts ?></span></a>
+				<a href="<?php echo site_url('/account/participant/profile/' . $action->from_participant); ?>" class="usr"><?php echo $action->from_participant ?></a>
+				<i><?php echo $action->name ?></i>
+			</li>
+		<?php endforeach; ?>
+	</ul>
+</div>

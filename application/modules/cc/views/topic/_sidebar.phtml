@@ -1,0 +1,14 @@
+<h3><?php echo lang('details') ?></h3>
+<?php
+$due = account_date_format($info['due']);
+
+echo <<<PQR
+<ul id="details">
+    <!--<li><b>status</b> {$info['status']}</li>-->
+    <li><b>due</b> {$due}</li>
+    <li><b>resp.</b> {$info['responsible']}</li>
+</ul>
+PQR;
+
+include_once _INC . 'modules/cc/views/_inc/participants.phtml';
+include_once _INC . 'modules/cc/views/timeline/get_timeline_simplified.phtml';

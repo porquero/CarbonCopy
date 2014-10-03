@@ -1,0 +1,21 @@
+<?php
+$attributes = array('id' => 'config_form');
+echo form_open_multipart('/account/participant/config', $attributes);
+?>
+<fieldset>
+	<legend><?php echo lang('user_info') ?></legend>
+	<label><span><?php echo lang('full_name') ?></span><input type="text" name="name" maxlength="75" value="<?php echo $user_data->name ?>" /></label>
+	<label><span><?php echo lang('email') ?></span><input type="email" name="email" id="email" maxlength="254" value="<?php echo $user_data->email ?>" /></label>
+	<label><span><?php echo lang('password') ?></span><input type="password" name="password" maxlength="75" /></label>
+</fieldset>
+<fieldset>
+	<legend><?php echo lang('user_settings') ?></legend>
+	<label><span><?php echo lang('language') ?></span><?php echo form_dropdown('language', $language, $user_language) ?></label>
+</fieldset>
+<div class="argt">
+	<button type="submit" name="submit" value="cancel"><?php echo lang('cancel') ?></button>
+	<button type="submit" value="send" class="action_button"><?php echo lang('send') ?></button>
+</div>
+<?php
+echo form_close();
+

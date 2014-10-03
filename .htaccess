@@ -1,0 +1,6 @@
+RewriteEngine On
+
+AddDefaultCharset UTF-8
+
+RewriteCond $1 !^(index\.php|pub|robots\.txt|sitemap\.xml|BingSiteAuth\.xml|google7b520621a8187caa\.html|curso-php)
+RewriteRule ^(.*)$ /index.php/$1 [L]

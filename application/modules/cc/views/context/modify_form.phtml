@@ -1,0 +1,14 @@
+<?php
+$attributes = array('class' => 'gf', 'id' => 'edit_context_form');
+echo form_open('/cc/context/modify', $attributes);
+?>
+<input type="hidden" name="context" id="context" value="<?php echo $context ?>" />
+<input type="hidden" name="id" id="id" value="<?php echo $info['info']['id'] ?>" />
+<label><span>Title</span><input type="text" name="title" id="title" value="<?php echo $info['info']['title'] ?>" /></label>
+<?php include dirname(__FILE__) . '/_inc/common_form.phtml'; ?>
+<div class="argt">
+	<button type="submit" name="submit" value="cancel"><?php echo lang('cancel'); ?></button>
+	<button type="submit" value="<?php echo $mode_edition ?>"><?php echo $mode_edition ?></button>
+</div>
+<?php
+echo form_close();

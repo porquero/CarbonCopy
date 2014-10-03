@@ -1,0 +1,23 @@
+<?php
+$attributes = array('id' => 'config_form');
+echo form_open_multipart('/account/manage/config', $attributes);
+?>
+<fieldset>
+	<legend><?php echo lang('account') ?></legend>
+	<label><span><?php echo lang('account_name') ?></span><?php echo form_input('account_name', $account_name, 'maxlength="75"') ?></label>
+	<label><span><?php echo lang('home_info') ?></span><div class="clear"></div><textarea name="home_info" id="home_info"><?php echo $account_info ?></textarea></label>
+</fieldset>
+<fieldset>
+	<legend><?php echo lang('global_settings') ?></legend>
+	<label><span><?php echo lang('date_format') ?></span><?php echo form_dropdown('date_format', $date_format, $account_date_format) ?></label>
+	<label><span><?php echo lang('language') ?></span><?php echo form_dropdown('language', $language, $account_language) ?></label>
+	<label><span><?php echo lang('context_label'); ?></span><?php echo form_input('context_label', $context_label, 'maxlength="30"') ?></label>
+	<label><span><?php echo lang('topic_label'); ?></span><?php echo form_input('topic_label', $topic_label, 'maxlength="30"') ?></label>
+</fieldset>
+<div class="argt">
+	<button type="submit" name="submit" value="cancel"><?php echo lang('cancel') ?></button>
+	<button type="submit" value="send" class="action_button"><?php echo lang('send') ?></button>
+</div>
+<?php
+echo form_close();
+

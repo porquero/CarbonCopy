@@ -1,0 +1,11 @@
+<?php
+$attributes = array('class' => 'gf', 'id' => 'register_form');
+echo form_open('/cc/user/register', $attributes);
+echo form_hidden('invitation_hash', $invitation_hash);
+?>
+<label><span><?php echo lang('full_name') ?></span><input type="text" name="name" maxlength="75" /></label>
+<label><span><?php echo lang('username') ?></span><input type="text" name="username" id="user" maxlength="50" /></label>
+<label><span><?php echo lang('email') ?></span><input type="email" name="email" id="email" maxlength="254" /></label>
+<label><span><?php echo lang('password') ?></span><input type="password" name="password" maxlength="75" /></label>
+<label><button type="submit" name="submit" value="register"><?php echo lang('register') ?></button></label>
+</form>

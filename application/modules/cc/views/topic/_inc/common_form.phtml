@@ -1,0 +1,9 @@
+<input type="hidden" name="context" id="context" value="<?php echo preg_replace('/_' . $id_topic . '/', '', $context) ?>" />
+<input type="hidden" name="id" id="id" value="<?php echo $id_topic ?>" />
+<?php
+$field = 'topic_title';
+echo form_label(lang($field, $field) . form_input($field, $$field, 'maxlength="75" class="focus"'));
+$field = 'topic_description';
+echo form_label(lang($field, $field) . '<div class="clear"></div>' . form_textarea($field, $$field, 'id="' . $field . '"'));
+$field = 'due';
+echo form_label(lang($field, $field) . form_input($field, $$field, 'id="' . $field . '"'));

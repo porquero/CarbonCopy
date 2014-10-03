@@ -1,0 +1,81 @@
+hr{
+	margin-bottom: 14px
+}
+#replies li{
+	border-bottom: 1px solid #ccc;
+	margin-top: 2px;
+	padding: 7px;
+	margin-bottom: 14px;
+	word-wrap: break-word
+}
+.r-date{
+	float: right;
+	color: #4B5558
+}
+#replies .p{
+	clear: both;
+	text-align: left;
+}
+#replies .p p{
+	margin-bottom: 7px
+}
+#replies .usr{
+	margin: 0 0 7px 0;
+	float: left
+}
+#replies a, #replies span{
+	font-size: 85%
+}
+#replies p a{
+	float: right
+}
+.f-atach{
+	text-align: right
+}
+#details b{
+	float: left;
+	width: 30%
+}
+#usr-pub{
+	font-size: 85%
+}
+h2{
+	margin: 14px 0 7px 0;
+}
+.header{
+	height: auto
+}
+.header h2{
+	position: absolute;
+	right: 7px;
+	top: 14px;
+	margin: 0;
+	font-size: 116%
+}
+#files{
+	width: 98%;
+	margin: 7px auto 21px auto
+}
+#files-h{
+	background: #eee;
+	padding: 3px 4px
+}
+#files a{
+	font-size: 93%
+}
+#files li{
+	list-style-type: circle;
+	list-style-position: inside;
+	word-wrap: break-word
+}
+#replies-h{
+	background: #4B5558;
+	padding: 3px 4px;
+	color: #fff;
+}
+#replies .usr{
+	margin-right: 4px
+}
+.fatach{
+	text-align: right
+}

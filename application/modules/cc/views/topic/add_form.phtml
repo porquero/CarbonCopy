@@ -1,0 +1,16 @@
+<?php
+$attributes = array('class' => 'gf', 'id' => 'add_topic_form');
+echo form_open_multipart('/cc/topic/add', $attributes);
+include dirname(__FILE__) . '/_inc/common_form.phtml';
+?>
+<label><span><?php echo lang('participants') ?></span></label>
+<?php echo Modules::run('account/participant/html_checkbox_for_context', $context, 'participants') ?>
+<label><span><?php echo lang('responsible') ?></span>
+	<?php echo Modules::run('account/participant/html_select_for_context', $context, 'responsible') ?>
+</label>
+<label><span><?php echo lang('attach_file') ?></span><input type="file" name="userfile" /></label>
+<div class="argt">
+	<a href="<?php echo site_url('/cc/context/resume/' . $context) ?>" class="cancel"><button type="button"><?php echo lang('cancel') ?></button></a>
+	<button type="submit" value="<?php echo $mode_edition ?>"><?php echo $submit_txt ?></button>
+</div>
+</form>
