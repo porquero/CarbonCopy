@@ -46,8 +46,4 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Insert first user to manage account. The password is 123456
-INSERT INTO `user` (`username`, `name`, `email`, `password`, `accounts`, `principal_account`, `validated`, `ts`) 
-VALUES ('admin', 'Admin', 'admin@mail.com', 'e10adc3949ba59abbe56e057f20f883e', 'cc', 'cc', '1', CURRENT_TIMESTAMP);
-
 COMMIT;

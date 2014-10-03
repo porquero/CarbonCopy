@@ -82,7 +82,9 @@ class m_user extends CI_Model {
 	 */
 	public function can_validate($token)
 	{
-		return $this->db->from($this->_table_name)->where('concat(password, md5(email)) = \'' . $token . '\'')
+		return $this->db->from($this->_table_name)
+				->where('concat(password, md5(email)) = \'' . $token . '\'')
+				->where('validated', 0)
 				->count_all_results() == 1;
 	}
 
@@ -257,7 +259,13 @@ class m_user extends CI_Model {
 	 */
 	public function accounts($username)
 	{
-		$r = $this->db->select('accounts')->from($this->_table_name)->where('username', $username)->get()->row();
+		if ($username === FALSE) {
+			$r = new stdClass();
+			$r->accounts = 'cc';
+		}
+		else {
+			$r = $this->db->select('accounts')->from($this->_table_name)->where('username', $username)->get()->row();
+		}
 
 		if (strstr($r->accounts, '_') !== FALSE) {
 			$accounts = explode('_', $r->accounts);

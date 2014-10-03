@@ -117,7 +117,7 @@ $lang['lconnect_cc'] = 'Connect to CarbonCopy';
 $lang['not_validated'] = 'You account is not validated yet. Please check you email.';
 $lang['invalid_login'] = 'Invalid user or password.';
 $lang['invalid_data'] = 'Invalid data';
-$lang['can_login'] = 'You can <a href="%s/cc/user/login_form">login</a> now';
+$lang['can_login'] = 'You can <a href="%scc/user/login_form">login</a> now';
 $lang['invitation_successful'] = 'Invitation successful';
 $lang['access_invited'] = 'You can access to account.';
 $lang['error_validatong_invitation'] = 'Problem validating your invitation. Please request another.';
