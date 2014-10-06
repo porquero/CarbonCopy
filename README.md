@@ -1,17 +1,16 @@
 CarbonCopy
 ===========
 
-CarbonCopy is a collaboration manager based in contexts that use the basis of communication
-(transmitter, message, receiver). CarbonCopy is the channel.
+CarbonCopy is a collaboration manager based in contexts using the basis of communication.
 
 
 Overview
 ------------
 
-Each enterprise or team has their own communication culture, so CarbonCopy was developed for adaptate to
+Each enterprise or team has their own communication culture, and CarbonCopy was developed to adaptate to
 that culture.
 
-All communication enviroment is based on participants, contexts, topics and interaction; they are the pillar of
+In CarbonCopy all communication enviroment is based on participants, contexts, topics and interaction; they are the pillar of
 the system.
 
 
@@ -42,4 +41,4 @@ using virtualhost as example.
 
 - Database
 
-Modify the file setup/cc.sql:51 to use your data and import  into database.
+Import  file setup/cc.sql into database.
