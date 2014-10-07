@@ -77,14 +77,15 @@ class user extends MX_Controller {
 				$this->load->library('email');
 				$recipient = $this->input->post('email');
 				$subject = 'CarbonCopy - ' . lang('email_validation');
-				$message_mail = sprintf(lang('email_validation_message'), $this->input->post('name'), site_url()
-					, md5($this->input->post('password')) . md5($this->input->post('email')));
+				$message_mail = nl2br(sprintf(lang('email_validation_message'), $this->input->post('name'), site_url_ws()
+					, md5($this->input->post('password')) . md5($this->input->post('email'))));
 				$this->email->from('validation@cccm.com', 'CarbonCopy');
 				$this->email->to($recipient);
 
 				$this->email->subject($subject);
 				$this->email->message($message_mail);
 
+				$this->email->set_mailtype('html');
 				$this->email->send();
 			}
 			else {
@@ -312,7 +313,7 @@ class user extends MX_Controller {
 			$this->tpl->variables(
 				array(
 						'title' => lang('registration_successful'),
-						'description' => sprintf(lang('can_login'), site_url()),
+						'description' => sprintf(lang('can_login'), site_url_ws()),
 			));
 			$this->tpl->load_view(_TEMPLATE);
 		}

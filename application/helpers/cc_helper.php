@@ -448,3 +448,13 @@ function topic_icon($info_topic)
 
 	return '';
 }
+
+/**
+ * Return site_url without slash
+ *
+ * @return string
+ */
+function site_url_ws()
+{
+	return preg_replace('/\/$/', '', site_url());
+}

@@ -57,7 +57,7 @@ Hi!
 
 To accept invitation only follow next link:
 
-%scc/user/invited/%s_%s
+%s/cc/user/invited/%s_%s
 
 Regards.
 The <a href="%s">CarbonCopy</a> Team.
@@ -105,19 +105,19 @@ Hi %s
 
 Welcome to CarbonCopy. Please to activate your account visit next link:
 
-%scc/user/validate/%s
+%s/cc/user/validate/%s
 
 Regards.
 The CarbonCopy Team.
 PQR;
 $lang['registration_successful'] = 'Registration successful';
-$lang['check_email'] = 'Please check email.';
+$lang['check_email'] = 'Please check your email.';
 $lang['login_form'] = 'Login.';
 $lang['lconnect_cc'] = 'Connect to CarbonCopy';
 $lang['not_validated'] = 'You account is not validated yet. Please check you email.';
 $lang['invalid_login'] = 'Invalid user or password.';
 $lang['invalid_data'] = 'Invalid data';
-$lang['can_login'] = 'You can <a href="%scc/user/login_form">login</a> now';
+$lang['can_login'] = 'You can <a href="%s/cc/user/login_form">login</a> now';
 $lang['invitation_successful'] = 'Invitation successful';
 $lang['access_invited'] = 'You can access to account.';
 $lang['error_validatong_invitation'] = 'Problem validating your invitation. Please request another.';

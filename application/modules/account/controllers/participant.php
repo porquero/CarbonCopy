@@ -356,14 +356,15 @@ PQR;
 		$hash = uniqid();
 		$this->write->archive(_INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/_invitations/' . $hash, $this->input->post('email'));
 
-		$mail_body = sprintf(lang('invitation_mail'), $name[0], site_url(), $this->session->userdata('current_account'), $hash, site_url());
+		$mail_body = nl2br(sprintf(lang('invitation_mail'), $name[0], site_url(), $this->session->userdata('current_account'), $hash, site_url_ws()));
 
 		// TODO Load email from configuration
 		$this->email->from('invitation@cccm.com', 'CarbonCopy');
 		$this->email->to($this->input->post('email'));
 
-		$this->email->subject(sprintf(lang('invitation_subject', $name[0])));
+		$this->email->subject(sprintf(lang('invitation_subject'), $name[0]));
 		$this->email->message($mail_body);
+		$this->email->set_mailtype('html');
 
 		$this->email->send();
 

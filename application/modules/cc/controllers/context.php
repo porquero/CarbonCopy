@@ -882,7 +882,7 @@ PQR;
 			);
 		}
 		else {
-			$context = preg_replace('/\_[a-z0-9-]*$/', '', $context);
+			$context = preg_replace('/\_?[a-z0-9-]*$/', '', $context);
 
 			return $this->labels($context);
 		}

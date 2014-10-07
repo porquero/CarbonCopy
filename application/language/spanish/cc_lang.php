@@ -57,12 +57,12 @@ $lang['invitation_mail'] = <<<PQR
 
 Para aceptar sólo sigue el siguiente link:
 
-%scc/user/invited/%s_%s
+%s/cc/user/invited/%s_%s
 
 Saludos.
 El equipo <a href="%s">CarbonCopy</a>.
 PQR;
-$lang['invitation_subject'] = ' te ha invitado para usar CarbonCopy';
+$lang['invitation_subject'] = '%s te ha invitado para usar CarbonCopy';
 $lang['error'] = 'Error';
 $lang['context_doesnt_exists'] = 'El contexto <b>%s</b> no existe o fue eliminado.';
 $lang['not_belongs_to_context'] = 'No perteneces a este contexto.';
@@ -105,7 +105,7 @@ Hola %s
 
 Bienvenid@ a CarbonCopy. Por favor visita el siguiente link para activar tu cuenta:
 
-%scc/user/validate/%s
+%s/cc/user/validate/%s
 
 Saludos.
 El equipo de CarbonCopy.
@@ -117,7 +117,7 @@ $lang['lconnect_cc'] = 'Conectar a CarbonCopy';
 $lang['not_validated'] = 'No has validado tu cuenta aún. Por favor revisa tu correo.';
 $lang['invalid_login'] = 'Usuario o Contraseña inválidos.';
 $lang['invalid_data'] = 'Datos inválidos';
-$lang['can_login'] = 'Puedes <a href="%scc/user/login_form">ingresar</a> ahora';
+$lang['can_login'] = 'Puedes <a href="%s/cc/user/login_form">ingresar</a> ahora';
 $lang['invitation_successful'] = 'Invitación completada';
 $lang['access_invited'] = 'Ahora podrás acceder a la cuenta.';
 $lang['error_validatong_invitation'] = 'Problema al validar tu invitación. Por favor solicita otra.';
