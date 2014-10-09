@@ -35,7 +35,7 @@ endif;
 <hr />
 <fieldset>
 	<legend><?php echo lang('config') ?></legend>
-	<label><input type="checkbox" value="1"<?php echo $info['info']['label_inherit'] === 1 ? 'checked="checked"' : '' ?> name="label_inherit" id="label_inherit" /> <span><?php echo lang('label_inherit') ?></span></label>
-	<label><span><?php echo lang('context_label'); ?></span><?php echo form_input('context_label', $info['info']['context_label'], 'maxlength="30"') ?></label>
-	<label><span><?php echo lang('topic_label'); ?></span><?php echo form_input('topic_label', $info['info']['topic_label'], 'maxlength="30"') ?></label>
+	<label><input type="checkbox" value="1"<?php echo (isset($info['info']['label_inherit']) && $info['info']['label_inherit'] === 1) ? 'checked="checked"' : '' ?> name="label_inherit" id="label_inherit" /> <span><?php echo lang('label_inherit') ?></span></label>
+	<label><span><?php echo lang('context_label'); ?></span><?php echo form_input('context_label', isset($info['info']['context_label']) ? $info['info']['context_label'] : '', 'maxlength="30"') ?></label>
+	<label><span><?php echo lang('topic_label'); ?></span><?php echo form_input('topic_label', isset($info['info']['topic_label']) ? $info['info']['topic_label'] : '', 'maxlength="30"') ?></label>
 </fieldset>
