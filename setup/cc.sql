@@ -1,6 +1,3 @@
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-
 -- Action table.
 CREATE TABLE IF NOT EXISTS `action` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -46,4 +43,3 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-COMMIT;

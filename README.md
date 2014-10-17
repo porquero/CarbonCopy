@@ -26,19 +26,16 @@ Features
 Configuration
 -----------------
 
-CarbonCopy is developed using CodeIgniter 2.2 PHP Framework and wiredesignz HMVC.
+CarbonCopy is developed using CodeIgniter 2.2.0 PHP Framework and wiredesignz HMVC.
 
-- No domain/Virtualhost
+* Modify file application/config.php:17 to set Base Site URL.
+* Modify file application/database.php to set database conection settings.
+* Make sure that _accounts/cc and application/logs is writeable recursively.
+* If don't use rewrite engine disable in .htaccess:5.
 
-* Modify file application/nodomain/config.php:17 to set Base Site URL.
-* Modify file application/nodomian/database.php to set database conection settings.
-* Make sure that _accounts/cc is writeable recursively.
+Setup
+-------
 
-- Virtualhost/Domain
-
-Is the same configuration that no domain depending environment. There is a development environment
-using virtualhost as example.
-
-- Database
-
-Import  file setup/cc.sql into database.
+* Create database using name used in database.php
+* Go to setup in the browser (http://installation-path/setup) and fill setup form with the firt user account.
+* Delete setup directory.
