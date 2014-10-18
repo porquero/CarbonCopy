@@ -25,7 +25,7 @@ PQR;
 	));
 	file_put_contents(dirname(__FILE__) . '/../_accounts/cc/_participants/' . $_POST['username'] . '.json', $username_data);
 
-	exit('Setup successful. Please delete setup directory.');
+	exit('Setup successful. Please delete setup directory a <a href="..">go to Home</a>');
 }
 ?>
 <!DOCTYPE html>
@@ -54,8 +54,9 @@ PQR;
 			<hr />
 			<i>CarbonCopy is developed using CodeIgniter 2.2.0 PHP Framework and wiredesignz HMVC.</i>
 			<ol>
-				<li>Modify file application/config.php:17 to set Base Site URL.</li>
-				<li>Modify file application/database.php to set database conection settings.</li>
+				<li>Modify file application/config/config.php:17 to set Base Site URL.</li>
+				<li>Modify file application/config/database.php to set database conection settings.</li>
+				<li>Create database using name used in database.php</li>
 				<li>Make sure that _accounts/cc and application/logs is writeable recursively.</li>
 				<li>If don't use rewrite engine disable in .htaccess:5.</li>
 				<li>And add first user in next form</li>

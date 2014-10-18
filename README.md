@@ -28,8 +28,8 @@ Configuration
 
 CarbonCopy is developed using CodeIgniter 2.2.0 PHP Framework and wiredesignz HMVC.
 
-* Modify file application/config.php:17 to set Base Site URL.
-* Modify file application/database.php to set database conection settings.
+* Modify file application/config/config.php:17 to set Base Site URL.
+* Modify file application/config/database.php to set database conection settings.
 * Make sure that _accounts/cc and application/logs is writeable recursively.
 * If don't use rewrite engine disable in .htaccess:5.
 
