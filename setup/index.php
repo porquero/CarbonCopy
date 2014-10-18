@@ -50,6 +50,16 @@ PQR;
 			</div>
 			<div class="clear"></div>
 			<hr />
+			<h3>Configuration</h3>
+			<hr />
+			<i>CarbonCopy is developed using CodeIgniter 2.2.0 PHP Framework and wiredesignz HMVC.</i>
+			<ol>
+				<li>Modify file application/config.php:17 to set Base Site URL.</li>
+				<li>Modify file application/database.php to set database conection settings.</li>
+				<li>Make sure that _accounts/cc and application/logs is writeable recursively.</li>
+				<li>If don't use rewrite engine disable in .htaccess:5.</li>
+				<li>And add first user in next form</li>
+			</ol>
 			<h1>Setup firt user</h1>
 			<form action="" method="post" accept-charset="utf-8" class="gf">
 				<label><span>Name</span><input type="text" name="name" maxlength="75" required></label>
