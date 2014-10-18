@@ -17,10 +17,10 @@ the system.
 Features
 -----------
 
-* Timeline organized information. Is posible see account, context and user timeline.
-* Support n contexts.
+* Timeline organized information. Is posible see for account, context and user timeline.
+* Support multiple contexts hierarchically.
 * Is posible personalize context/topics labels.
-* Support multiple accounts.
+* Support multiple accounts for user.
 
 
 Configuration
@@ -28,10 +28,10 @@ Configuration
 
 CarbonCopy is developed using CodeIgniter 2.2.0 PHP Framework and wiredesignz HMVC.
 
-* Modify file application/config/config.php:17 to set Base Site URL.
+* Modify file application/config/config.php to set Base Site URL.
 * Modify file application/config/database.php to set database conection settings.
 * Make sure that _accounts/cc and application/logs is writeable recursively.
-* If don't use rewrite engine disable in .htaccess:5.
+* If don't use rewrite engine disable in .htaccess.
 
 Setup
 -------
