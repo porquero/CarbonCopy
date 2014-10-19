@@ -23,6 +23,7 @@ example email.
 Features
 -----------
 
+* English/Spanish Interface language.
 * It is support multiple accounts for user.
 * Timeline information organized. It is possible to see the information timeline in every account, context and user.
 * It supports multiple contexts hierarchically.
