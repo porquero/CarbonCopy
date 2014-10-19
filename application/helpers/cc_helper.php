@@ -458,3 +458,29 @@ function site_url_ws()
 {
 	return preg_replace('/\/$/', '', site_url());
 }
+
+/**
+ * Delete not empty directory
+ *
+ * @param string $dir
+ *
+ * @see http://php.net/manual/en/function.rmdir.php#98622
+ */
+function rrmdir($dir)
+{
+	if (is_dir($dir)) {
+		$objects = scandir($dir);
+		foreach ($objects as $object) {
+			if ($object != "." && $object != "..") {
+				if (filetype($dir . "/" . $object) === "dir") {
+					rrmdir($dir . "/" . $object);
+				}
+				else {
+					unlink($dir . "/" . $object);
+				}
+			}
+		}
+		reset($objects);
+		rmdir($dir);
+	}
+}

@@ -23,15 +23,8 @@ mb_internal_encoding('utf-8');
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-if (strstr($_SERVER['HTTP_HOST'], 'cc-dev') == true) {
-	define('ENVIRONMENT', 'development');
-}
-elseif (strstr($_SERVER['HTTP_HOST'], 'my-domain') == true) {
-	define('ENVIRONMENT', 'production');
-}
-else {
-	define('ENVIRONMENT', 'nodomain');
-}
+define('ENVIRONMENT', 'production');
+
 /*
  * ---------------------------------------------------------------
  * ERROR REPORTING

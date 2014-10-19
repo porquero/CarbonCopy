@@ -822,7 +822,7 @@ PQR;
 
 		// Remove old same context id if exists.
 		if (is_dir($deleted_path)) {
-			rmdir($deleted_path);
+			rrmdir($deleted_path);
 		}
 
 		// Delete context timeline.
