@@ -15,7 +15,7 @@ Overview
 Each enterprise or team has their own communication culture, and CarbonCopy was developed to be adaptate to
 that culture.
 
-In CarbonCopy all communication enviroment is based on participants, contexts, topics and interaction; they are the pillars of
+In CarbonCopy the communication enviroment is based on participants, contexts, topics and interaction; they are the pillars of
 the system. And the purpose of this project is that teams use this system of communication instead of others, for
 example email.
 
