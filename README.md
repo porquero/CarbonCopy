@@ -6,7 +6,7 @@ CarbonCopy is a collaboration manager based in contexts using the basis of commu
 ![Context Structure](https://raw.githubusercontent.com/porquero/CarbonCopy/master/pub/readme/context-structure.png)
 
 So you can create any communication environment using your own structure: Knowledge Managment, Corporate Forum,
- Wiki, Historical Success, Tracking Proyect, etc.
+ Wiki, Historical Success, Tracking Project, etc.
 
 
 Overview
