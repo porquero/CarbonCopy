@@ -499,7 +499,7 @@ PQR;
 			}
 
 			// Save password if not empty.
-			if ($this->input->post('password') !== FALSE) {
+			if ($this->input->post('password') !== '') {
 				$update_data['password'] = md5($this->input->post('password'));
 			}
 

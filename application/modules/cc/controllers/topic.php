@@ -97,6 +97,7 @@ PQR;
 					'user_locking' => $user_locking,
 					'msg_type' => isset($msg_type) ? $msg_type : '',
 					'msg' => isset($msg) ? $msg : '',
+					'statuses' => array('opened' => 'close', 'closed' => 'open'),
 		));
 
 		$this->tpl->section('_sidebar', '_sidebar.phtml');
@@ -210,7 +211,7 @@ PQR;
 						'description' => trim($this->input->post('topic_description')),
 						'responsible' => $this->input->post('responsible'),
 						'due' => $this->input->post('due'),
-						'status' => 'open',
+						'status' => 'opened',
 						'participants' => $participants == 'all' ? '' : implode(',', (array) $participants)
 							. ',' . connected_user(),
 						'created_by' => connected_user(),
@@ -243,6 +244,7 @@ PQR;
 				if ($res === 'ok') {
 					$this->load->model('m_timeline');
 
+					// Timeline info.
 					$data = array(
 							'title' => $this->input->post('topic_title'),
 							'from_participant' => connected_user(),
@@ -252,6 +254,13 @@ PQR;
 							'id_topic' => '_' . $this->input->post('id'),
 					);
 					$this->m_timeline->save_action($data);
+
+					// Due info.
+					if ($this->input->post('due') !== '') {
+						$this->load->model('m_due');
+						$this->m_due->add($this->input->post('context') . '_' . $this->input->post('id')
+							, $this->input->post('due'));
+					}
 				}
 
 				if ($res == 'fail' and strlen($message) == 0) {
@@ -283,7 +292,7 @@ PQR;
 
 	/**
 	 * Validate sent form to create topic
-	 * 
+	 *
 	 * @return array for use in ajax request
 	 */
 	public function validate_form()
@@ -324,7 +333,7 @@ PQR;
 
 	/**
 	 * Save reply for topic in context
-	 * 
+	 *
 	 * @return mixed
 	 */
 	public function reply()
@@ -729,6 +738,7 @@ PQR;
 					$message = 'Sytem error number #32143. Please contact us and send the error number.';
 				}
 				else {
+					// Timeline info.
 					$data = array(
 							'title' => $this->input->post('topic_title'),
 							'from_participant' => connected_user(),
@@ -737,6 +747,16 @@ PQR;
 							'id_topic' => '_' . $topic_name_slug,
 					);
 					$this->m_timeline->save_action($data);
+
+					// Due info.
+					$this->load->model('m_due');
+					if ($this->input->post('due') == '') {
+						$this->m_due->delete($this->input->post('context') . '_' . $this->input->post('id'));
+					}
+					else {
+						$this->m_due->change($this->input->post('context') . '_' . $this->input->post('id')
+							, $this->input->post('due'));
+					}
 				}
 
 				$result = array(
@@ -870,8 +890,11 @@ PQR;
 		$rc = rename($topic_path, $deleted_path);
 
 		if ($rm && $rc) {
+			$this->load->model('m_due');
+
 			$this->session->set_flashdata('msg_type', 'msg_ok');
 			$this->session->set_flashdata('msg', lang('topic_deleted'));
+			$this->m_due->delete($context . '_' . $id_topic);
 
 			redirect('/cc/context/resume/' . $context);
 		}
@@ -945,9 +968,14 @@ PQR;
 		}
 		elseif (rename($move_from, _INC_ROOT . $move_to)) {
 			$info = $this->info($to_context . '_' . $id_topic);
-
 			$this->load->model('m_timeline');
 			$this->m_timeline->move_topic($id_topic, $from_context, $to_context);
+
+			// Change topic_context for due date.
+			if ($info['info']['due'] !== '') {
+				$this->load->model('m_due');
+				$this->m_due->move($from_context . '_' . $id_topic, $to_context . '_' . $id_topic);
+			}
 
 			$this->session->set_flashdata('msg', lang('topic_moved'));
 			$this->session->set_flashdata('msg_type', 'msg_ok');

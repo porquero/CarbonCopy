@@ -555,9 +555,9 @@ class context extends MX_Controller {
 		$this->load->module('file/misc');
 		$this->load->module('file/write');
 
-		$context = "_accounts/{$this->session->userdata('current_account')}/contexts/{$this->misc->unslug($context)}";
+		$context_path = "_accounts/{$this->session->userdata('current_account')}/contexts/{$this->misc->unslug($context)}";
 		if ($this->input->post('submit') === 'cancel') {
-			$this->_unlock($context);
+			$this->_unlock($context_path);
 			$result = array(
 					'result' => 'canceled',
 					'message' => ''
@@ -571,7 +571,7 @@ class context extends MX_Controller {
 			}
 		}
 
-		$this->_unlock($context);
+		$this->_unlock($context_path);
 		$info = $this->info($context);
 		// TODO: Use method for modify context info content!
 		$context_info = array(
@@ -592,7 +592,7 @@ class context extends MX_Controller {
 		$archive_created = $this->write->archive($dir_path . '/info_context.json', $content);
 
 		$participants = '';
-		foreach (Modules::run('account/participant/list_for_context', $context) as $participant) {
+		foreach (Modules::run('account/participant/list_for_context', $context_path) as $participant) {
 			$url = site_url('/account/participant/profile/' . trim($participant['info']['id']));
 			$participants .= <<<PQR
 <li><a href="{$url}" class="usr">{$participant['info']['id']}</a></li>
@@ -607,6 +607,7 @@ PQR;
 					'from_participant' => connected_user(),
 					'context' => preg_replace('/\_' . $info['info']['id'] . '$/', '', $context),
 					'action_id' => 5,
+					'id_context' => $info['info']['id'],
 			);
 			$this->m_timeline->save_action($data);
 
@@ -634,27 +635,27 @@ PQR;
 	/**
 	 * Try to lock context manipulation.
 	 *
-	 * @param type $context
+	 * @param type $contexti
 	 */
-	private function _try_lock($context)
+	private function _try_lock($contexti)
 	{
 		$this->load->module('file/write');
 		$this->load->module('file/misc');
 
-		$context = "_accounts/{$this->session->userdata('current_account')}/contexts/{$this->misc->unslug($context)}";
-		$user_locking = $this->_user_locking($context);
+		$context_path = "_accounts/{$this->session->userdata('current_account')}/contexts/{$this->misc->unslug($contexti)}";
+		$user_locking = $this->_user_locking($context_path);
 
 		if ($user_locking !== FALSE) {
 			$this->tpl->variables(array(
 					'title' => lang('atention'),
-					'breadcrumb' => create_breadcrumb($context),
+					'breadcrumb' => create_breadcrumb($context_path),
 					'description' => sprintf(lang('description_lock'), $user_locking)
 			));
 
 			$this->tpl->load_view(_TEMPLATE);
 		}
 		else {
-			$context_lock = $this->misc->final_slash($context) . 'LOCK';
+			$context_lock = $this->misc->final_slash($context_path) . 'LOCK';
 			$this->write->archive($context_lock, connected_user());
 
 			return TRUE;
@@ -867,7 +868,6 @@ PQR;
 
 		$counter = 1;
 		$context_info = $this->info($context, $counter);
-		$result = array();
 
 		// TODO: add type validation to avoid server lock!
 		if ( ! is_array($context_info)) {

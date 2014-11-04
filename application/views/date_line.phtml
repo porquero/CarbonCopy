@@ -1,0 +1,52 @@
+<?php
+/*
+ * Note: This view is used out of HMVC because is transversal to all views.
+ */
+?>
+<ul id="date_line">
+	<li id="dl_today"><a href="<?php echo site_url() ?>"><?php echo lang('today') ?></a></li>
+	<?php
+	foreach ($line_range as $date => $topics):
+		$are_topics = is_array($topics);
+		$day_class = '';
+		if ($are_topics) {
+			$day_class .= ' ring';
+		}
+
+		if ($date === $middle_date) {
+			$day_class .= ' middle_date';
+		}
+		?>
+		<li>
+			<a class="<?php echo $day_class ?>" href="<?php echo site_url('cc/resume/index/all/' . $date) ?>"><?php echo date('d', strtotime($date)) ?></a>
+			<?php
+			if ($are_topics):
+				?>
+				<ul>
+					<?php
+					$i = 0;
+					foreach ($topics as $topic_context):
+						$info = Modules::run('cc/topic/info', $topic_context);
+
+						if ($info['info']['status'] == 'closed' && $only_opened === TRUE) {
+							continue;
+						}
+
+						if (belongs_to('topic', $topic_context, connected_user(), TRUE)):
+							?>
+							<li><a class="topic" href="<?php echo site_url('cc/topic/resume/' . $topic_context) ?>"><b><?php echo $info['info']['title'] ?></b></a></li>
+							<?php
+						endif;
+
+						$i ++;
+					endforeach;
+					?>
+				</ul>
+				<div class="count"><?php echo $i ?></div>
+				<?php
+			endif;
+			?>
+		</li>
+	<?php endforeach; ?>
+</ul>
+<div class="clear"></div>

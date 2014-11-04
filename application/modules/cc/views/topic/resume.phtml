@@ -5,12 +5,12 @@ if (connected_user() !== FALSE && belongs_to('topic', $context, connected_user()
 		<?php
 		if ($user_locking === FALSE):
 			?>
-			<!--<li>
-				<select name="status" id="status">
-					<option value="published">opened</option>
-					<option value="closed">closed</option>
-				</select>
-			</li>-->
+			<li>
+				<button data-status="<?php echo $info['status'] ?>" id="b_task">
+					<span class="b_active"><?php echo lang($info['status']) ?></span>
+					<span class="b_inactive"><?php echo lang($statuses[$info['status']]) ?></span>
+				</button>
+			</li>
 			<li><a href="<?php echo site_url('/cc/topic/reply_form/' . $context) ?>"><?php echo lang('reply') ?></a></li>
 			<li style="position: relative">
 				<a href="<?php echo site_url('/cc/topic/move_form/' . get_name_from_slug($context) . '|' . parent_context($context)) ?>" id="move_context"><?php echo lang('move'); ?></a>

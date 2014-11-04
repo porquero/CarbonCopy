@@ -6,15 +6,15 @@ CREATE TABLE IF NOT EXISTS `action` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 INSERT INTO `action` (`id`, `name`) VALUES
-(1, 'publish'),
-(2, 'reply'),
+(1, 'published'),
+(2, 'replied'),
 (3, 'closed'),
 (4, 'finished'),
 (5, 'modified'),
 (6, 'moved');
 
 -- Default timeline.
-CREATE TABLE IF NOT EXISTS `timeline_cc` (
+CREATE TABLE IF NOT EXISTS `cc_timeline` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -28,6 +28,12 @@ CREATE TABLE IF NOT EXISTS `timeline_cc` (
   KEY `id_tax` (`id_context`),
   FULLTEXT KEY `ucontext` (`context`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- Due table.
+CREATE TABLE IF NOT EXISTS `cc_due` (
+  `topic_context` text collate utf8_bin NOT NULL,
+  `date` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- User table.
 CREATE TABLE IF NOT EXISTS `user` (

@@ -33,6 +33,7 @@ class resume extends MX_Controller {
 
 		$this->load->module('cc/timeline');
 		$this->load->model('m_user');
+		$this->load->model('m_due');
 
 		$contexts = $this->contexts($this->session->userdata('current_account'));
 		$info = Modules::run('file/read/json_content', "_accounts/{$this->session->userdata('current_account')}/info_account.json");
@@ -40,11 +41,12 @@ class resume extends MX_Controller {
 
 		$this->timeline->menu_act[$menu_act] = 'act';
 		$participant_id = $menu_act === 'to_me' ? connected_user() : NULL;
+		$tl_date = is_null($ts_date) ? '' : ': ' . account_date_format($ts_date);
 
 		$this->tpl->variables(
 			array(
 					'title' => $info['name'],
-					'tl_title' => lang('timeline'),
+					'tl_title' => lang('timeline') . $tl_date,
 					'subtitle' => $info['info'],
 					'contexts' => $contexts,
 					'context_label' => $account_config['context_label'],
@@ -58,6 +60,7 @@ class resume extends MX_Controller {
 					'accounts' => $this->m_user->accounts(connected_user()),
 					'msg_type' => isset($msg_type) ? $msg_type : '',
 					'msg' => isset($msg) ? $msg : '',
+					'due_date_topics' => $this->m_due->for_day($ts_date),
 			)
 		);
 

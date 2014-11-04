@@ -9,10 +9,18 @@
  */
 class m_timeline extends CI_Model {
 
+	/**
+	 * Timeline account table
+	 *
+	 * @var string
+	 */
+	private $_table;
+
 	public function __construct()
 	{
 		parent::__construct();
 		$this->db = $this->load->database('default', TRUE);
+		$this->_table = $this->session->userdata('current_account') . '_timeline';
 	}
 
 	/**
@@ -26,11 +34,10 @@ class m_timeline extends CI_Model {
 	public function get_for_resume($participant_id = NULL, $ts_date = NULL)
 	{
 		$result = array();
-		$table = 'timeline_' . $this->session->userdata('current_account');
 		$date_format = account_date_format_mysql();
 
 		$this->db
-			->from("{$table} t")
+			->from("{$this->_table} t")
 			->select(
 				"distinct date_format(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, "
 				. "t.to_participant, t.title, t.id_topic, a.name, t.id_context"
@@ -64,11 +71,10 @@ class m_timeline extends CI_Model {
 	public function get_for_context($context, $participant_id = NULL, $ts_date = NULL)
 	{
 		$result = array();
-		$table = 'timeline_' . $this->session->userdata('current_account');
 		$date_format = account_date_format_mysql();
 
 		$this->db
-			->from("{$table} t")
+			->from("{$this->_table} t")
 			->select(
 				"distinct DATE_FORMAT(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, t.to_participant, t.title, t.id_topic, a.name, t.id_context"
 				, FALSE)
@@ -104,10 +110,9 @@ class m_timeline extends CI_Model {
 	public function contexts_topics($context, $participant_id = NULL, $ts_date = NULL)
 	{
 		$result = array();
-		$table = 'timeline_' . $this->session->userdata('current_account');
 
 		$this->db
-			->from("{$table} t")
+			->from("{$this->_table} t")
 			->select('t.title, t.id_topic, t.context')
 			->join('action a', 't.action_id = a.id')
 			->where("t.context = '{$context}'")
@@ -143,12 +148,11 @@ class m_timeline extends CI_Model {
 	public function get_for_topic($context)
 	{
 		$result = array();
-		$table = 'timeline_' . $this->session->userdata('current_account');
 		preg_match('/(\_[a-zA-Z0-9-]*)$/', $context, $id_topic);
 		$date_format = account_date_format_mysql();
 
 		$account_timeline = $this->db
-			->from("{$table} t")
+			->from("{$this->_table} t")
 			->select(
 				"distinct DATE_FORMAT(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, t.to_participant, t.title, t.id_topic, a.name"
 				, FALSE)
@@ -177,13 +181,12 @@ class m_timeline extends CI_Model {
 
 	public function get_for_user($username, $participant_id = NULL, $ts_date = NULL)
 	{
-		$table = 'timeline_' . $this->session->userdata('current_account');
 		$date_format = account_date_format_mysql();
 
 		$this->db->select(
 				"distinct DATE_FORMAT(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, t.to_participant, t.title, t.id_topic, a.name, t.id_context"
 				, FALSE)
-			->from($table . ' t')
+			->from($this->_table . ' t')
 			->join('action a', 't.action_id = a.id')
 			->where('from_participant', $username)
 			->order_by('t.id', 'desc');
@@ -208,27 +211,23 @@ class m_timeline extends CI_Model {
 
 	/**
 	 * Save action ocurred in timeline
-	 * 
+	 *
 	 * @param array $data Array format [title, from_participant, to_participant, context, action_id, id_topic]
 	 * @return object
 	 */
 	public function save_action($data)
 	{
-		$table = 'timeline_' . $this->session->userdata('current_account');
-
-		$this->db->insert($table, $data);
+		$this->db->insert($this->_table, $data);
 	}
 
 	/**
 	 * Create new timeline table for new account
-	 * 
+	 *
 	 * @param type $accoun_id
 	 */
 	public function create($accoun_id)
 	{
-		$table = 'timeline_' . $this->session->userdata('current_account');
-
-		return $this->db->query("create table timeline_{$accoun_id} like " . $table);
+		return $this->db->query("create table {$accoun_id}_timeline like " . $this->_table);
 	}
 
 	/**
@@ -240,14 +239,12 @@ class m_timeline extends CI_Model {
 	 */
 	public function move_context($id_context, $from_context, $to_context)
 	{
-		$table = 'timeline_' . $this->session->userdata('current_account');
-
 		// Move childs first.
 		$from = trim($from_context . '_' . $id_context, '_');
 		$to = trim($to_context . '_' . $id_context, '_');
 
 		$q = <<<PQR
-update `{$table}`
+update `{$this->_table}`
 set context = replace(context, "{$from}", "{$to}") WHERE context like '{$from}%'
 PQR;
 		$this->db->query($q, FALSE);
@@ -255,7 +252,7 @@ PQR;
 		// Finally move context.
 		$this->db->where('context', $from_context)
 			->where('id_context', $id_context)
-			->update($table, array('context' => $to_context));
+			->update($this->_table, array('context' => $to_context));
 	}
 
 	/**
@@ -268,12 +265,10 @@ PQR;
 	 */
 	public function delete_context($id_context, $context)
 	{
-		$table = 'timeline_' . $this->session->userdata('current_account');
-
 		$full_context = trim("{$context}_{$id_context}", '_');
 
 		$q = <<<PQR
-DELETE FROM `{$table}`
+DELETE FROM `{$this->_table}`
 WHERE `context` LIKE '{$full_context}%'
 OR (`id_context` LIKE '{$id_context}' AND `context` = '{$context}')
 PQR;
@@ -292,10 +287,8 @@ PQR;
 	 */
 	public function move_topic($id_topic, $from_context, $to_context)
 	{
-		$table = 'timeline_' . $this->session->userdata('current_account');
-
 		$q = <<<PQR
-update `{$table}`
+update `{$this->_table}`
 set context = replace(context, "{$from_context}", "{$to_context}") WHERE id_topic = '_{$id_topic}'
 PQR;
 		Plogger::log($q);
@@ -313,10 +306,8 @@ PQR;
 	 */
 	public function delete_topic($id_topic, $context)
 	{
-		$table = 'timeline_' . $this->session->userdata('current_account');
-
 		$q = <<<PQR
-DELETE FROM `{$table}`
+DELETE FROM `{$this->_table}`
 WHERE `id_topic` = '_{$id_topic}' AND `context` = '{$context}'
 PQR;
 
@@ -335,9 +326,7 @@ PQR;
 	 */
 	public function modify_topic($id_topic, $new_title)
 	{
-		$table = 'timeline_' . $this->session->userdata('current_account');
-
-		return $this->db->where('id_topic', '_' . $id_topic)->update($table, array('title' => $new_title));
+		return $this->db->where('id_topic', '_' . $id_topic)->update($this->_table, array('title' => $new_title));
 	}
 
 }

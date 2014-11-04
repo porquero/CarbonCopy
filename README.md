@@ -29,26 +29,7 @@ Features
 * It supports multiple contexts hierarchically.
 * It is possible to personalize context/topics labels.
 * It is 99% NoSQL.
-
-
-Screenshots
----------------
-
-Home Account
-![Home](https://raw.githubusercontent.com/porquero/CarbonCopy/master/pub/screenshots/home.png)
-
-Topic Resume
-![Topic](https://raw.githubusercontent.com/porquero/CarbonCopy/master/pub/screenshots/topic.png)
-
-User Timeline
-![User](https://raw.githubusercontent.com/porquero/CarbonCopy/master/pub/screenshots/user.png)
-
-Add Context Form
-![Add Context Form](https://raw.githubusercontent.com/porquero/CarbonCopy/master/pub/screenshots/add-context.png)
-
-Account Config
-![Add Context Form](https://raw.githubusercontent.com/porquero/CarbonCopy/master/pub/screenshots/account-config.png)
-
+* Top calendar for due dates.
 
 Configuration
 -----------------

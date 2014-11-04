@@ -279,10 +279,20 @@ form label span{
 }
 #context-actions{
 	float: right;
-	margin: 14px 0
+	margin: 14px 0;
+	padding: 3px 7px;
 }
 #context-actions li{
-	float: left
+	float: left;
+	height: 23px;
+}
+#context-actions li a{
+	height: 23px;
+	vertical-align: middle
+}
+#context-actions li a:before{
+	content: "\f0da  ";
+	color: #c77405
 }
 .cke * {
 	font-size: 100% !important
@@ -352,10 +362,12 @@ article p{
 #accounts li{
 	float: left
 }
+#search-box{
+	position: relative
+}
 #search_results{
 	position: absolute;
-	top: 30px;
-	left: 20.3%;
+	top: 105%;
 	background: #4B5558;
 	padding: 3px;
 	display: none;
@@ -445,4 +457,113 @@ article p{
 	margin-top: 2px;
 	opacity: .7;
 	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+#date_line{
+	float: left;
+	padding: 0;
+	margin-bottom: 12px;
+	width: 100%
+}
+#date_line *{
+	list-style-type: none;
+}
+#date_line li{
+	position: relative;
+	float: left;
+	width: 3.03%
+}
+#date_line a{
+	border: 1px solid #999;
+	float: left;
+	width: 88%;
+	text-align: center;
+	margin: 2px;
+}
+#date_line li ul{
+	padding: 0;
+	position: absolute;
+	top: 100%;
+	background: #fff;
+	width: 240px;
+	overflow: hidden;
+	left: 7px;
+	display: none;
+	z-index: 100
+}
+#date_line li ul li{
+	width: 100%;
+	border-bottom: 1px solid #333;
+}
+#date_line li ul li a{
+	border: none;
+	width: 100%;
+	text-align: left
+}
+#date_line .ring{
+	font-weight: bold;
+	background: #ff855c;
+	border-color: #c77405;
+	color: #fff
+}
+.middle_date{
+	font-weight: bold;
+	background: #f6f6f6;
+	color: #000
+}
+#date_line .count{
+	position: absolute;
+	top: 75%;
+	right: -2px;
+	background: #b81900;
+	font-size: 63%;
+	-webkit-border-radius: 16px;
+	-moz-border-radius: 16px;
+	border-radius: 16px;
+	border: solid 1px #cd0a0a;
+	width: 11px;
+	height: 11px;
+	text-align: center
+}
+#dl_today{
+	width: 6% !important;
+}
+#dl_today a{
+	background: #fbcb09;
+	color: #363636;
+}
+#dl_today a:hover{
+	color: #1c94c4
+}
+#duefor{
+	clear: both;
+	background: #fdf5ce
+}
+#duefor h3{
+	margin: 7px 0 0 0;
+	padding: 3px;
+	background: #fbd850;
+	color: #0066ff;
+}
+#duefor ul{
+	border-top: 1px solid #333;
+	margin-bottom: 28px
+}
+#duefor li{
+	border-bottom: 1px solid #333;
+	padding: 4px
+}
+.b_inactive{
+	display: none
+}
+#b_task:hover .b_active{
+	display: none;
+}
+#b_task:hover .b_inactive{
+	display: inline;
+}
+#context-actions .closed span:before{
+	content: "\f00c  "
+}
+#context-actions .opened span:before{
+	content: "\f017  "
 }

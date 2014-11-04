@@ -1,3 +1,29 @@
 <?php
-
+$key = key($due_date_topics);
+if (count($due_date_topics[$key])):
+	?>
+	<h2>To Do</h2>
+	<div id="duefor">
+		<h3><?php echo lang('tasks_for') . account_date_format($key) ?></h3>
+		<ul>
+			<?php
+			foreach ($due_date_topics[$key] as $topic_context):
+				$info = Modules::run('cc/topic/info', $topic_context);
+				if (belongs_to('topic', $topic_context, connected_user(), TRUE)):
+					?>
+					<li>
+						<a class="topic" href="<?php echo site_url('cc/topic/resume/' . $topic_context) ?>"><b><?php echo $info['info']['title'] ?></b></a>
+								<?php echo create_breadcrumb(parent_context($topic_context), $info['info']['id']) ?>
+					</li>
+					<?php
+				endif;
+			endforeach;
+			?>
+		</ul>
+	</div>
+	<?php
+endif;
+?>
+<h2>Activity</h2>
+<?php
 include_once _INC . 'modules/cc/views/timeline/get_timeline.phtml';
