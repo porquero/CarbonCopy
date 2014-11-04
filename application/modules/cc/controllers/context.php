@@ -555,9 +555,9 @@ class context extends MX_Controller {
 		$this->load->module('file/misc');
 		$this->load->module('file/write');
 
-		$context = "_accounts/{$this->session->userdata('current_account')}/contexts/{$this->misc->unslug($context)}";
+		$context_path = "_accounts/{$this->session->userdata('current_account')}/contexts/{$this->misc->unslug($context)}";
 		if ($this->input->post('submit') === 'cancel') {
-			$this->_unlock($context);
+			$this->_unlock($context_path);
 			$result = array(
 					'result' => 'canceled',
 					'message' => ''
@@ -571,7 +571,7 @@ class context extends MX_Controller {
 			}
 		}
 
-		$this->_unlock($context);
+		$this->_unlock($context_path);
 		$info = $this->info($context);
 		// TODO: Use method for modify context info content!
 		$context_info = array(
@@ -592,7 +592,7 @@ class context extends MX_Controller {
 		$archive_created = $this->write->archive($dir_path . '/info_context.json', $content);
 
 		$participants = '';
-		foreach (Modules::run('account/participant/list_for_context', $context) as $participant) {
+		foreach (Modules::run('account/participant/list_for_context', $context_path) as $participant) {
 			$url = site_url('/account/participant/profile/' . trim($participant['info']['id']));
 			$participants .= <<<PQR
 <li><a href="{$url}" class="usr">{$participant['info']['id']}</a></li>
@@ -607,6 +607,7 @@ PQR;
 					'from_participant' => connected_user(),
 					'context' => preg_replace('/\_' . $info['info']['id'] . '$/', '', $context),
 					'action_id' => 5,
+					'id_context' => $info['info']['id'],
 			);
 			$this->m_timeline->save_action($data);
 
