@@ -1,6 +1,7 @@
 var options = {
 	dataType: 'json',
 	type: 'post',
+	beforeSubmit: aggressive_message,
 	success: process_validation
 };
 $('#reply_topic').ajaxForm(options);

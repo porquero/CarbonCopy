@@ -363,7 +363,8 @@ article p{
 	float: left
 }
 #search-box{
-	position: relative
+	position: relative;
+	float: left
 }
 #search_results{
 	position: absolute;
@@ -566,4 +567,21 @@ article p{
 }
 #context-actions .opened span:before{
 	content: "\f017  "
+}
+#aggressive_message{
+	background: #1c94c4;
+	color: #fff;
+	font-weight: bold;
+	height: 140px;
+	position: absolute;
+	top: 25%;
+	text-align: center;
+	padding: 28px 0;
+	z-index: 2000;
+	width: 100%;
+	display: none;
+}
+#aggressive_message div{
+	display: table-cell;
+	vertical-align: middle
 }

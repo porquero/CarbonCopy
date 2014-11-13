@@ -176,11 +176,10 @@ PQR;
 			$this->load->helper(array('form'));
 
 			$this->load->module('file/write');
-			$this->load->module('file/misc');
 			$this->load->module('cc/file');
 
 			$dir_path = _INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/contexts/'
-				. $this->misc->unslug($this->input->post('context')) . '/_topics/' . $this->input->post('id');
+				. unslug_path($this->input->post('context')) . '/_topics/' . $this->input->post('id');
 
 			if (is_dir($dir_path) === TRUE) {
 				$result = array(
@@ -365,7 +364,7 @@ PQR;
 			$this->load->module('file/write');
 			$this->load->module('cc/file');
 
-			$path = _INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/contexts/' . \topic_real_path($this->misc->unslug($this->input->post('context')));
+			$path = _INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/contexts/' . \topic_real_path(unslug_path($this->input->post('context')));
 
 			$this->file_name = '';
 			$message = '';
@@ -580,7 +579,7 @@ PQR;
 		);
 		$content = json_encode($topic_info);
 		$dir_path = _INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/contexts/'
-			. topic_real_path($this->misc->unslug($context));
+			. topic_real_path(unslug_path($context));
 		$archive_created = $this->write->archive($dir_path . '/info_topic.json', $content);
 
 		$participants = '';
@@ -707,7 +706,7 @@ PQR;
 
 			$topic_name_slug = slug_path(strtolower($this->input->post('id')));
 			$dir_path = _INC_ROOT . topic_real_path('_accounts/' . $this->session->userdata('current_account') . '/contexts/'
-					. $this->misc->unslug($context) . '/' . $topic_name_slug);
+					. unslug_path($context) . '/' . $topic_name_slug);
 			$this->_unlock($topic);
 			$info = $this->info($context . '_' . $this->input->post('id'));
 
@@ -984,7 +983,7 @@ PQR;
 		}
 
 		$topic = "_accounts/{$this->session->userdata('current_account')}/contexts/" . $to_context . '/' . $id_topic;
-		$this->_unlock($move_to, $topic);
+		$this->_unlock($move_to);
 
 		$this->tpl->variables(array(
 				'msg_type' => 'msg_warning',
@@ -992,6 +991,64 @@ PQR;
 		));
 
 		$this->tpl->load_view(_TEMPLATE);
+	}
+
+	/**
+	 * Change topic status from/to open/close
+	 */
+	public function open_close()
+	{
+		is_connected();
+
+		if ($this->input->is_ajax_request() && $this->input->get('status') !== FALSE && $this->input->get('context') !== FALSE) {
+			$this->load->module('file/misc');
+			$this->load->model('m_timeline');
+
+			$topic = "_accounts/{$this->session->userdata('current_account')}/contexts/{$this->misc->unslug($this->input->get('context'))}";
+
+			$this->_try_lock($this->input->get('context'), $topic);
+
+			$info = $this->info($this->input->get('context'));
+			$statuses = array('opened' => 'closed', 'closed' => 'opened');
+			$topic_info = array(
+					'id' => $info['info']['id'],
+					'title' => $info['info']['title'],
+					'description' => $info['info']['description'],
+					'responsible' => $info['info']['responsible'],
+					'due' => $info['info']['due'],
+					'status' => $statuses[$this->input->get('status')],
+					'participants' => $info['info']['participants'],
+					'created_by' => $info['info']['created_by'],
+					'created_date' => $info['info']['created_date'],
+					'modified_date' => date('Y-m-d'),
+			);
+			$content = json_encode($topic_info);
+			$dir_path = _INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/contexts/'
+				. topic_real_path(unslug_path($this->input->get('context')));
+
+			$this->write->archive($dir_path . '/info_topic.json', $content);
+
+			$this->_unlock($topic);
+
+			// Timeline info.
+			$tm_status = array(
+					'closed' => 3,
+					'opened' => 4,
+			);
+			$data = array(
+					'title' => $info['info']['title'],
+					'from_participant' => connected_user(),
+					'context' => parent_context($this->input->get('context')),
+					'action_id' => $tm_status[$statuses[$this->input->get('status')]],
+					'id_topic' => '_' . $info['info']['id'],
+			);
+			$this->m_timeline->save_action($data);
+
+			echo 'ok';
+		}
+		else {
+			echo 'Not allowed';
+		}
 	}
 
 }

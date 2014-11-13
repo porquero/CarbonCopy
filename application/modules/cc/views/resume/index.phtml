@@ -2,13 +2,19 @@
 $key = key($due_date_topics);
 if (count($due_date_topics[$key])):
 	?>
-	<h2>To Do</h2>
+	<h2><?php echo lang('to_do') ?></h2>
 	<div id="duefor">
 		<h3><?php echo lang('tasks_for') . account_date_format($key) ?></h3>
 		<ul>
 			<?php
+			$i = 0;
 			foreach ($due_date_topics[$key] as $topic_context):
 				$info = Modules::run('cc/topic/info', $topic_context);
+
+				if ($info['info']['status'] == 'closed' && $only_opened === TRUE) {
+					continue;
+				}
+
 				if (belongs_to('topic', $topic_context, connected_user(), TRUE)):
 					?>
 					<li>
@@ -17,13 +23,18 @@ if (count($due_date_topics[$key])):
 					</li>
 					<?php
 				endif;
+				$i ++;
 			endforeach;
+
+			if ($i === 0) {
+				echo '<li style="text-align:center">' . lang('nothing_happens') . '</li>';
+			}
 			?>
 		</ul>
 	</div>
 	<?php
 endif;
 ?>
-<h2>Activity</h2>
+<h2><?php echo lang('timeline') ?></h2>
 <?php
 include_once _INC . 'modules/cc/views/timeline/get_timeline.phtml';

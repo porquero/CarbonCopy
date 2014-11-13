@@ -6,19 +6,21 @@ if (connected_user() !== FALSE && belongs_to('topic', $context, connected_user()
 		if ($user_locking === FALSE):
 			?>
 			<li>
-				<button data-status="<?php echo $info['status'] ?>" id="b_task">
+				<button class="<?php echo $info['status'] ?>" data-status="<?php echo $info['status'] ?>" data-context="<?php echo $context ?>" id="b_task">
 					<span class="b_active"><?php echo lang($info['status']) ?></span>
 					<span class="b_inactive"><?php echo lang($statuses[$info['status']]) ?></span>
 				</button>
 			</li>
-			<li><a href="<?php echo site_url('/cc/topic/reply_form/' . $context) ?>"><?php echo lang('reply') ?></a></li>
-			<li style="position: relative">
-				<a href="<?php echo site_url('/cc/topic/move_form/' . get_name_from_slug($context) . '|' . parent_context($context)) ?>" id="move_context"><?php echo lang('move'); ?></a>
-				<div id="move_form" class="mdl"></div>
-			</li>
-			<li><a href="<?php echo site_url('/cc/topic/delete/' . get_name_from_slug($context) . '|' . parent_context($context)) ?>" id="delete_topic"><?php echo lang('delete') ?></a></li>
-			<li><a href="<?php echo site_url('/cc/topic/modify_form/' . $context) ?>"><?php echo lang('edit') ?></a></li>
-			<?php
+			<?php if ($info['status'] === 'opened'): ?>
+				<li><a href="<?php echo site_url('/cc/topic/reply_form/' . $context) ?>"><?php echo lang('reply') ?></a></li>
+				<li style="position: relative">
+					<a href="<?php echo site_url('/cc/topic/move_form/' . get_name_from_slug($context) . '|' . parent_context($context)) ?>" id="move_context"><?php echo lang('move'); ?></a>
+					<div id="move_form" class="mdl"></div>
+				</li>
+				<li><a href="<?php echo site_url('/cc/topic/delete/' . get_name_from_slug($context) . '|' . parent_context($context)) ?>" id="delete_topic"><?php echo lang('delete') ?></a></li>
+				<li><a href="<?php echo site_url('/cc/topic/modify_form/' . $context) ?>"><?php echo lang('edit') ?></a></li>
+				<?php
+			endif;
 		endif;
 		?>
 	</ul>

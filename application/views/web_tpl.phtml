@@ -86,5 +86,6 @@ $current_account = current_account_info();
 		. js_tag('pub/js/jquery.form.js')
 		. @$footer;
 		?>
+		<div id="aggressive_message"><div><?php echo @isset($aggressive_message) ? $aggressive_message : lang('wait_please'); ?></div></div>
 	</body>
 </html>

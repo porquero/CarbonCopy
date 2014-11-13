@@ -411,8 +411,6 @@ class context extends MX_Controller {
 	{
 		is_connected();
 
-		$this->load->module('file/misc');
-
 		$context = preg_replace('/\_*+' . $this->input->post('id') . '$/', '', $this->input->post('context'));
 		$id_context = context_real_path($context . '_' . $this->input->post('id'));
 
@@ -439,7 +437,7 @@ class context extends MX_Controller {
 
 			$context_name_slug = slug_path(strtolower($this->input->post('id')));
 			$dir_path = _INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/contexts/'
-				. $this->misc->unslug($context) . '/' . $context_name_slug;
+				. unslug_path($context) . '/' . $context_name_slug;
 			$this->_unlock($id_context);
 			$info = $this->info($context . '_' . $this->input->post('id'));
 
@@ -588,7 +586,7 @@ class context extends MX_Controller {
 		);
 		$content = json_encode($context_info);
 		$dir_path = _INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/contexts/'
-			. $this->misc->unslug($context);
+			. unslug_path($context);
 		$archive_created = $this->write->archive($dir_path . '/info_context.json', $content);
 
 		$participants = '';

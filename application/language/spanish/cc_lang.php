@@ -148,3 +148,5 @@ $lang['opened'] = 'abierto';
 $lang['closed'] = 'cerrado';
 $lang['open'] = 'abrir';
 $lang['close'] = 'cerrar';
+$lang['to_do'] = 'Por hacer';
+$lang['wait_please'] = 'Espera por favor...';

@@ -84,7 +84,6 @@ PQR;
 		$output = $this->_match($q, 'info_context.json');
 		$result = array();
 		$i = 0;
-		$this->load->module('file/misc');
 
 		foreach ($output as $context) {
 			$result[$i]['context'] = preg_replace('/contexts\_/', '', slug_path(strtolower(slug_text(dirname($context)))));
@@ -117,7 +116,6 @@ PQR;
 		$result = array();
 		$account = $this->session->userdata('current_account');
 		$i = 0;
-		$this->load->module('file/misc');
 
 		foreach ($output as $topic) {
 			$context = preg_replace('/\/\_topics\//', '/', dirname($topic));

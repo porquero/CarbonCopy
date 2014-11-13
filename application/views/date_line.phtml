@@ -21,29 +21,34 @@
 			<a class="<?php echo $day_class ?>" href="<?php echo site_url('cc/resume/index/all/' . $date) ?>"><?php echo date('d', strtotime($date)) ?></a>
 			<?php
 			if ($are_topics):
-				?>
-				<ul>
-					<?php
-					$i = 0;
-					foreach ($topics as $topic_context):
-						$info = Modules::run('cc/topic/info', $topic_context);
+				$todo = '<ul>';
+				$i = 0;
 
-						if ($info['info']['status'] == 'closed' && $only_opened === TRUE) {
-							continue;
-						}
+				foreach ($topics as $topic_context):
+					$info = Modules::run('cc/topic/info', $topic_context);
 
-						if (belongs_to('topic', $topic_context, connected_user(), TRUE)):
-							?>
-							<li><a class="topic" href="<?php echo site_url('cc/topic/resume/' . $topic_context) ?>"><b><?php echo $info['info']['title'] ?></b></a></li>
-							<?php
-						endif;
+					if ($info['info']['status'] == 'closed' && $only_opened === TRUE) {
+						continue;
+					}
 
-						$i ++;
-					endforeach;
-					?>
-				</ul>
-				<div class="count"><?php echo $i ?></div>
-				<?php
+					if (belongs_to('topic', $topic_context, connected_user(), TRUE)):
+						$link = site_url('cc/topic/resume/' . $topic_context);
+						$topic = <<<PQR
+<li><a class="topic" href="{$link}"><b>{$info['info']['title']}</b></a></li>
+PQR;
+						$todo .= $topic;
+					endif;
+					$i ++;
+				endforeach;
+
+				$todo .= '</ul>';
+
+				if ($i > 0) {
+					echo <<<PQR
+{$todo}
+<div class="count">{$i}</div>
+PQR;
+				}
 			endif;
 			?>
 		</li>

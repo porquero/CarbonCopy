@@ -9,7 +9,7 @@ INSERT INTO `action` (`id`, `name`) VALUES
 (1, 'published'),
 (2, 'replied'),
 (3, 'closed'),
-(4, 'finished'),
+(4, 'opened'),
 (5, 'modified'),
 (6, 'moved');
 

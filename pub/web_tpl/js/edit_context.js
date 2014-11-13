@@ -3,6 +3,7 @@ var options = {
 	type: 'post',
 	success: process_validation,
 	beforeSubmit: function() {
+		aggressive_message();
 		$('#id').val($('#id').val().replace(/(\-)$/g, ''));
 	}
 };
@@ -16,6 +17,7 @@ function process_validation(data) {
 			window.location = site_url + 'cc/context/resume/' + $('#context').val();
 		}
 	} else {
+		hide_aggressive_message();
 		alert(data.message);
 	}
 }

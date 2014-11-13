@@ -151,6 +151,7 @@ $('#move_context').on('click', function (e) {
 
 $('#delete_context').on('click', function (e) {
 	if (confirm("Are you sure to delete this context?") === true) {
+		aggressive_message();
 		return true;
 	} else {
 		e.preventDefault();
@@ -160,6 +161,7 @@ $('#delete_context').on('click', function (e) {
 
 $('#delete_topic').on('click', function (e) {
 	if (confirm("Are you sure to delete this topic?") === true) {
+		aggressive_message();
 		return true;
 	} else {
 		e.preventDefault();
@@ -177,5 +179,34 @@ $('#date_line li').hover(function () {
 });
 
 $('#b_task').on('click', function () {
+	aggressive_message();
+
+	var status = $(this).data('status');
+	var context = $(this).data('context');
+
+	$.ajax({
+		url: site_url + 'cc/topic/open_close/',
+		type: 'GET',
+		data: {'status': status, 'context': context},
+		success: function (result) {
+			if (result !== 'ok') {
+				alert(result);
+			}
+			else {
+				window.location = document.URL;
+			}
+		}
+	});
 
 });
+
+function aggressive_message(message) {
+	if (message !== undefined && typeof message === 'string') {
+		$('#aggressive_message div').text(message);
+	}
+	$('#aggressive_message').css('display', 'table');
+}
+
+function hide_aggressive_message() {
+	$('#aggressive_message').css('display', 'none');
+}

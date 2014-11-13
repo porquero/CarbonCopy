@@ -39,7 +39,7 @@ class m_timeline extends CI_Model {
 		$this->db
 			->from("{$this->_table} t")
 			->select(
-				"distinct date_format(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, "
+				"date_format(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, "
 				. "t.to_participant, t.title, t.id_topic, a.name, t.id_context"
 				, FALSE)
 			->join('action a', 't.action_id = a.id')
@@ -76,7 +76,7 @@ class m_timeline extends CI_Model {
 		$this->db
 			->from("{$this->_table} t")
 			->select(
-				"distinct DATE_FORMAT(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, t.to_participant, t.title, t.id_topic, a.name, t.id_context"
+				"DATE_FORMAT(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, t.to_participant, t.title, t.id_topic, a.name, t.id_context"
 				, FALSE)
 			->join('action a', 't.action_id = a.id')
 			->where("t.context REGEXP '{$context}(.*)'")
@@ -154,7 +154,7 @@ class m_timeline extends CI_Model {
 		$account_timeline = $this->db
 			->from("{$this->_table} t")
 			->select(
-				"distinct DATE_FORMAT(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, t.to_participant, t.title, t.id_topic, a.name"
+				"DATE_FORMAT(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, t.to_participant, t.title, t.id_topic, a.name"
 				, FALSE)
 			->join('action a', 't.action_id = a.id')
 			->where("t.id_topic = '{$id_topic[0]}'")
@@ -184,7 +184,7 @@ class m_timeline extends CI_Model {
 		$date_format = account_date_format_mysql();
 
 		$this->db->select(
-				"distinct DATE_FORMAT(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, t.to_participant, t.title, t.id_topic, a.name, t.id_context"
+				"DATE_FORMAT(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, t.to_participant, t.title, t.id_topic, a.name, t.id_context"
 				, FALSE)
 			->from($this->_table . ' t')
 			->join('action a', 't.action_id = a.id')
