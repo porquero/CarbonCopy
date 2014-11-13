@@ -9,16 +9,12 @@
 	foreach ($line_range as $date => $topics):
 		$are_topics = is_array($topics);
 		$day_class = '';
-		if ($are_topics) {
-			$day_class .= ' ring';
-		}
 
 		if ($date === $middle_date) {
 			$day_class .= ' middle_date';
 		}
 		?>
 		<li>
-			<a class="<?php echo $day_class ?>" href="<?php echo site_url('cc/resume/index/all/' . $date) ?>"><?php echo date('d', strtotime($date)) ?></a>
 			<?php
 			if ($are_topics):
 				$todo = '<ul>';
@@ -48,9 +44,12 @@ PQR;
 {$todo}
 <div class="count">{$i}</div>
 PQR;
+					$day_class .= ' ring';
 				}
 			endif;
 			?>
+			<a class="<?php echo $day_class ?>" href="<?php echo site_url('cc/resume/index/all/' . $date) ?>"><?php echo date('d', strtotime($date)) ?></a>
+
 		</li>
 	<?php endforeach; ?>
 </ul>
