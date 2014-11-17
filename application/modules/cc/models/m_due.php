@@ -84,9 +84,21 @@ PQR;
 	 * 
 	 * @return boolean
 	 */
-	public function delete($topic_context)
+	public function delete_topic($topic_context)
 	{
 		return $this->db->where('topic_context', $topic_context)->delete($this->_table);
+	}
+
+	/**
+	 * Delete all topics due date for context.
+	 *
+	 * @param string $context slugged topic path
+	 *
+	 * @return boolean
+	 */
+	public function delete_context($context)
+	{
+		return $this->db->where('topic_context like ', trim($context, '_') . '_%')->delete($this->_table);
 	}
 
 	/**

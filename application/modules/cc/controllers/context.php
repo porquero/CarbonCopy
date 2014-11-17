@@ -806,6 +806,7 @@ PQR;
 	public function delete($data)
 	{
 		$this->load->model('m_timeline');
+		$this->load->model('m_due');
 
 		list($id_context, $context) = explode('|', urldecode($data));
 
@@ -826,6 +827,9 @@ PQR;
 
 		// Delete context timeline.
 		$rm = $this->m_timeline->delete_context($id_context, $context);
+
+		// Delete topics due date.
+		$this->m_due->delete_context("{$context}_{$id_context}");
 
 		// Send to trash.
 		$rc = rename($id_context_path, $deleted_path);

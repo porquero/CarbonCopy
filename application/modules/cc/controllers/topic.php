@@ -750,7 +750,7 @@ PQR;
 					// Due info.
 					$this->load->model('m_due');
 					if ($this->input->post('due') == '') {
-						$this->m_due->delete($this->input->post('context') . '_' . $this->input->post('id'));
+						$this->m_due->delete_topic($this->input->post('context') . '_' . $this->input->post('id'));
 					}
 					else {
 						$this->m_due->change($this->input->post('context') . '_' . $this->input->post('id')
@@ -893,7 +893,7 @@ PQR;
 
 			$this->session->set_flashdata('msg_type', 'msg_ok');
 			$this->session->set_flashdata('msg', lang('topic_deleted'));
-			$this->m_due->delete($context . '_' . $id_topic);
+			$this->m_due->delete_topic($context . '_' . $id_topic);
 
 			redirect('/cc/context/resume/' . $context);
 		}

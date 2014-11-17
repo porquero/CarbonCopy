@@ -125,6 +125,7 @@ a.topic{
 	color: #044;
 	border-color: #044;
 	display: block;
+	margin-top: 24px
 }
 #msg_warning{
 	background: #fdf5ce;
@@ -573,7 +574,7 @@ article p{
 	color: #fff;
 	font-weight: bold;
 	height: 140px;
-	position: absolute;
+	position: fixed;
 	top: 25%;
 	text-align: center;
 	padding: 28px 0;
