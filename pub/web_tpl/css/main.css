@@ -374,7 +374,8 @@ article p{
 	padding: 3px;
 	display: none;
 	width: 344px;
-	border-bottom: 4px #333 solid
+	border-bottom: 4px #333 solid;
+	z-index: 10
 }
 #search_results li{
 	margin-bottom: 7px;
