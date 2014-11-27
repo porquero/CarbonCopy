@@ -1,6 +1,6 @@
 <?php
 $key = key($due_date_topics);
-if (count($due_date_topics[$key])):
+if ( ! is_null($key) && count($due_date_topics[$key])):
 	?>
 	<h2><?php echo lang('to_do') ?></h2>
 	<div id="duefor">
