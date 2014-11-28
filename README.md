@@ -1,11 +1,11 @@
 CarbonCopy
 ===========
 
-CarbonCopy is a collaboration manager based in contexts using the basis of communication and user defined structures:
+CarbonCopy is a collaborative project manager based in contexts using the basis of communication and user defined structures:
 
 ![Context Structure](https://raw.githubusercontent.com/porquero/CarbonCopy/master/pub/readme/context-structure.png)
 
-So you can create any communication environment using your own structure: Knowledge Managment, Corporate Forum,
+So you can create any communication environment using your own structure: Projects, Knowledge Managment, Corporate Forum,
  Wiki, Historical Success, Tracking Project, etc.
 
 
@@ -27,7 +27,7 @@ Features
 * It is support multiple accounts for user.
 * Timeline information organized. It is possible to see the information timeline in every account, context and user.
 * It supports multiple contexts hierarchically.
-* It is possible to personalize context/topics labels.
+* It is possible to personalize the context/topics labels to use team definitions and concepts.
 * It is 99% NoSQL.
 * Top calendar for due dates.
 
