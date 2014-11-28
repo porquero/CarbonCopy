@@ -204,7 +204,7 @@ PQR;
 		$inherit = lang('inherit');
 		$output = <<<PQR
 <div class="checkbox">
-        <label><input type="checkbox" value="all" {$checked_all} name="{$id_name}" id="{$id_name}" /> <span>{$inherit}</span></label>
+        <label><input type="checkbox" id="pa" value="all" {$checked_all} name="{$id_name}" id="{$id_name}" /> <span>{$inherit}</span></label>
 PQR;
 
 		foreach ($participants as $participant) {
@@ -214,7 +214,7 @@ PQR;
 				continue;
 			}
 			$checked = in_array($participant, $for_check) ? 'checked' : '';
-			$output .= '<label><input type="checkbox" value="' . $participant . '" name="' . $id_name . '[]" ' . $checked
+			$output .= '<label><input type="checkbox" class="pp" value="' . $participant . '" name="' . $id_name . '[]" ' . $checked
 				. ' /> <span>' . $participant . '</span></label>';
 		}
 		$me = lang('me');

@@ -50,6 +50,12 @@ $('.man-lst').on('click', function (e) {
 
 	return false;
 });
+$('#manage_participants_div').on('click', '.pp', function(){
+	$('#pa:checked').attr('checked', false);
+});
+$('#manage_participants_div').on('click', '#pa', function(){
+	$('.pp:checked').attr('checked', false);
+});
 
 // Search
 (function () {
