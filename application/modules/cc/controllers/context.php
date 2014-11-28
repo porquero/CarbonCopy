@@ -603,7 +603,7 @@ PQR;
 			$data = array(
 					'title' => $info['info']['id'],
 					'from_participant' => connected_user(),
-					'context' => preg_replace('/\_' . $info['info']['id'] . '$/', '', $context),
+					'context' => preg_replace('/\_*+' . $info['info']['id'] . '$/', '', $context),
 					'action_id' => 5,
 					'id_context' => $info['info']['id'],
 			);
