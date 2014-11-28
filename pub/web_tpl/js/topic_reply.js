@@ -14,6 +14,7 @@ function process_validation(data) {
 	if (data.result === 'ok') {
 		window.location = site_url + 'cc/topic/resume/' + $('#context').val();
 	} else {
+		hide_aggressive_message();
 		alert(data.message);
 	}
 }

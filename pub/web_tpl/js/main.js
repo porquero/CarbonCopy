@@ -28,6 +28,7 @@
 					$('#participants').append(data.message);
 					break;
 				default:
+					hide_aggressive_message();
 					alert(data.message);
 					break;
 			}
