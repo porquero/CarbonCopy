@@ -1,5 +1,9 @@
 <?php
 
+if(is_file(dirname(__FILE__) . '/setup/index.php') || is_file(dirname(__FILE__) . '/setup/cc.sql')){
+	die('Go to setup/index.php directory and delete after installation!');
+}
+
 // TODO Sacar esto de acá!
 date_default_timezone_set('America/Santiago');
 setlocale(LC_TIME, "es_CL.UTF8", "es_CL", "esp");

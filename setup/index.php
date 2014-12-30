@@ -43,7 +43,7 @@ PQR;
 		</style>
 	</head>
 	<body>
-		<div class="content">
+		<div class="content" style="background: #fff; width: 740px; padding: 7px">
 			<div id="cc">
 				<a href="http://cc-dev/" title="CarbonCopy - Collaboration Manager"><span>CC</span></a>
 				<h2>CarbonCopy</h2>
