@@ -484,3 +484,15 @@ function rrmdir($dir)
 		rmdir($dir);
 	}
 }
+
+function clean_uploaded_file_name($file_name)
+{
+	$file_name = preg_replace('/[ -]{2,}/', '-', preg_replace('/[\_\(\)]/', '-', $file_name));
+	preg_match('/\.[a-z0-9]*$/', $file_name, $ext);
+	preg_match('/(.*)\.[a-z0-9]*$/', $file_name, $name);
+	if (isset($name[1]) AND isset($ext[0])) {
+		$file_name = trim($name[1], " \t\n\r\0\x0B\-") . $ext[0];
+	}
+
+	return $file_name;
+}

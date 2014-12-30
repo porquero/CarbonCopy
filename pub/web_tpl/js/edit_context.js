@@ -2,6 +2,9 @@ var options = {
 	dataType: 'json',
 	type: 'post',
 	success: process_validation,
+	beforeSerialize: function () {
+		nicEditors.findEditor('context_description').saveContent();
+	},
 	beforeSubmit: function() {
 		aggressive_message();
 		$('#id').val($('#id').val().replace(/(\-)$/g, ''));
@@ -22,4 +25,4 @@ function process_validation(data) {
 	}
 }
 
-$('textarea#context_description').ckeditor();
+new nicEditor({fullPanel: true}).panelInstance('context_description', {hasPanel: true});

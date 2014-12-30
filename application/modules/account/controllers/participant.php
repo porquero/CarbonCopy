@@ -359,7 +359,7 @@ PQR;
 		$mail_body = nl2br(sprintf(lang('invitation_mail'), $name[0], site_url(), $this->session->userdata('current_account'), $hash, site_url_ws()));
 
 		// TODO Load email from configuration
-		$this->email->from('invitation@cccm.com', 'CarbonCopy');
+		$this->email->from('noreply@carboncpm.com', 'CarbonCopy');
 		$this->email->to($this->input->post('email'));
 
 		$this->email->subject(sprintf(lang('invitation_subject'), $name[0]));
@@ -426,8 +426,7 @@ PQR;
 					'title' => 'Account config',
 					'description' => '',
 					'user_language' => $user_config['info']['language'],
-					'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/ckeditor/ckeditor.js')
-					. js_tag('pub/js/ckeditor/adapters/jquery.js') . js_tag('pub/web_tpl/js/participant_config.js'),
+					'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/web_tpl/js/participant_config.js'),
 					'language' => array(
 							'english' => 'english',
 							'spanish' => 'spanish',

@@ -57,13 +57,7 @@ class file extends MX_Controller {
 		$config['max_height'] = 4000;
 		$config['overwrite'] = FALSE;
 		$config['remove_spaces'] = FALSE;
-		// Clean filename. TODO Is it neccesary?
-		$config['file_name'] = preg_replace('/[ -]{2,}/', '-', preg_replace('/[\_\(\)]/', '-', $_FILES['userfile']['name']));
-		preg_match('/\.[a-z0-9]*$/', $config['file_name'], $ext);
-		preg_match('/(.*)\.[a-z0-9]*$/', $config['file_name'], $name);
-		if (isset($name[1]) AND isset($ext[0])) {
-			$config['file_name'] = trim($name[1], " \t\n\r\0\x0B\-") . $ext[0];
-		}
+		$config['file_name'] = clean_uploaded_file_name($_FILES['userfile']['name']);
 //        $config['max_filename'] = 64;
 
 		$this->load->library('upload', $config);

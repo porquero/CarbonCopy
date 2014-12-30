@@ -1,6 +1,9 @@
 var options = {
 	dataType: 'json',
 	type: 'post',
+	beforeSerialize: function () {
+		nicEditors.findEditor('home_info').saveContent();
+	},
 	beforeSubmit: aggressive_message,
 	success: process_validation
 };
@@ -15,4 +18,4 @@ function process_validation(data) {
 	}
 }
 
-$('textarea#home_info').ckeditor();
+new nicEditor({fullPanel: true}).panelInstance('home_info', {hasPanel: true});

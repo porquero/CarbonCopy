@@ -142,8 +142,7 @@ PQR;
 		$this->tpl->variables(
 			array(
 					'title' => lang('add_topic'),
-					'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/ckeditor/ckeditor.js')
-					. js_tag('pub/js/ckeditor/adapters/jquery.js') . js_tag('pub/web_tpl/js/edit_topic.js'),
+					'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/edit_topic.js'),
 					'description' => '',
 					'breadcrumb' => create_breadcrumb($context),
 					'context' => $context,
@@ -461,8 +460,7 @@ PQR;
 		$this->tpl->variables(
 			array(
 					'title' => $info['info']['title'],
-					'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/ckeditor/ckeditor.js')
-					. js_tag('pub/js/ckeditor/adapters/jquery.js') . js_tag('pub/web_tpl/js/topic_reply.js'),
+					'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/topic_reply.js'),
 					'description' => lang('topic_reply'),
 					'breadcrumb' => create_breadcrumb($context, get_name_from_slug($context)),
 					'context' => $context,
@@ -648,8 +646,7 @@ PQR;
 		$this->tpl->variables(
 			array(
 					'title' => lang('modify_topic'),
-					'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/ckeditor/ckeditor.js')
-					. js_tag('pub/js/ckeditor/adapters/jquery.js') . js_tag('pub/web_tpl/js/edit_topic.js'),
+					'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/edit_topic.js'),
 					'description' => '',
 					'breadcrumb' => create_breadcrumb($context),
 					'context' => $context,

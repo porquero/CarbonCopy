@@ -103,8 +103,7 @@ class manage extends MX_Controller {
 					'topic_label' => $account_config['topic_label'],
 					'account_name' => $account_info['name'],
 					'account_info' => $account_info['info'],
-					'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/ckeditor/ckeditor.js')
-					. js_tag('pub/js/ckeditor/adapters/jquery.js') . js_tag('pub/web_tpl/js/account_config.js'),
+					'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/account_config.js'),
 					'date_format' => array(
 							'd-m-Y' => 'dd-mm-yyyy',
 							'Y-m-d' => 'yyyy-mm-dd'

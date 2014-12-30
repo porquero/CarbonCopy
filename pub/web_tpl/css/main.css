@@ -38,7 +38,7 @@ label{
 body{
 	font-family: 'Oxygen', sans-serif;
 	background: #2E3436;
-	color: #E0E0E0;
+	color: #333;
 	cursor: default;
 	font-size: 13px
 }
@@ -92,7 +92,8 @@ a.topic{
 	float: left;
 	width: 19.5%;
 	position: relative;
-	padding-right: 0.5%
+	padding-right: 0.5%;
+	color: #E0E0E0
 }
 .sidebar h3{
 	margin: 10px 0 4px 0;
@@ -176,7 +177,8 @@ a.topic{
 	color: #fff;
 	text-align: center;
 	text-decoration: none;
-	background: #3380CC
+	background: #3380CC;
+	position: relative
 }
 #contexts ul a:hover, a.context:hover{
 	background: #0066cc
@@ -454,6 +456,10 @@ article p{
 	opacity: .7;
 	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
 }
+.private-lock{
+	position: absolute;
+	right: 3px
+}
 .private-lock:before{
 	float: right;
 	content: "\f0c0";
@@ -525,7 +531,8 @@ article p{
 	border: solid 1px #cd0a0a;
 	width: 11px;
 	height: 11px;
-	text-align: center
+	text-align: center;
+	color: #fff
 }
 #dl_today{
 	width: 6% !important;

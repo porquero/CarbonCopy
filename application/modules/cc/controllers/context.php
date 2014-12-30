@@ -291,8 +291,7 @@ class context extends MX_Controller {
 		$this->tpl->variables(
 			array(
 					'title' => lang('add_context'),
-					'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/ckeditor/ckeditor.js')
-					. js_tag('pub/js/ckeditor/adapters/jquery.js') . js_tag('pub/web_tpl/js/edit_context.js'),
+					'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/edit_context.js'),
 					'description' => '',
 					'breadcrumb' => create_breadcrumb($context),
 					'context' => $context,
@@ -386,8 +385,7 @@ class context extends MX_Controller {
 		$this->tpl->variables(
 			array(
 					'title' => lang('modify_context'),
-					'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/ckeditor/ckeditor.js')
-					. js_tag('pub/js/ckeditor/adapters/jquery.js') . js_tag('pub/web_tpl/js/edit_context.js'),
+					'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/edit_context.js'),
 					'description' => '',
 					'breadcrumb' => create_breadcrumb($context),
 					'context' => $context,

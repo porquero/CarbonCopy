@@ -179,7 +179,6 @@ $('#delete_topic').on('click', function (e) {
 $('.focus').focus();
 
 $('#date_line li').hover(function () {
-	console.log($(this).find('ul'));
 	$(this).find('ul').stop(true, true).slideDown();
 }, function () {
 	$(this).find('ul').stop(true, true).slideUp();

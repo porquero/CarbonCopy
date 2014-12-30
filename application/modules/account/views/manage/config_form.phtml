@@ -5,7 +5,7 @@ echo form_open_multipart('/account/manage/config', $attributes);
 <fieldset>
 	<legend><?php echo lang('account') ?></legend>
 	<label><span><?php echo lang('account_name') ?></span><?php echo form_input('account_name', $account_name, 'maxlength="75"') ?></label>
-	<label><span><?php echo lang('home_info') ?></span><div class="clear"></div><textarea name="home_info" id="home_info"><?php echo $account_info ?></textarea></label>
+	<label><span><?php echo lang('home_info') ?></span><div class="clear"></div><textarea name="home_info" id="home_info" cols="60" rows="10"><?php echo $account_info ?></textarea></label>
 </fieldset>
 <fieldset>
 	<legend><?php echo lang('global_settings') ?></legend>

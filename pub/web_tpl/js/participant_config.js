@@ -14,5 +14,3 @@ function process_validation(data) {
 		alert(data.message);
 	}
 }
-
-$('textarea#home_info').ckeditor();
