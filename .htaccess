@@ -2,5 +2,5 @@ RewriteEngine On
 
 AddDefaultCharset UTF-8
 
-RewriteCond $1 !^(index\.php|pub|robots\.txt|setup)
+RewriteCond $1 !^(index\.php|pub|extends(.*)assets(.*)|robots\.txt|setup)
 RewriteRule ^(.*)$ /index.php/$1 [L]

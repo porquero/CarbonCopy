@@ -1,38 +1,38 @@
 <?php
 if (connected_user() !== FALSE && belongs_to('topic', $context, connected_user(), TRUE)):
-	?>
-	<ul id="context-actions">
-		<?php
-		if ($user_locking === FALSE):
-			?>
-			<li>
-				<button class="<?php echo $info['status'] ?>" data-status="<?php echo $info['status'] ?>" data-context="<?php echo $context ?>" id="b_task">
-					<span class="b_active"><?php echo lang($info['status']) ?></span>
-					<span class="b_inactive"><?php echo lang($statuses[$info['status']]) ?></span>
-				</button>
-			</li>
-			<?php if ($info['status'] === 'opened'): ?>
-				<li><a href="<?php echo site_url('/cc/topic/reply_form/' . $context) ?>"><?php echo lang('reply') ?></a></li>
-				<li style="position: relative">
-					<a href="<?php echo site_url('/cc/topic/move_form/' . get_name_from_slug($context) . '|' . parent_context($context)) ?>" id="move_context"><?php echo lang('move'); ?></a>
-					<div id="move_form" class="mdl"></div>
-				</li>
-				<li><a href="<?php echo site_url('/cc/topic/delete/' . get_name_from_slug($context) . '|' . parent_context($context)) ?>" id="delete_topic"><?php echo lang('delete') ?></a></li>
-				<li><a href="<?php echo site_url('/cc/topic/modify_form/' . $context) ?>"><?php echo lang('edit') ?></a></li>
-				<?php
-			endif;
-		endif;
-		?>
-	</ul>
-	<?php
+    ?>
+    <ul id="context-actions">
+        <?php
+        if ($user_locking === FALSE):
+            ?>
+            <li>
+                <button class="<?php echo $info['status'] ?>" data-status="<?php echo $info['status'] ?>" data-context="<?php echo $context ?>" id="b_task">
+                    <span class="b_active"><?php echo lang($info['status']) ?></span>
+                    <span class="b_inactive"><?php echo lang($statuses[$info['status']]) ?></span>
+                </button>
+            </li>
+            <?php if ($info['status'] === 'opened'): ?>
+                <li><a href="<?php echo site_url('/cc/topic/reply_form/' . $context) ?>"><?php echo lang('reply') ?></a></li>
+                <li style="position: relative">
+                    <a href="<?php echo site_url('/cc/topic/move_form/' . get_name_from_slug($context) . '|' . parent_context($context)) ?>" id="move_context"><?php echo lang('move'); ?></a>
+                    <div id="move_form" class="mdl"></div>
+                </li>
+                <li><a href="<?php echo site_url('/cc/topic/delete/' . get_name_from_slug($context) . '|' . parent_context($context)) ?>" id="delete_topic"><?php echo lang('delete') ?></a></li>
+                <li><a href="<?php echo site_url('/cc/topic/modify_form/' . $context) ?>"><?php echo lang('edit') ?></a></li>
+                <?php
+            endif;
+        endif;
+        ?>
+    </ul>
+    <?php
 endif;
 ?>
 <div class="clear"></div>
 <h3 id="files-h"><?php echo lang('files') ?></h3>
 <ul id="files">
-	<?php foreach ($files as $file): ?>
-		<li><a href="<?php echo site_url('/cc/file/download/' . $context . '_' . urlencode(basename($file))) ?>" target="_blank"><?php echo basename($file) ?></a></li>
-	<?php endforeach; ?>
+    <?php foreach ($files as $file): ?>
+        <li><a href="<?php echo site_url('/cc/file/download/' . $context . '_' . urlencode(basename($file))) ?>" target="_blank"><?php echo basename($file) ?></a></li>
+    <?php endforeach; ?>
 </ul>
 <h3 id="replies-h"><?php echo lang('replies') ?></h3>
 <?php
