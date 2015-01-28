@@ -49,6 +49,10 @@ define('_TEMPLATE_BLANK_TXT', 'BLANK_txt.phtml');
 define('_INC', dirname(__FILE__) . '/../');
 define('_INC_ROOT', dirname(__FILE__) . '/../../');
 
+// Message types
+define('_MSG_OK', 'msg_ok');
+define('_MSG_WARNING', 'msg_warning');
+define('_MSG_ERROR', 'msg_error');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

@@ -150,3 +150,20 @@ $lang['open'] = 'open';
 $lang['close'] = 'close';
 $lang['to_do'] = 'To Do';
 $lang['wait_please'] = 'Wait please...';
+$lang['reset_password'] = 'Reset Password';
+$lang['reset_form'] = 'Reset my password';
+$lang['reset_description'] = 'Use the email that you used to register on CarbonCopy, set the new password and you will receive an email with a link to confirm it.';
+$lang['reset_subject'] = 'CarbonCopy - Reset Your Password';
+$lang['reset_mail'] = <<<PQR
+Hi!
+
+You has request reset your password.
+
+To accept new password please visit next link. If you think that you don't have request it just delete this email.
+
+%s
+
+Regards.
+The <a href="%s">CarbonCopy</a> Team.
+PQR;
+$lang['reset_password_sent'] = 'Your request has been sent. Please se your email to continue with the password reset.';

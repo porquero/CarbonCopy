@@ -78,8 +78,8 @@ class user extends MX_Controller {
 				$recipient = $this->input->post('email');
 				$subject = 'CarbonCopy - ' . lang('email_validation');
 				$message_mail = nl2br(sprintf(lang('email_validation_message'), $this->input->post('name'), site_url_ws()
-					, md5($this->input->post('password')) . md5($this->input->post('email'))));
-				$this->email->from('validation@cccm.com', 'CarbonCopy');
+						, md5($this->input->post('password')) . md5($this->input->post('email'))));
+				$this->email->from('noreply@carboncpm.com', 'CarbonCopy');
 				$this->email->to($recipient);
 
 				$this->email->subject($subject);
@@ -448,6 +448,117 @@ class user extends MX_Controller {
 		}
 
 		return $this->m_user->add_account($username, $account);
+	}
+
+	/**
+	 * Generate password form.
+	 */
+	public function reset_password_form()
+	{
+		// Only for not connected.
+		if (connected_user() !== FALSE) {
+			redirect();
+			return;
+		}
+
+		$this->load->helper('form');
+
+		$this->tpl->variables(
+			array(
+					'title' => lang('reset_form'),
+					'description' => lang('reset_description'),
+					'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/web_tpl/js/user_reset_password.js'),
+		));
+
+		$this->tpl->section('_view', 'reset_password.phtml');
+		$this->tpl->load_view(_TEMPLATE);
+	}
+
+	/**
+	 * Generate hash to reset password by email link.
+	 */
+	public function reset_password()
+	{
+		$this->load->module('file/write');
+		$this->load->library('email');
+
+		$hash = uniqid();
+		// TODO Add user data!
+		$this->write->archive(_INC_ROOT . 'tmp/' . $hash, md5($this->input->post('password')));
+
+		$mail_body = nl2br(sprintf(lang('reset_mail'), site_url() . "/cc/user/validate_reset_password/{$hash}", site_url_ws()));
+
+		// TODO Load email from configuration
+		$this->email->from('noreply@carboncpm.com', 'CarbonCopy');
+		$this->email->to($this->input->post('email'));
+
+		$this->email->subject(lang('reset_subject'));
+		$this->email->message($mail_body);
+		$this->email->set_mailtype('html');
+
+		$this->email->send();
+
+		$this->session->set_flashdata('msg', lang('reset_password_sent'));
+		$this->session->set_flashdata('msg_type', _MSG_OK);
+
+		echo json_encode(array(
+				'result' => 'ok',
+				'message' => ''
+		));
+	}
+
+	/**
+	 * Validate reset password and change it if data is corect.
+	 *
+	 * @param string $hash
+	 */
+	public function validate_reset_password($hash = NULL)
+	{
+		if ($hash === NULL) {
+			redirect();
+		}
+
+		$this->load->module('file/read');
+
+		$hash_path = '';
+
+		if (strlen($hash) > 0) {
+			$hash_path = _INC_ROOT . 'tmp/' . $hash;
+		}
+
+		if (is_file($hash_path)) {
+			$this->load->model('cc/m_user');
+			$password = $this->read->content($hash_path);
+
+			// Registered users.
+			if ($this->m_user->email_exists($password)) {
+				$this->add_account($this->m_user->username($password), $hash[0]);
+
+				$this->tpl->variables(
+					array(
+							'title' => lang('invitation_successful'),
+							'description' => lang('access_invited'),
+				));
+				$this->tpl->load_view(_TEMPLATE);
+
+				unlink($hash_path);
+				return;
+			}
+			// New users.
+			else {
+				redirect('cc/user/register_form/' . $hash);
+			}
+		}
+
+		// Only on fail!
+		$this->tpl->variables(
+			array(
+					'title' => lang('error'),
+					'description' => '',
+					'msg_type' => 'msg_error',
+					'msg' => lang('error_validating_invitation'),
+		));
+		$this->tpl->load_view(_TEMPLATE);
 	}
 
 }

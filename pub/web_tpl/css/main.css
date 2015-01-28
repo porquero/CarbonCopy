@@ -250,9 +250,6 @@ a.topic{
 .content form{
 	width: 70%
 }
-.content form *{
-	font-size: 116%;
-}
 form.gf input[type=text], form.gf select, form.gf textarea, form.gf input[type=file]{
 }
 form.gf input[type=file]{
@@ -352,7 +349,7 @@ article p{
 .cancel:hover{
 	background-color: transparent
 }
-.cancel button{
+button{
 	font-size: 100% !important
 }
 .inline{

@@ -35,7 +35,7 @@ class topic extends MX_Controller {
 		$topic = "_accounts/{$this->session->userdata('current_account')}/contexts/{$this->misc->unslug($context)}";
 
 		// Validate if topic exists.
-		if ( ! is_dir(_INC_ROOT . \topic_real_path($topic))) {
+		if ( ! is_dir(_INC_ROOT . topic_real_path($topic))) {
 			header('HTTP/1.1 404 Not Found');
 
 			$this->tpl->variables(array(
@@ -363,7 +363,7 @@ PQR;
 			$this->load->module('file/write');
 			$this->load->module('cc/file');
 
-			$path = _INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/contexts/' . \topic_real_path(unslug_path($this->input->post('context')));
+			$path = _INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/contexts/' . topic_real_path(unslug_path($this->input->post('context')));
 
 			$this->file_name = '';
 			$message = '';
@@ -804,7 +804,7 @@ PQR;
 			$this->tpl->load_view(_TEMPLATE);
 		}
 		else {
-			$topic_lock = $this->misc->final_slash(\topic_real_path($topic)) . 'LOCK';
+			$topic_lock = $this->misc->final_slash(topic_real_path($topic)) . 'LOCK';
 			$this->write->archive($topic_lock, connected_user(), 'w');
 
 			return TRUE;
@@ -823,7 +823,7 @@ PQR;
 		$this->load->module('file/read');
 		$this->load->module('file/misc');
 
-		$topic_lock = $this->misc->final_slash(\topic_real_path($topic)) . 'LOCK';
+		$topic_lock = $this->misc->final_slash(topic_real_path($topic)) . 'LOCK';
 
 		if (is_file($topic_lock)) {
 			$user_locking = $this->read->content($topic_lock);
@@ -844,7 +844,7 @@ PQR;
 	{
 		$this->load->module('file/misc');
 
-		$lock_file = $this->misc->final_slash(\topic_real_path($topic)) . 'LOCK';
+		$lock_file = $this->misc->final_slash(topic_real_path($topic)) . 'LOCK';
 
 		if (is_file($lock_file)) {
 			return unlink($lock_file);

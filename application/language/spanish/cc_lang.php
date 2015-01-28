@@ -150,3 +150,20 @@ $lang['open'] = 'abrir';
 $lang['close'] = 'cerrar';
 $lang['to_do'] = 'Por hacer';
 $lang['wait_please'] = 'Espera por favor...';
+$lang['reset_password'] = 'Restablecer Contraseña';
+$lang['reset_form'] = 'Restablecer mi contraseña';
+$lang['reset_description'] = 'Utiliza el email que usaste para registrarte en CarbonCopy, ingresa la nueva contraseña y recibirás un correo con link para confirmarlo.';
+$lang['reset_subject'] = 'CarbonCopy - Restablecer contraseña';
+$lang['reset_mail'] = <<<PQR
+Hola!
+
+Has solicitado restablecer tu contraseña.
+
+Para aceptar la nueva contraseña visita el siguiente link. Si piensas que no has hecho la solicitud sólo borra este correo.
+
+%s
+
+Saludos.
+El equipo de <a href="%s">CarbonCopy</a>.
+PQR;
+$lang['reset_password_sent'] = 'Tu solicitud ha sido enviada. Por favor mira tu correo para continuar con el restablecimiento de tu contraseña.';

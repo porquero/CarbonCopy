@@ -34,8 +34,8 @@ class nicedit extends MX_Controller {
 
 		$status = array();
 		$status['done'] = 1;
-		$status['width'] = $size[0];
 		$status['noprogress'] = true;
+		$status['upload']['image']['width'] = $size[0];
 		$status['upload']['links']['original'] = base_url() . '/pub/images/' . $this->file_upload_result['data']['upload_data']['file_name'];
 		$status['upload']['links']['imgur_page'] = base_url() . '/pub/images/' . $this->file_upload_result['data']['upload_data']['file_name'];
 		$status['upload']['links']['delete_page'] = base_url() . '/pub/images/' . $this->file_upload_result['data']['upload_data']['file_name'];

@@ -708,11 +708,10 @@ PQR;
 	public function move_form($data)
 	{
 		list($id_context, $from_context) = explode('|', urldecode($data));
-		$all_contexts = array('/' => array('title' => '[/]', 'context' => '')) + account_contexts($this->session->userdata('current_account'));
 		$contexts = array();
 
 		// Only show context that user belongs to.
-		foreach ($all_contexts as $k => $context) {
+		foreach (account_contexts($this->session->userdata('current_account')) as $k => $context) {
 			$this_context = trim($from_context . '_' . $id_context, '_');
 			$belongs = empty($context['context']) ? belongs_to('account', connected_user()) : belongs_to('context', $context['context'], connected_user());
 
@@ -723,7 +722,7 @@ PQR;
 		}
 
 		$variables = array(
-				'contexts' => $contexts,
+				'contexts' => $from_context === '' ? $contexts : array('/' => array('title' => '[/]', 'context' => '')) + $contexts,
 				'id_context' => $id_context,
 				'from_context' => $from_context,
 		);
@@ -772,7 +771,7 @@ PQR;
 			);
 
 			if (empty($to_context)) {
-				$context_info[]['visibility'] = 'private';
+				$context_info['visibility'] = 'private';
 			}
 
 			$this->write->archive(_INC_ROOT . $move_to . '/info_context.json', json_encode($context_info));
@@ -886,6 +885,23 @@ PQR;
 
 			return $this->labels($context);
 		}
+	}
+
+	public function export_topics($context)
+	{
+		$this->load->module('file/read');
+
+		$topics = glob_recursive(_INC_ROOT . "_accounts/{$this->session->userdata('current_account')}/contexts/{$context}/info_topic.json");
+		$fields = array();
+		$temp = tmpfile();
+
+		foreach ($topics as $topic) {
+			$fields[] = $this->read->json_content($topic);
+		}
+
+		$fp = fopen($archive_path, $mode);
+		fputcsv($fp, $fields);
+		fclose($fp);
 	}
 
 }
