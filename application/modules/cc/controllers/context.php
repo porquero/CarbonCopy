@@ -109,7 +109,7 @@ class context extends MX_Controller {
 					'msg' => isset($msg) ? $msg : '',
 		));
 		$this->tpl->section('_sidebar', '_sidebar.phtml');
-		$this->tpl->section('_view', 'index.phtml');
+		$this->tpl->section('_view', 'resume.phtml');
 		$this->tpl->load_view(_TEMPLATE);
 	}
 
@@ -279,7 +279,7 @@ class context extends MX_Controller {
 
 	/**
 	 * Create context form view
-	 * 
+	 *
 	 * @param type $context
 	 */
 	public function create_form($context = '')
@@ -315,7 +315,7 @@ class context extends MX_Controller {
 
 	/**
 	 * Validate sent form to create context
-	 * 
+	 *
 	 * @return string
 	 */
 	public function validate_form()
@@ -540,7 +540,7 @@ class context extends MX_Controller {
 	}
 
 	/**
-	 * Manage participants for topic
+	 * Manage participants for contet
 	 *
 	 * @param string $context
 	 *
@@ -797,7 +797,7 @@ PQR;
 
 	/**
 	 * Send to trash sent context
-	 * 
+	 *
 	 * @param string $data id_context|context
 	 */
 	public function delete($data)
@@ -851,7 +851,7 @@ PQR;
 	 * Get context labels (context and topic)
 	 *
 	 * @param string $context
-	 * 
+	 *
 	 * @return array
 	 */
 	public function labels($context)
