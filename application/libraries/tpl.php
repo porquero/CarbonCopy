@@ -118,7 +118,7 @@ class Tpl {
 				$sections[$section] .= $CI->load->view($v, $this->_variables, true);
 			}
 		}
-
+                
 		$result = $CI->load->view($view, array_merge($sections, $vars), TRUE);
 
 		if ($return === TRUE) {

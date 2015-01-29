@@ -1,0 +1,1 @@
+alert('This is a section example js asset.');

@@ -25,13 +25,6 @@ class example extends component{
             $description = ''; // Page description.
 
     /**
-     * Model component
-     *
-     * @var class
-     */
-    public $m_example;
-
-    /**
      * Required: Default component action.
      * 
      */

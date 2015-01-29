@@ -41,4 +41,7 @@ class PRE_C {
 		$this->_ci->lang->load('cc', $language);
 	}
 
+        public function sections() {
+            
+        }
 }
