@@ -1,7 +1,7 @@
 <?php
 
-if ( ! defined('BASEPATH'))
-	exit('No direct script access allowed');
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
 
 /**
  * Isolate tests
@@ -10,12 +10,13 @@ if ( ! defined('BASEPATH'))
  */
 class tests extends MX_Controller {
 
-	public function all_topics($context)
-	{
-		$context = preg_replace('/\_/', '/', $context);
-		Plogger::var_dump(glob_recursive(_INC_ROOT . "_accounts/{$this->session->userdata('current_account')}/contexts/{$context}/info_topic.json"));
-	}
+    public function all_topics($context) {
+        $context = preg_replace('/\_/', '/', $context);
+        Plogger::var_dump(glob_recursive(_INC_ROOT . "_accounts/{$this->session->userdata('current_account')}/contexts/{$context}/info_topic.json"));
+    }
+
+    public function glob_r() {
+        Plogger::var_dump(glob(_INC_ROOT . '/extends/components/*'));
+    }
 
 }
-
-

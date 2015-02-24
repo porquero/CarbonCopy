@@ -26,7 +26,7 @@ class manage extends MX_Controller {
         $account_path = _INC_ROOT . '_accounts/' . $account_id;
 
         // Create account dir.
-        $zip = new \ZipArchive();
+        $zip = new ZipArchive();
         $zip->open(_INC_ROOT . '_accounts/_account_tpl.zip');
         $zip->extractTo($account_path);
         $zip->close();
@@ -112,6 +112,7 @@ class manage extends MX_Controller {
                     'msg' => isset($msg) ? $msg : '',
         ));
 
+        $this->tpl->section('_sidebar', '_sidebar.phtml');
         $this->tpl->section('_view', 'config_form.phtml');
         $this->tpl->load_view(_TEMPLATE);
     }
@@ -144,7 +145,7 @@ class manage extends MX_Controller {
             $this->load->module('file/write');
 
             // Save config data.
-            $account_conifg = $this->_date_format($this->input->post('date_format')) + array(
+            $account_conifg = Modules::run('account/configuration/load') + $this->_date_format($this->input->post('date_format')) + array(
                 'language' => $this->input->post('language'),
                 'context_label' => $this->input->post('context_label'),
                 'topic_label' => $this->input->post('topic_label'),
@@ -254,19 +255,44 @@ class manage extends MX_Controller {
     }
 
     /**
-     * Extensions configuration
+     * Extends configuration
      */
-    public function extensions() {
+    public function extends_form() {
+        is_connected();
         $this->tpl->variables(
                 array(
-                    'title' => 'Extensions Manager',
+                    'title' => 'Extends Manager',
+                    'description' => '',
+                    'footer' => '',
+                    'msg_type' => isset($msg_type) ? $msg_type : '',
+                    'msg' => isset($msg) ? $msg : '',
+                    'components' => Modules::run('extends/component/installed'),
+                    'sections' => Modules::run('extends/section/installed'),
+                    'footer' => js_tag('pub/web_tpl/js/account_config.js'),
+        ));
+
+        $this->tpl->section('_sidebar', '_sidebar.phtml');
+        $this->tpl->section('_view', 'extends.phtml');
+        $this->tpl->load_view(_TEMPLATE);
+    }
+
+    /**
+     * Account config principal view.
+     */
+    public function index() {
+
+        $components = '';
+
+        $this->tpl->variables(
+                array(
+                    'title' => 'Account Configuration',
                     'description' => '',
                     'footer' => '',
                     'msg_type' => isset($msg_type) ? $msg_type : '',
                     'msg' => isset($msg) ? $msg : '',
         ));
 
-        $this->tpl->section('_view', 'extensions.phtml');
+        $this->tpl->section('_view', 'index.phtml');
         $this->tpl->load_view(_TEMPLATE);
     }
 

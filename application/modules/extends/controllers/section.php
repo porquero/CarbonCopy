@@ -3,12 +3,14 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+include_once dirname(__FILE__) . '/cc_extends.php';
+
 /**
  * Sections manager
  *
  * @author Cristian
  */
-class section extends MX_Controller {
+class section extends cc_extends {
 
     /**
      * Load section and run.
@@ -25,11 +27,17 @@ class section extends MX_Controller {
             echo 'Invalid section name.';
         }
 
+        // Validate if enabled.
+        $account_config = Modules::run('account/configuration/load');
+        if (!(array_key_exists($section, $account_config['extends']['sections']) && $account_config['extends']['sections'][$section] === TRUE)) {
+            echo $section . ': not enabled. ';
+        }
 
         list($section_name, $action) = explode('_', $section, 2);
         is_null($action) ? $action = 'index' : NULL;
 
         include_once _INC_ROOT . '/extends/sections/' . "{$section_name}/controllers/{$section_name}.php";
+        $params = json_decode(file_get_contents(_INC_ROOT . '/extends/sections/' . "{$section_name}/{$section_name}.json"));
 
         $section = new $section_name();
         $section->load->model('m_component');
@@ -52,7 +60,35 @@ class section extends MX_Controller {
                     'action' => $action,
         ));
 
-        $this->tpl->section('_section', 'extends/section/index.phtml');
+        $this->tpl->section('_section_' . $params->position, 'extends/section/index.phtml');
+    }
+
+    /**
+     * Return installed sections indicating if it is enable (true) or not (false)
+     * in the account extends manager.
+     * 
+     * @return array Components installed.
+     */
+    public function installed() {
+        return parent::installed('sections');
+    }
+    
+        /**
+     * Activate component.
+     * 
+     * @param string $component
+     */
+    public function activate($component) {
+        return parent::_activation($component, 'sections', TRUE);
+    }
+
+    /**
+     * Desactivate component.
+     * 
+     * @param string $component
+     */
+    public function desactivate($component) {
+        return parent::_activation($component, 'sections', FALSE);
     }
 
 }

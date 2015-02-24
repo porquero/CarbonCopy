@@ -1,0 +1,36 @@
+<div id="extensions">
+    <fieldset class="lft">
+        <legend>Components</legend>
+        <table>
+            <tr>
+                <th class="fa-bolt"></th>
+                <th>Name</th>
+                <th>In menu?</th>
+            </tr>
+            <?php foreach ($components as $component): ?>
+                <tr>
+                    <td><input class="component_activation" type="checkbox" value="<?php echo $component['id'] ?>" <?php echo $component['enabled'] ? 'checked' : '' ?> /></td>
+                    <td><a href="<?php echo site_url('extends/component/run/' . $component['id']) ?>"><?php echo $component['data']->name ?></a></td>
+                    <td><?php echo $component['data']->in_menu ? 'yes' : 'no' ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </fieldset>
+    <fieldset class="lft">
+        <legend>Sections</legend>
+        <table>
+            <tr>
+                <th class="fa-bolt" title="Enable/Disable"></th>
+                <th>Name</th>
+                <th>Activated in</th>
+            </tr>
+            <?php foreach ($sections as $section): ?>
+                <tr>
+                    <td><input class="section_activation" type="checkbox" value="<?php echo $section['id'] ?>" <?php echo $section['enabled'] ? 'checked' : '' ?> /></td>
+                    <td><?php echo $section['data']->name ?></td>
+                    <td><?php echo $section['data']->position ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </fieldset>
+</div>

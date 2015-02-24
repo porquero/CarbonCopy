@@ -1,0 +1,10 @@
+{
+    "name": "Example",
+    "author": "Playa EIRL",
+    "web": "http://www.playasoluciones.cl",
+    "trigger": {
+        "context": true,
+        "topic": true
+    },
+    "position": "after_content"
+}

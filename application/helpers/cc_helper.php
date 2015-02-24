@@ -472,13 +472,22 @@ function clean_uploaded_file_name($file_name) {
     return $file_name;
 }
 
-function glob_recursive($pattern, $flags = 0)
-{
-	$files = glob($pattern, $flags);
+/**
+ * Recursive glob
+ * 
+ * @param string $pattern
+ * @param constant $flags
+ * 
+ * @link http://php.net/manual/en/function.glob.php#106595 adaptation
 
-	foreach (glob(dirname($pattern) . '/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
-		$files = array_merge($files, glob_recursive($dir . '/' . basename($pattern), $flags));
-	}
+ * @return array
+ */
+function glob_recursive($pattern, $flags = 0) {
+    $files = glob($pattern, $flags);
 
-	return $files;
+    foreach (glob(dirname($pattern) . '/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
+        $files = array_merge($files, glob_recursive($dir . '/' . basename($pattern), $flags));
+    }
+
+    return $files;
 }

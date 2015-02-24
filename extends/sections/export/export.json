@@ -1,0 +1,11 @@
+{
+    "name": "Export Topics",
+    "description": "Export Context Topics",
+    "author": "Playa EIRL",
+    "web": "",
+    "trigger": {
+        "context": true,
+        "topic": false
+    },
+    "position": "after_content"
+}

@@ -3,12 +3,14 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+include_once dirname(__FILE__) . '/cc_extends.php';
+
 /**
  * Components manager
  *
  * @author Cristian
  */
-class component extends MX_Controller {
+class component extends cc_extends {
 
     /**
      * Load component and its view.
@@ -18,6 +20,12 @@ class component extends MX_Controller {
     public function run($component = NULL) {
 
         if (is_null($component)) {
+            redirect();
+        }
+
+        // Validate if enabled.
+        $account_config = Modules::run('account/configuration/load');
+        if (!(array_key_exists($component, $account_config['extends']['components']) && $account_config['extends']['components'][$component] === TRUE)) {
             redirect();
         }
 
@@ -32,14 +40,14 @@ class component extends MX_Controller {
         include_once _INC_ROOT . '/extends/components/' . "{$component_name}/models/m_{$component_name}.php";
         $m_component = "m_{$component_name}";
         $component->$m_component = new $m_component;
-        
+
         $component->$action();
 
         $this->tpl->variables(
                 array(
                     'title' => $component->title,
-                    'head' => link_tag('extends/components/'. $component_name . '/assets/styles.css'),
-                    'footer' => js_tag('extends/components/'. $component_name . '/assets/scripts.js'),
+                    'head' => link_tag('extends/components/' . $component_name . '/assets/styles.css'),
+                    'footer' => js_tag('extends/components/' . $component_name . '/assets/scripts.js'),
                     'subtitle' => $component->subtitle,
                     'description' => $component->description,
                     'msg_type' => isset($component->msg_type) ? $component->msg_type : '',
@@ -51,6 +59,34 @@ class component extends MX_Controller {
         $this->tpl->section('_sidebar', '_sidebar.phtml');
         $this->tpl->section('_view', 'index.phtml');
         $this->tpl->load_view(_TEMPLATE);
+    }
+
+    /**
+     * Return installed components indicating if it is enable (true) or not (false)
+     * in the account extends manager.
+     * 
+     * @return array Components installed.
+     */
+    public function installed() {
+        return parent::installed();
+    }
+
+    /**
+     * Activate component.
+     * 
+     * @param string $component
+     */
+    public function activate($component) {
+        return parent::_activation($component, 'components', TRUE);
+    }
+
+    /**
+     * Desactivate component.
+     * 
+     * @param string $component
+     */
+    public function desactivate($component) {
+        return parent::_activation($component);
     }
 
 }
