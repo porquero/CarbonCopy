@@ -1,11 +1,11 @@
 <div id="extensions">
     <fieldset class="lft">
-        <legend>Components</legend>
+        <legend><?php echo lang('components') ?></legend>
         <table>
             <tr>
                 <th class="fa-bolt"></th>
-                <th>Name</th>
-                <th>In menu?</th>
+                <th><?php echo lang('name') ?></th>
+                <th><?php echo lang('in_menu') ?></th>
             </tr>
             <?php foreach ($components as $component): ?>
                 <tr>
@@ -17,12 +17,12 @@
         </table>
     </fieldset>
     <fieldset class="lft">
-        <legend>Sections</legend>
+        <legend><?php echo lang('sections') ?></legend>
         <table>
             <tr>
                 <th class="fa-bolt" title="Enable/Disable"></th>
-                <th>Name</th>
-                <th>Activated in</th>
+                <th><?php echo lang('name') ?></th>
+                <th><?php echo lang('activated_in') ?></th>
             </tr>
             <?php foreach ($sections as $section): ?>
                 <tr>

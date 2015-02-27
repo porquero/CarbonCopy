@@ -167,3 +167,11 @@ Regards.
 The <a href="%s">CarbonCopy</a> Team.
 PQR;
 $lang['reset_password_sent'] = 'Your request has been sent. Please se your email to continue with the password reset.';
+$lang['extensions_manager'] = 'Extensions Manager';
+$lang['components'] = 'Components';
+$lang['in_menu'] = 'In menu?';
+$lang['sections'] = 'Sections';
+$lang['activated_in'] = 'Activated in';
+$lang['name'] = 'Name';
+$lang['principal'] = 'Principal';
+$lang['extensions'] = 'Extensions';

@@ -229,4 +229,8 @@ $(function () {
         document.location = site_url + 'cc/user/login_form';
         return false;
     });
+    $(document).bind('keydown', 'alt+x', function () {
+        document.location = site_url + 'cc/user/logout';
+        return false;
+    });
 });

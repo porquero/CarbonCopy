@@ -261,7 +261,7 @@ class manage extends MX_Controller {
         is_connected();
         $this->tpl->variables(
                 array(
-                    'title' => 'Extends Manager',
+                    'title' => lang('extensions_manager'),
                     'description' => '',
                     'footer' => '',
                     'msg_type' => isset($msg_type) ? $msg_type : '',
@@ -285,7 +285,7 @@ class manage extends MX_Controller {
 
         $this->tpl->variables(
                 array(
-                    'title' => 'Account Configuration',
+                    'title' => lang('account_configuration'),
                     'description' => '',
                     'footer' => '',
                     'msg_type' => isset($msg_type) ? $msg_type : '',
