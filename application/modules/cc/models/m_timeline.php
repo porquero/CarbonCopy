@@ -37,6 +37,7 @@ class m_timeline extends CI_Model {
 		$date_format = account_date_format_mysql();
 
 		$this->db
+			->limit(50)
 			->from("{$this->_table} t")
 			->select(
 				"date_format(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, "

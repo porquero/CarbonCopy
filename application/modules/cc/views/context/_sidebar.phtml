@@ -1,11 +1,11 @@
 <h3><?php echo lang('details'); ?></h3>
-<?php
-echo <<<PQR
 <ul id="details">
-    <li><b>resp.</b> {$info['info']['responsible']}</li>
-</ul>
+	<?php
+echo <<<PQR
+    <li><b>Resp.: </b> {$info['info']['responsible']}</li>
 PQR;
-?>
+	?>
+</ul>
 <div id="contexts">
 	<h3><?php echo $context_label . nbs() . logged_data($participants, '<a href="' . site_url('/cc/context/create_form/' . $context) . '">[+]</a>') ?></h3>
 	<ul>

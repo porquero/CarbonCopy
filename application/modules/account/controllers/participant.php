@@ -272,6 +272,7 @@ PQR;
 						'url_ts' => site_url('/account/participant/profile/' . $username . '/' . $menu_act),
 			));
 			$this->tpl->section('_view', 'profile.phtml');
+			$this->tpl->section('_sidebar', '_sidebar_profile.phtml');
 			$this->tpl->load_view(_TEMPLATE);
 		}
 		else {
@@ -295,14 +296,12 @@ PQR;
 			$where_in[] = preg_replace('/\.json/', '', $participant);
 		}
 
-		$info_participants = $this->m_user->where_in($where_in);
-
 		$this->tpl->variables(
 			array(
 					'title' => lang('people'),
 					'footer' => js_tag('pub/web_tpl/js/people.js'),
 					'description' => lang('all_we_are'),
-					'info_participants' => $info_participants,
+					'info_participants' => $this->m_user->where_in($where_in),
 					'breadcrumb' => create_breadcrumb(''),
 		));
 		$this->tpl->section('_view', 'all_people.phtml');
@@ -514,6 +513,7 @@ PQR;
 					'info' => array(
 							'id' => $participant_info['info']['id'],
 							'language' => $this->input->post('language'),
+							'type' => $participant_info['info']['type'],
 					)
 			);
 
@@ -587,4 +587,69 @@ PQR;
 		return $result;
 	}
 
+	/**
+	 * Set participant as administrator.
+	 *
+	 * @param string $user
+	 */
+	public function as_administrator($user)
+	{
+		is_connected('administrator');
+
+		$this->load->module('file/write');
+
+		// Save info data.
+		$participant_config_path = "_accounts/{$this->session->userdata('current_account')}/_participants/" . connected_user() . ".json";
+		$participant_info = Modules::run('file/read/json_content', $participant_config_path);
+		$participant_info = array(
+				'info' => array(
+						'id' => $participant_info['info']['id'],
+						'language' => $participant_info['info']['language'],
+						'type' => 'administrator',
+				)
+		);
+
+		$res = $this->write->archive($participant_config_path, json_encode($participant_info)) === TRUE ? '1' : 'fail';
+		$this->session->set_userdata('user_info', Modules::run('file/read/json_content', $participant_config_path));
+
+		if ($this->input->is_ajax_request()) {
+			echo $res;
+		}
+		else {
+			return $res;
+		}
+	}
+
+	/**
+	 * Set participant as participant.
+	 *
+	 * @param string $user
+	 */
+	public function as_participant($user)
+	{
+		is_connected('administrator');
+
+		$this->load->module('file/write');
+
+		// Save info data.
+		$participant_config_path = "_accounts/{$this->session->userdata('current_account')}/_participants/" . connected_user() . ".json";
+		$participant_info = Modules::run('file/read/json_content', $participant_config_path);
+		$participant_info = array(
+				'info' => array(
+						'id' => $participant_info['info']['id'],
+						'language' => $participant_info['info']['language'],
+						'type' => 'participant',
+				)
+		);
+
+		$res = $this->write->archive($participant_config_path, json_encode($participant_info)) === TRUE ? '1' : 'fail';
+		$this->session->set_userdata('user_info', Modules::run('file/read/json_content', $participant_config_path));
+
+		if ($this->input->is_ajax_request()) {
+			echo $res;
+		}
+		else {
+			return $res;
+		}
+	}
 }

@@ -175,3 +175,4 @@ $lang['activated_in'] = 'Activado en';
 $lang['name'] = 'Nombre';
 $lang['principal'] = 'Principal';
 $lang['extensions'] = 'Extensiones';
+$lang['component_disabled'] = 'Componente desactivado.';

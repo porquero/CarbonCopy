@@ -591,3 +591,6 @@ button{
 	display: table-cell;
 	vertical-align: middle
 }
+.as_administrator{
+	display: inline !important
+}

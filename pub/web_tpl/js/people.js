@@ -15,3 +15,31 @@ function process_validation(data) {
 		alert(data.message);
 	}
 }
+
+$('.as_administrator').on('click', function () {
+    if ($(this).prop('checked')) {
+        aggressive_message('Setting as administrator.');
+        $.ajax({
+            url: site_url + 'account/participant/as_administrator/' + $(this).val(),
+            success: function (result) {
+                if (result !== "1") {
+                    alert('Error trying to setting as administrator. Please try again later.');
+                    window.location = document.URL;
+                }
+                hide_aggressive_message();
+            }
+        });
+    } else {
+        aggressive_message('Setting as participant.');
+        $.ajax({
+            url: site_url + 'account/participant/as_participant/' + $(this).val(),
+            success: function (result) {
+                if (result !== "1") {
+                    alert('Error trying to setting as participant. Please try again later.');
+                    window.location = document.URL;
+                }
+                hide_aggressive_message();
+            }
+        });
+    }
+});

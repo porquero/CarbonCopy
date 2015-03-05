@@ -13,10 +13,6 @@ var options = {
 };
 $('#add_topic_form').ajaxForm(options);
 
-/**
- * 
- * @param json data response
- */
 function process_validation(data) {
 	if (data.result === 'ok') {
 		var regex = new RegExp("\_+" + $('#id').val() + '$');

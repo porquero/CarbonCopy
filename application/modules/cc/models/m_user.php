@@ -145,7 +145,8 @@ class m_user extends CI_Model {
 				->where('username in(\'' . $participants . '\')')->get();
 
 		foreach ($r->result() as $user) {
-			$result[] = $user;
+			$result[$user->username]['user'] = $user;
+			$result[$user->username]['participant'] = Modules::run('file/read/json_content', "_accounts/{$this->session->userdata('current_account')}/_participants/" . connected_user() . ".json");
 		}
 
 		return $result;
