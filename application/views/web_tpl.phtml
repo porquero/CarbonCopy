@@ -3,100 +3,100 @@ $current_account = current_account_info();
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><?php echo @$title ?> - CarbonCopy</title>
-        <?php
-        echo
-        link_tag('pub/css/reset.css')
-        . link_tag('pub/css/font-awesome.css')
-        . link_tag('pub/css/ui-lightness/jquery-ui-1.10.3.custom.min.css')
-        . link_tag('pub/formalize/css/formalize.css')
-        . link_tag('pub/web_tpl/css/main.css')
-        . @$head . @$_head;
-        ?>
-        <script type="text/javascript">
-            var site_url = '<?php echo preg_replace('/\/$/', '', site_url()); ?>/';
-            var base_url = '<?php echo base_url() ?>/';
-        </script>
-    </head>
-    <body>
-        <div class="container" id="delegate">
-            <div class="clear"></div>
-            <div class="content">
-                <?php
-                if (connected_user() !== FALSE):
-                    echo Modules::run('cc/due/date_line', preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $this->uri->segment(5)) === 1 ? $this->uri->segment(5) : date('Y-m-d'), 15, TRUE);
-                endif;
-                ?>
-                <div id="menu">
-                    <ul>
-                        <li><a href="<?php echo site_url() ?>"><?php echo lang('home') ?></a></li>
-                        <?php if (FALSE !== connected_user()): ?>
-                            <li><a href="<?php echo site_url('/account/participant/config_form') ?>"><?php echo connected_user() . lang('connected_in') . $current_account['name'] ?></a></li>
-                            <li><a href="<?php echo site_url('/account/participant/all_people') ?>"><?php echo lang('all_people') ?></a></li>
-                            <li><a href="<?php echo site_url('/cc/user/logout') ?>"><?php echo lang('logout') ?></a></li>
-                        <?php else: ?>
-                            <!--<li><a href="<?php echo site_url('/cc/user/register_form') ?>"><?php echo lang('register') ?></a></li>-->
-                            <li><a href="<?php echo site_url('/cc/user/login_form') ?>"><?php echo lang('login') ?></a></li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
-                <?php
-                if (connected_user() !== FALSE):
-                    ?>
-                    <div id="search-box">
-                        <input type="text" name="seach" id="search" placeholder="Search" tabindex="1" />
-                        <div id="search_results"></div>
-                    </div>
-                <?php endif; ?>
-                <div class="clear"></div>
-                <div id="context_breadcrumb"><a href="<?php echo site_url() ?>">[/]</a> <?php echo @$breadcrumb ?></div>
-                <div id="din-content">
-                    <div class="header">
-                        <p id="<?php echo @$msg_type; ?>" class="msg"><?php echo @$msg; ?></p>
-                        <?php
-                        echo '<h1>' . @ucfirst($title) . '</h1>';
-                        echo '<h2>' . @ucfirst($subtitle) . '</h2>';
-                        echo '<article>' . @ucfirst($description) . '</article>';
-                        ?>
-                    </div>
-                    <?php
-                    echo @$_section_after_content;
-                    echo @$_view;
-                    echo @$_section_before_content;
-                    ?>
-                </div>
-            </div>
-            <div class="sidebar">
-                <div id="cc">
-                    <a href="<?php echo site_url() ?>" title="CarbonCopy - Collaboration Manager"><span>CC</span></a>
-                    <h2>CarbonCopy</h2>
-                    <?php
-                    if ($this->router->fetch_class() !== 'manage' AND $this->router->fetch_class() !== 'config_form') {
-                        echo logged_data(isset($participants) ? $participants : array(), '<a href="' . site_url('account/manage/config_form') . '" class="config-ico accnf"><span></span></a>', '', isset($user_locking) ? $user_locking : FALSE);
-                    }
-                    ?>
-                </div>
-                <div class="clear"></div>
-                <?php
-                echo @$_sidebar;
-                echo @$_section_sidebar;
-                ?>
-            </div>
-            <div class="clear"></div>
-            <div class="footer"><?php echo @$_footer ?></div>
-        </div>
-        <?php
-        echo
-        js_tag('pub/js/jquery-1.9.1.js')
-        . js_tag('pub/js/main.js')
-        . js_tag('pub/web_tpl/js/main.js')
-        . js_tag('pub/js/jquery-ui-1.10.3.custom.min.js')
-        . js_tag('pub/js/jquery.form.js')
-        . js_tag('pub/js/jquery.hotkeys/jquery.hotkeys.latam.js')
-        . @$footer;
-        ?>
-        <div id="aggressive_message"><div><span><?php echo @isset($aggressive_message) ? $aggressive_message : lang('wait_please'); ?></span> <img src="<?php echo base_url('pub/web_tpl/img/ajax-loader.gif') ?>" alt="" /></div></div>
-    </body>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title><?php echo @$title ?> - CarbonCopy</title>
+		<?php
+		echo
+		link_tag('pub/css/reset.css')
+		. link_tag('pub/css/font-awesome.css')
+		. link_tag('pub/css/ui-lightness/jquery-ui-1.10.3.custom.min.css')
+		. link_tag('pub/formalize/css/formalize.css')
+		. link_tag('pub/web_tpl/css/main.css')
+		. @$head . @$_head;
+		?>
+		<script type="text/javascript">
+			var site_url = '<?php echo preg_replace('/\/$/', '', site_url()); ?>/';
+			var base_url = '<?php echo base_url() ?>/';
+		</script>
+	</head>
+	<body>
+		<div class="container" id="delegate">
+			<div class="clear"></div>
+			<div class="content">
+				<?php
+				if (connected_user() !== FALSE):
+					echo Modules::run('cc/due/date_line', preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $this->uri->segment(5)) === 1 ? $this->uri->segment(5) : date('Y-m-d'), 15, TRUE);
+				endif;
+				?>
+				<div id="menu">
+					<ul>
+						<li><a href="<?php echo site_url() ?>"><?php echo lang('home') ?></a></li>
+						<?php if (FALSE !== connected_user()): ?>
+							<li><a href="<?php echo site_url('/account/participant/config_form') ?>"><?php echo connected_user() . lang('connected_in') . $current_account['name'] ?></a></li>
+							<li><a href="<?php echo site_url('/account/participant/all_people') ?>"><?php echo lang('all_people') ?></a></li>
+							<li><a href="<?php echo site_url('/cc/user/logout') ?>"><?php echo lang('logout') ?></a></li>
+						<?php else: ?>
+							<!--<li><a href="<?php echo site_url('/cc/user/register_form') ?>"><?php echo lang('register') ?></a></li>-->
+							<li><a href="<?php echo site_url('/cc/user/login_form') ?>"><?php echo lang('login') ?></a></li>
+						<?php endif; ?>
+					</ul>
+				</div>
+				<?php
+				if (connected_user() !== FALSE):
+					?>
+					<div id="search-box">
+						<input type="text" name="seach" id="search" placeholder="Search" tabindex="1" />
+						<div id="search_results"></div>
+					</div>
+				<?php endif; ?>
+				<div class="clear"></div>
+				<div id="din-content">
+					<div id="context_breadcrumb"><a href="<?php echo site_url() ?>">[/]</a> &raquo; <?php echo @$breadcrumb ?></div>
+					<div class="header">
+						<p id="<?php echo @$msg_type; ?>" class="msg"><?php echo @$msg; ?></p>
+						<?php
+						echo '<h1>' . @ucfirst($title) . '</h1>';
+						echo '<h2>' . @ucfirst($subtitle) . '</h2>';
+						echo '<article>' . @ucfirst($description) . '</article>';
+						?>
+					</div>
+					<?php
+					echo @$_section_after_content;
+					echo @$_view;
+					echo @$_section_before_content;
+					?>
+				</div>
+			</div>
+			<div class="sidebar">
+				<div id="cc">
+					<a href="<?php echo site_url() ?>" title="CarbonCopy - Collaboration Manager"><span>CC</span></a>
+					<h2>CarbonCopy</h2>
+					<?php
+					if ($this->router->fetch_class() !== 'manage' AND $this->router->fetch_class() !== 'config_form') {
+						echo logged_data(isset($participants) ? $participants : array(), '<a href="' . site_url('account/manage/config_form') . '" class="config-ico accnf"><span></span></a>', '', isset($user_locking) ? $user_locking : FALSE);
+					}
+					?>
+				</div>
+				<div class="clear"></div>
+				<?php
+				echo @$_sidebar;
+				echo @$_section_sidebar;
+				?>
+			</div>
+			<div class="clear"></div>
+			<div class="footer"><?php echo @$_footer ?></div>
+		</div>
+		<?php
+		echo
+		js_tag('pub/js/jquery-1.9.1.js')
+		. js_tag('pub/js/main.js')
+		. js_tag('pub/web_tpl/js/main.js')
+		. js_tag('pub/js/jquery-ui-1.10.3.custom.min.js')
+		. js_tag('pub/js/jquery.form.js')
+		. js_tag('pub/js/jquery.hotkeys/jquery.hotkeys.latam.js')
+		. @$footer;
+		?>
+		<div id="aggressive_message"><div><span><?php echo @isset($aggressive_message) ? $aggressive_message : lang('wait_please'); ?></span> <img src="<?php echo base_url('pub/web_tpl/img/ajax-loader.gif') ?>" alt="" /></div></div>
+	</body>
 </html>

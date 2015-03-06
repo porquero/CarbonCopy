@@ -41,7 +41,7 @@ PQR;
  * @return string
  */
 function parent_context($full_context) {
-    $parent_context = preg_replace('/_[a-z0-9-]*$/', '', $full_context);
+    $parent_context = preg_replace('/_[a-zA-Z0-9-\+\%\.]*$/', '', $full_context);
 
     if ($parent_context === $full_context) {
         return '';
@@ -319,7 +319,7 @@ function user_info() {
 }
 
 /**
- * Helper to validate if user belongs to context.
+ * Helper to validate if user belongs to account/context/topic.
  *
  * @param string $context_type account|context|topic
  * @param string $context_or_user Can be user (for account) or context (for other)
