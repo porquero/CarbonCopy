@@ -13,7 +13,7 @@ if (!defined('BASEPATH'))
 class manage extends MX_Controller {
 
     /**
-     * Create a ne CC account
+     * Create a new CC account
      *
      * @param string $username first account participant
      */
@@ -36,7 +36,8 @@ class manage extends MX_Controller {
             'info' => array(
                 'id' => $username,
                 'language' => 'english',
-            )
+            ),
+            'type' => 'administrator',
         ));
         $this->write->archive($account_path . '/_participants/' . $username . '.json', $username_data);
 

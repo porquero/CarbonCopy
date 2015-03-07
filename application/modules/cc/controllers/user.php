@@ -32,7 +32,7 @@ class user extends MX_Controller {
                     'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/web_tpl/js/user_register.js'),
                     'invitation_hash' => $invitation_hash,
         ));
-        
+
         // User register disabled means make compatible extends with it.
         if (strlen($invitation_hash) > 0) {
             $this->tpl->section('_view', 'register_form.phtml');
@@ -143,10 +143,10 @@ class user extends MX_Controller {
      * Login form
      */
     public function login_form($redirect = '') {
-        if(connected_user() !== FALSE){
+        if (connected_user() !== FALSE) {
             redirect();
         }
-        
+
         $this->load->helper('form');
         $this->tpl->variables(
                 array(
@@ -299,8 +299,8 @@ class user extends MX_Controller {
             $username = $this->m_user->validate($token);
 
             // Create account.
-            $this->load->module('account/manage');
-            $this->manage->create($username);
+//            $this->load->module('account/manage');
+//            $this->manage->create($username);
 
             $this->tpl->variables(
                     array(
@@ -424,7 +424,8 @@ class user extends MX_Controller {
             'info' => array(
                 'id' => $username,
                 'language' => $account_config['language'],
-            )
+            ),
+            'type' => 'participant',
         ));
         $user_file = _INC_ROOT . '_accounts/' . $account . '/_participants/' . $username . '.json';
 

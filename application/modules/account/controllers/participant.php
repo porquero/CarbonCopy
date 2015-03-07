@@ -492,8 +492,8 @@ PQR;
                 'info' => array(
                     'id' => $participant_info['info']['id'],
                     'language' => $this->input->post('language'),
-                    'type' => $participant_info['info']['type'],
-                )
+                ),
+                'type' => $participant_info['type'],
             );
 
             $res = $this->write->archive($participant_config_path, json_encode($participant_info)) === TRUE ? 'ok' : 'fail';

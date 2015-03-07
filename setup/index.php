@@ -21,7 +21,8 @@ PQR;
 			'info' => array(
 					'id' => $_POST['username'],
 					'language' => 'english',
-			)
+			),
+                        'type' => 'administrator',
 	));
 	file_put_contents(dirname(__FILE__) . '/../_accounts/cc/_participants/' . $_POST['username'] . '.json', $username_data);
 
