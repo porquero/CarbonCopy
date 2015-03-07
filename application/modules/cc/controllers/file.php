@@ -19,7 +19,9 @@ class file extends MX_Controller {
 	 */
 	public function download($slug_context)
 	{
-		is_connected();
+		if ( ! (is_connected() && belongs_to('topic', parent_context($slug_context), connected_user()))) {
+			die(lang('not_belongs_to_topic'));
+		}
 
 		$this->load->helper('file');
 

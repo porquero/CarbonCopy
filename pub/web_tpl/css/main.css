@@ -75,9 +75,10 @@ a.topic{
 	font-size: 108%;
 	min-height: 750px;
 	min-width: 980px;
-	padding: 7px;
+	/*padding: 7px;*/
 	text-align: left;
-	position: relative
+	position: relative;
+	padding-top: 3px
 }
 .header{
 	margin-bottom: 14px
@@ -86,17 +87,17 @@ a.topic{
 	float: right;
 	position: relative;
 	width: 80%;
-	padding-top: 4px
+	/*padding-top: 4px*/
 }
 .sidebar{
 	float: left;
-	width: 19.5%;
+	width: 20%;
 	position: relative;
-	padding-right: 0.5%;
+	/*padding-right: 0.5%;*/
 	color: #E0E0E0
 }
 .sidebar h3{
-	margin: 10px 0 4px 0;
+	margin: 0 0 4px 0;
 	text-align: center;
 	background: #4B5558;
 	font-size:100%;
@@ -108,7 +109,7 @@ a.topic{
 	padding: 0
 }
 .sidebar ul{
-	margin: 0 4px
+	/*margin: 0 4px*/
 }
 .sidebar a.topic{
 	color: #fff
@@ -142,7 +143,8 @@ a.topic{
 }
 #menu{
 	display:inline;
-	float:right
+	float:right;
+	margin-right: 28px
 }
 #menu ul{
 	display:inline
@@ -170,7 +172,7 @@ a.topic{
 #contexts ul a{
 	width: 96%;
 	display: block;
-	margin: 2px 0;
+	margin: 1px 0;
 }
 #contexts ul a, a.context{
 	padding: 2px 2%;
@@ -183,8 +185,12 @@ a.topic{
 #contexts ul a:hover, a.context:hover{
 	background: #0066cc
 }
+#cc{
+	float: left;
+	margin-bottom: 37px
+}
 #cc:hover a.config-ico{
-	color: #4B5558 !important
+	color: #4B5558 !important;
 }
 #cc a{
 	color: #fff;
@@ -241,11 +247,14 @@ a.topic{
 	padding: 4px
 }
 #context_breadcrumb{
-	background: #4B5558;
-	color: #fff;
-	margin: 13px 0 4px 0;
-	padding: 2px 4px;
+	/*background: #4B5558;*/
+	/*color: #fff;*/
+	margin: 0 0 4px 0;
+	padding: 2px 0 4px;
 	font-size:93%;
+}
+#context_breadcrumb a{
+	margin: 0
 }
 .content form{
 	width: 70%
@@ -364,16 +373,16 @@ button{
 }
 #search-box{
 	position: relative;
-	float: left
+	float: left;
 }
 #search_results{
 	position: absolute;
 	top: 105%;
-	background: #4B5558;
+	background: #eee;
 	padding: 3px;
 	display: none;
 	width: 344px;
-	border-bottom: 4px #333 solid;
+	border-bottom: 4px #FF855C solid;
 	z-index: 10
 }
 #search_results li{
@@ -399,17 +408,18 @@ button{
 	background: #fff;
 	min-height: 600px;
 	color:#2E3436;
-	padding: 14px
+	padding: 1px 21px;
+	margin-top: 4px
 }
 #tm-topics li{
 	border-bottom: 1px #666 solid;
-	padding: 11px 0 7px 0
+	/*padding: 11px 0 7px 0*/
 }
 #tm-topics a{
 	margin: 0;
-	width: 100%;
+	width: 98%;
 	display: block;
-	padding: 3px;
+	padding: 3px 0 3px 2%;
 }
 #move_form{
 	position: absolute;
@@ -467,7 +477,7 @@ button{
 #date_line{
 	float: left;
 	padding: 0;
-	margin-bottom: 12px;
+	margin: 5px 0 14px;
 	width: 100%
 }
 #date_line *{
@@ -483,7 +493,7 @@ button{
 	float: left;
 	width: 88%;
 	text-align: center;
-	margin: 2px;
+	/*margin: 2px;*/
 }
 #date_line li ul{
 	padding: 0;
@@ -537,6 +547,7 @@ button{
 #dl_today a{
 	background: #fbcb09;
 	color: #363636;
+	margin: 0
 }
 #dl_today a:hover{
 	color: #1c94c4
@@ -593,4 +604,8 @@ button{
 }
 .as_administrator{
 	display: inline !important
+}
+#details li{
+	width: 98%;
+	margin-left: 2%
 }
