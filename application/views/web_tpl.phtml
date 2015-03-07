@@ -33,7 +33,7 @@ $current_account = current_account_info();
                     <ul>
                         <li><a href="<?php echo site_url() ?>"><?php echo lang('home') ?></a></li>
                         <?php if (FALSE !== connected_user()): ?>
-                            <li><a href="<?php echo site_url('/account/participant/config_form') ?>"><?php echo connected_user() . lang('connected_in') . $current_account['name'] ?></a></li>
+                            <li><a href="<?php echo site_url('/account/participant/config_form') ?>"><?php echo connected_user() /*. lang('connected_in') . $current_account['name']*/ ?></a></li>
                             <li><a href="<?php echo site_url('/account/participant/all_people') ?>"><?php echo lang('all_people') ?></a></li>
                             <li><a href="<?php echo site_url('/cc/user/logout') ?>"><?php echo lang('logout') ?></a></li>
                         <?php else: ?>
