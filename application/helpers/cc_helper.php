@@ -341,7 +341,7 @@ function belongs_to($context_type, $context_or_user, $user = NULL, $strict = FAL
  * 
  * @return boolean
  */
-function is_connected() {
+function is_connected($type = array('participant')) {
     $CI = & get_instance();
 
     $CI->load->helper('url');
@@ -349,9 +349,19 @@ function is_connected() {
     $CI->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
     $CI->output->set_header("Pragma: no-cache");
 
+    // Validate if connected.
     if (connected_user() === FALSE) {
         redirect('cc/user/login_form/' . base64_encode(current_url()));
         exit;
+    }
+
+    // Validate Privilegies.
+    $user_info = user_info();
+    if (!(in_array($user_info['type'], $type) || $user_info['type'] === 'administrator')) {
+        $CI->session->set_flashdata('msg', 'No privilegies. Redirected to Home.');
+        $CI->session->set_flashdata('msg_type', _MSG_WARNING);
+
+        redirect();
     }
 
     return TRUE;
