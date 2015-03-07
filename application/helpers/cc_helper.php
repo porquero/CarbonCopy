@@ -26,7 +26,7 @@ function create_breadcrumb($path, $id_topic = NULL) {
         $breadcrumb = trim($breadcrumb, '_') . '_' . $context;
         $context_href = site_url('/cc/context/resume/' . trim($breadcrumb, '_'));
         $result .= <<<PQR
-<a href="{$context_href}">[{$context}]</a>
+ &raquo; <a href="{$context_href}">[{$context}]</a>
 PQR;
     }
 
@@ -357,7 +357,7 @@ function is_connected($type = array('participant')) {
 
     // Validate Privilegies.
     $user_info = user_info();
-    if (!(in_array($user_info['type'], $type) || $user_info['type'] === 'administrator')) {
+    if (!(in_array($user_info['type'], (array) $type) || $user_info['type'] === 'administrator')) {
         $CI->session->set_flashdata('msg', 'No privilegies. Redirected to Home.');
         $CI->session->set_flashdata('msg_type', _MSG_WARNING);
 
@@ -365,6 +365,17 @@ function is_connected($type = array('participant')) {
     }
 
     return TRUE;
+}
+
+/**
+ * Check if conected user is administrator.
+ * 
+ * @return boolean
+ */
+function is_administrator() {
+    $user_info = user_info();
+
+    return $user_info['type'] === 'administrator';
 }
 
 /**

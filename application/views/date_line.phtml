@@ -4,53 +4,64 @@
  */
 ?>
 <ul id="date_line">
-	<li id="dl_today"><a href="<?php echo site_url() ?>"><?php echo lang('today') ?></a></li>
-	<?php
-	foreach ($line_range as $date => $topics):
-		$are_topics = is_array($topics);
-		$day_class = '';
+    <li id="dl_today"><a href="<?php echo site_url() ?>"><?php echo lang('today') ?></a></li>
+    <?php
+    $im = 0;
+    $month_stop = FALSE;
+    foreach ($line_range as $date => $topics):
+        $are_topics = is_array($topics);
+        $day_class = '';
 
-		if ($date === $middle_date) {
-			$day_class .= ' middle_date';
-		}
-		?>
-		<li>
-			<?php
-			if ($are_topics):
-				$todo = '<ul>';
-				$i = 0;
+        if ($date === $middle_date) {
+            $day_class .= ' middle_date';
+        }
+        ?>
+        <li>
+            <?php
+            if ($are_topics):
+                $todo = '<ul>';
+                $i = 0;
 
-				foreach ($topics as $topic_context):
-					$info = Modules::run('cc/topic/info', $topic_context);
+                foreach ($topics as $topic_context):
+                    $info = Modules::run('cc/topic/info', $topic_context);
 
-					if ($info['info']['status'] == 'closed' && $only_opened === TRUE) {
-						continue;
-					}
+                    if ($info['info']['status'] == 'closed' && $only_opened === TRUE) {
+                        continue;
+                    }
 
-					if (belongs_to('topic', $topic_context, connected_user(), TRUE)):
-						$link = site_url('cc/topic/resume/' . $topic_context);
-						$topic = <<<PQR
+                    if (belongs_to('topic', $topic_context, connected_user(), TRUE)):
+                        $link = site_url('cc/topic/resume/' . $topic_context);
+                        $topic = <<<PQR
 <li><a class="topic" href="{$link}"><b>{$info['info']['title']}</b></a></li>
 PQR;
-						$todo .= $topic;
-					endif;
-					$i ++;
-				endforeach;
+                        $todo .= $topic;
+                    endif;
+                    $i ++;
+                endforeach;
 
-				$todo .= '</ul>';
+                $todo .= '</ul>';
 
-				if ($i > 0) {
-					echo <<<PQR
+                if ($i > 0) {
+                    echo <<<PQR
 {$todo}
 <div class="count">{$i}</div>
 PQR;
-					$day_class .= ' ring';
-				}
-			endif;
-			?>
-			<a class="<?php echo $day_class ?>" href="<?php echo site_url('cc/resume/index/all/' . $date) ?>"><?php echo date('d', strtotime($date)) ?></a>
-
-		</li>
-	<?php endforeach; ?>
+                    $day_class .= ' ring';
+                }
+            endif;
+            ?>
+            <a class="<?php echo $day_class ?>" href="<?php echo site_url('cc/resume/index/all/' . $date) ?>"><?php echo date('d', strtotime($date)) ?></a>
+            <?php
+            if ($im === 0) {
+                $month = date('M', strtotime($date));
+                echo '<span class="dl_month">' . strtolower($month) . '</span>';
+            } elseif (date('M', strtotime($date)) !== $month && $month_stop === FALSE) {
+                $month_stop = TRUE;
+                echo '<span class="dl_month">' . strtolower(date('M', strtotime($date))) . '</span>';
+            }
+            $im++;
+            ?>
+        </li>
+    <?php endforeach; ?>
 </ul>
 <div class="clear"></div>

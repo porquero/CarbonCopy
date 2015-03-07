@@ -1,11 +1,11 @@
 <ul id="all_we_are">
-	<?php foreach ($info_participants as $participant): ?>
-		<li>
-			<b><?php echo $participant['user']->name ?></b>
-			<a href="mailto:<?php echo $participant['user']->email ?>"><?php echo $participant['user']->email ?></a>
-			<p><?php echo $participant['user']->ts ?></p>
-			<a href="<?php echo site_url('account/participant/profile/' . $participant['user']->username) ?>"><?php echo $participant['user']->username ?></a>
-			<p><label><input type="checkbox" name="as_administrator" class="as_administrator" value="<?php echo $participant['user']->username ?>" <?php echo $participant['participant']['info']['type'] === 'administrator' ? 'checked' : '' ?> /> Administrator</label></p>
-		</li>
-	<?php endforeach; ?>
+    <?php foreach ($info_participants as $participant): ?>
+        <li>
+            <b><?php echo $participant['user']->name ?></b>
+            <a href="mailto:<?php echo $participant['user']->email ?>"><?php echo $participant['user']->email ?></a>
+            <p><?php echo $participant['user']->ts ?></p>
+            <a href="<?php echo site_url('account/participant/profile/' . $participant['user']->username) ?>"><?php echo $participant['user']->username ?></a>
+            <p><label><input type="checkbox" name="as_administrator" class="as_administrator" value="<?php echo $participant['user']->username ?>" <?php echo $participant['participant']['type'] === 'administrator' ? 'checked' : '' ?> /> Administrator</label></p>
+        </li>
+    <?php endforeach; ?>
 </ul>

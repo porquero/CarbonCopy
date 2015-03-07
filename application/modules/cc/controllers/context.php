@@ -82,6 +82,13 @@ class context extends MX_Controller {
         }
         $tl_date = is_null($ts_date) ? '' : ': ' . account_date_format($ts_date);
         $labels = $this->labels($context);
+        
+        // Run enabled sections.
+        foreach (Modules::run('extends/section/installed') as $section) {
+            if ($section['enabled'] && $section['data']->trigger->context === TRUE) {
+                Modules::run('extends/section/run', $section['id']);
+            }
+        }
 
         $this->tpl->variables(
                 array(

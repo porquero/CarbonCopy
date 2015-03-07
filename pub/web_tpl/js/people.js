@@ -21,6 +21,7 @@ $('.as_administrator').on('click', function () {
         aggressive_message('Setting as administrator.');
         $.ajax({
             url: site_url + 'account/participant/as_administrator/' + $(this).val(),
+            cache : false,
             success: function (result) {
                 if (result !== "1") {
                     alert('Error trying to setting as administrator. Please try again later.');
@@ -33,6 +34,7 @@ $('.as_administrator').on('click', function () {
         aggressive_message('Setting as participant.');
         $.ajax({
             url: site_url + 'account/participant/as_participant/' + $(this).val(),
+            cache : false,
             success: function (result) {
                 if (result !== "1") {
                     alert('Error trying to setting as participant. Please try again later.');

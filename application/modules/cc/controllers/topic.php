@@ -80,7 +80,7 @@ PQR;
 
         // Run enabled sections.
         foreach (Modules::run('extends/section/installed') as $section) {
-            if ($section['enabled']) {
+            if ($section['enabled'] && $section['data']->trigger->topic === TRUE) {
                 Modules::run('extends/section/run', $section['id']);
             }
         }

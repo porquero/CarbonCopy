@@ -143,6 +143,10 @@ class user extends MX_Controller {
      * Login form
      */
     public function login_form($redirect = '') {
+        if(connected_user() !== FALSE){
+            redirect();
+        }
+        
         $this->load->helper('form');
         $this->tpl->variables(
                 array(

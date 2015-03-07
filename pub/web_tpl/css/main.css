@@ -1,611 +1,608 @@
 /*@import url(http://fonts.googleapis.com/css?family=Oxygen);*/
 @font-face {
-	font-family: 'Oxygen';
-	font-style: normal;
-	font-weight: 400;
-	src: local('Oxygen'), local('Oxygen-Regular'), url(oxygen.woff) format('woff');
+    font-family: 'Oxygen';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Oxygen'), local('Oxygen-Regular'), url(oxygen.woff) format('woff');
 }
 *:before{
-	font-family: FontAwesome;
-	font-weight: normal
+    font-family: FontAwesome;
+    font-weight: normal
 }
 .alft{
-	text-align: left
+    text-align: left
 }
 .argt{
-	text-align: right
+    text-align: right
 }
 .lft{
-	float: left
+    float: left
 }
 .rgt{
-	float: right
+    float: right
 }
 fieldset{
-	padding: 14px;
-	border: 1px #eee solid;
-	margin: 14px
+    padding: 14px;
+    border: 1px #eee solid;
+    margin: 14px
 }
 fieldset legend{
-	background: #4b5558;
-	color: #fff;
-	padding: 2px 4px;
-	font-size: 85% !important
+    background: #4b5558;
+    color: #fff;
+    padding: 2px 4px;
+    font-size: 85% !important
 }
 label{
-	display: block
+    display: block
 }
 body{
-	font-family: 'Oxygen', sans-serif;
-	background: #2E3436;
-	color: #333;
-	cursor: default;
-	font-size: 13px
+    font-family: 'Oxygen', sans-serif;
+    background: #2E3436;
+    color: #333;
+    cursor: default;
+    font-size: 13px
 }
 h1{
-	margin-bottom: 14px;
-	max-width: 60%
+    margin-bottom: 14px;
+    max-width: 60%
 }
 a{
-	color: #FF855C;
-	text-decoration: none;
-	margin:0 3px
+    color: #FF855C;
+    text-decoration: none;
+    margin:0 3px
 }
 a:hover{
-	color: #fff;
-	background: #FF855C
+    color: #fff;
+    background: #FF855C
 }
 hr{
-	margin: 14px 0
+    margin: 14px 0
 }
 ::selection{ background-color: #333; color: #FF855C}
 ::moz-selection{ background-color: #333; color: #FF855C}
 ::webkit-selection{ background-color: #333; color: #FF855C}
 a.usr{
-	text-decoration: underline !important
+    text-decoration: underline !important
 }
 a.act{
-	background: #FF855C;
-	color: #fff
+    background: #FF855C;
+    color: #fff
 }
 a.topic{
-	color: #000
+    color: #000
 }
 .container{
-	font-size: 108%;
-	min-height: 750px;
-	min-width: 980px;
-	/*padding: 7px;*/
-	text-align: left;
-	position: relative;
-	padding-top: 3px
+    font-size: 108%;
+    min-height: 750px;
+    min-width: 980px;
+    text-align: left;
+    position: relative;
+    padding-top: 3px
 }
 .header{
-	margin-bottom: 14px
+    margin-bottom: 14px
 }
 .content{
-	float: right;
-	position: relative;
-	width: 80%;
-	/*padding-top: 4px*/
+    float: right;
+    position: relative;
+    width: 80%;
 }
 .sidebar{
-	float: left;
-	width: 20%;
-	position: relative;
-	/*padding-right: 0.5%;*/
-	color: #E0E0E0
+    float: left;
+    width: 20%;
+    position: relative;
+    color: #E0E0E0
 }
 .sidebar h3{
-	margin: 0 0 4px 0;
-	text-align: center;
-	background: #4B5558;
-	font-size:100%;
-	padding: 2px 4px;
-	text-align: left
+    margin: 11px 0 4px 0;
+    text-align: center;
+    background: #4B5558;
+    font-size:100%;
+    padding: 2px 4px;
+    text-align: left
 }
 .sidebar h3 a{
-	float: right;
-	padding: 0
-}
-.sidebar ul{
-	/*margin: 0 4px*/
+    float: right;
+    padding: 0
 }
 .sidebar a.topic{
-	color: #fff
+    color: #fff
 }
 .msg{
-	text-align: center;
-	padding: 14px 0;
-	border: 1px solid;
-	display: none;
-	margin-bottom: 7px;
+    text-align: center;
+    padding: 14px 0;
+    border: 1px solid;
+    display: none;
+    margin-bottom: 7px;
 }
 #msg_ok{
-	background: #E3F3DB;
-	border-color: #788273;
-	color: #044;
-	border-color: #044;
-	display: block;
-	margin-top: 24px
+    background: #E3F3DB;
+    border-color: #788273;
+    color: #044;
+    border-color: #044;
+    display: block;
+    margin-top: 24px
 }
 #msg_warning{
-	background: #fdf5ce;
-	color: #222;
-	border-color: #e78f08;
-	display: block;
+    background: #fdf5ce;
+    color: #222;
+    border-color: #e78f08;
+    display: block;
 }
 #msg_error{
-	background: #FCC;
-	color: #800;
-	border-color: #800;
-	display: block;
+    background: #FCC;
+    color: #800;
+    border-color: #800;
+    display: block;
 }
 #menu{
-	display:inline;
-	float:right;
-	margin-right: 28px
+    display:inline;
+    float:right;
 }
 #menu ul{
-	display:inline
+    display:inline
 }
 #menu li{
-	list-style-type: none;
-	display:inline
+    list-style-type: none;
+    display:inline
 }
 #menu li:last-of-type{
-	border: none
+    border: none
 }
 #menu a{
-	color: #ccc;
-	margin: 0 3px;
-	padding: 0 4px
+    color: #ccc;
+    margin: 0 3px;
+    padding: 0 4px
 }
 #menu a:hover{
-	color: #ff8550;
-	background: transparent
+    color: #ff8550;
+    background: transparent
 }
 #actions{
-	float: right;
-	text-align: right;
+    float: right;
+    text-align: right;
 }
 #contexts ul a{
-	width: 96%;
-	display: block;
-	margin: 1px 0;
+    width: 96%;
+    display: block;
+    margin: 1px 0;
 }
 #contexts ul a, a.context{
-	padding: 2px 2%;
-	color: #fff;
-	text-align: center;
-	text-decoration: none;
-	background: #3380CC;
-	position: relative
+    padding: 2px 2%;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    background: #3380CC;
+    position: relative
 }
 #contexts ul a:hover, a.context:hover{
-	background: #0066cc
+    background: #0066cc
 }
 #cc{
-	float: left;
-	margin-bottom: 37px
+    float: left;
+    margin: 0 0 6px;
+}
+#cc div{
+    margin: 0 0 0 2px;
 }
 #cc:hover a.config-ico{
-	color: #4B5558 !important;
-}
-#cc a{
-	color: #fff;
-	padding: 3px
+    color: #4B5558 !important;
 }
 #cc h2{
-	margin: 6px 0 0 6px;
-	float: left;
-	font-size: 100%;
+    margin: 6px 0 0 6px;
+    float: left;
+    font-size: 100%;
 }
 #cc a{
-	background: #FF855C;
-	color: #fff;
-	float: left;
-	width: 24px;
-	height: 24px;
-	text-align: center
+    background: #FF855C;
+    color: #fff;
+    float: left;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    color: #fff;
+    padding: 3px
 }
 #cc a span{
-	font-weight: bold;
-	display:block;
-	margin-top:3px
+    font-weight: bold;
+    display:block;
+    margin-top:3px
 }
 #participants{
-	position: relative
+    position: relative
 }
 #participants li{
-	float: left;
+    float: left;
 }
 #tim-t{
-	padding: 3px 4px;
-	background: #eee
+    padding: 3px 4px;
+    background: #eee
 }
 #tim-t *{
-	display: inline
+    display: inline
 }
 #tim-t a{
-	text-decoration: none
+    text-decoration: none
 }
 #timeline{
-	clear: both
+    clear: both
 }
 #timeline h3{
-	margin: 7px 0 0 0;
-	padding: 3px;
-	background: #4B5558;
-	color: #fff
+    margin: 7px 0 0 0;
+    padding: 3px;
+    background: #4B5558;
+    color: #fff
 }
 #timeline ul{
-	border-top: 1px solid #333;
+    border-top: 1px solid #333;
 }
 #timeline li{
-	border-bottom: 1px solid #333;
-	padding: 4px
+    border-bottom: 1px solid #333;
+    padding: 4px
 }
 #context_breadcrumb{
-	/*background: #4B5558;*/
-	/*color: #fff;*/
-	margin: 0 0 4px 0;
-	padding: 2px 0 4px;
-	font-size:93%;
+    margin: 0 0 4px 0;
+    padding: 2px 0 4px;
+    font-size:93%;
 }
 #context_breadcrumb a{
-	margin: 0
+    margin: 0
 }
 .content form{
-	width: 70%
+    width: 70%
 }
 form.gf input[type=text], form.gf select, form.gf textarea, form.gf input[type=file]{
 }
 form.gf input[type=file]{
-	font-size: 85%
+    font-size: 85%
 }
 form label{
-	margin: 0 0 14px 0
+    margin: 0 0 14px 0
 }
 form label span{
-	float: left;
-	width: 40%;
+    float: left;
+    width: 40%;
 }
 .checkbox{
-	margin-bottom: 7px
+    margin-bottom: 7px
 }
 .checkbox span{
-	float: none;
-	font-size: 93%;
-	font-weight: normal
+    float: none;
+    font-size: 93%;
+    font-weight: normal
 }
 .checkbox label{
-	float: left;
-	margin-right: 7px
+    float: left;
+    margin-right: 7px
 }
 .no-margin{
-	margin: 0
+    margin: 0
 }
 #context-actions{
-	float: right;
-	margin: 14px 0;
-	padding: 3px 7px;
+    float: right;
+    margin: 14px 0;
+    padding: 3px 7px;
 }
 #context-actions li{
-	float: left;
-	height: 23px;
+    float: left;
+    height: 23px;
 }
 #context-actions li a{
-	height: 23px;
-	vertical-align: middle
+    height: 23px;
+    vertical-align: middle
 }
 #context-actions li a:before{
-	content: "\f0da  ";
-	color: #c77405
+    content: "\f0da  ";
+    color: #c77405
 }
 .cke * {
-	font-size: 100% !important
+    font-size: 100% !important
 }
 .gf textarea{
-	clear: both;
-	width: 100%
+    clear: both;
+    width: 100%
 }
 article ul, ol{
-	margin: 14px 0 14px 28px;
+    margin: 14px 0 14px 28px;
 }
 article ul{
-	list-style-type: disc
+    list-style-type: disc
 }
 article ol{
-	list-style-type: decimal
+    list-style-type: decimal
 }
 article img{
-	max-width: 100%;
-	height: auto
+    max-width: 100%;
+    height: auto
 }
 article p{
-	margin: 7px 0
+    margin: 7px 0
 }
 .config-ico{
-	background: transparent !important
+    background: transparent !important
 }
 .config-ico span:before{
-	content: "\f085"
+    content: "\f085"
 }
 .accnf{
-	color: transparent !important
+    color: transparent !important
 }
 .mdl{
-	border: 1px #999 solid;
-	padding: 7px;
-	background: #fff;
-	-webkit-box-shadow: 9px 10px 26px 0px rgba(0,0,0,0.75);
-	-moz-box-shadow: 9px 10px 26px 0px rgba(0,0,0,0.75);
-	box-shadow: 9px 10px 26px 0px rgba(0,0,0,0.75);
-	display: none;
-	color: #000;
-	width: 250px;
+    border: 1px #999 solid;
+    padding: 7px;
+    background: #fff;
+    -webkit-box-shadow: 9px 10px 26px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 9px 10px 26px 0px rgba(0,0,0,0.75);
+    box-shadow: 9px 10px 26px 0px rgba(0,0,0,0.75);
+    display: none;
+    color: #000;
+    width: 250px;
 }
 #manage_participants_div{
-	position: absolute;
-	left: 4px;
-	top: 3px;
+    position: absolute;
+    left: 4px;
+    top: 3px;
 }
 #manage_participants_div b{
-	margin-bottom: 7px;
-	display: block
+    margin-bottom: 7px;
+    display: block
 }
 .cancel:hover{
-	background-color: transparent
+    background-color: transparent
 }
 button{
-	font-size: 100% !important
+    font-size: 100% !important
 }
 .inline{
-	display: inline
+    display: inline
 }
 #invite-form{
-	margin: 14px 0;
-	text-align: center
+    margin: 14px 0;
+    text-align: center
 }
 #accounts li{
-	float: left
+    float: left
 }
 #search-box{
-	position: relative;
-	float: left;
+    position: relative;
+    float: left;
 }
 #search_results{
-	position: absolute;
-	top: 105%;
-	background: #eee;
-	padding: 3px;
-	display: none;
-	width: 344px;
-	border-bottom: 4px #FF855C solid;
-	z-index: 10
+    position: absolute;
+    top: 105%;
+    background: #eee;
+    padding: 3px;
+    display: none;
+    width: 344px;
+    border-bottom: 4px #FF855C solid;
+    z-index: 10
 }
 #search_results li{
-	margin-bottom: 7px;
-	border-top: 1px #666 solid
+    margin-bottom: 5px;
 }
 #search_results a{
-	padding: 1px;
-	margin: 0
+    padding: 2px 1px;
+    margin: 0
 }
 #search_results a:focus{
-	text-decoration: underline;
-	outline: none;
+    text-decoration: underline;
+    outline: none;
 }
 #search{
-	width: 350px;
-	background: #666;
-	color: #fff;
-	border: none
+    width: 350px;
+    background: #666;
+    color: #fff;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
 }
 #din-content{
-	position: relative;
-	background: #fff;
-	min-height: 600px;
-	color:#2E3436;
-	padding: 1px 21px;
-	margin-top: 4px
+    position: relative;
+    background: #fff;
+    min-height: 600px;
+    color:#2E3436;
+    padding: 1px 21px;
+    margin-top: 4px
 }
 #tm-topics li{
-	border-bottom: 1px #666 solid;
-	/*padding: 11px 0 7px 0*/
+    border-bottom: 1px #666 solid;
 }
 #tm-topics a{
-	margin: 0;
-	width: 98%;
-	display: block;
-	padding: 3px 0 3px 2%;
+    margin: 0;
+    width: 98%;
+    display: block;
+    padding: 3px 0 3px 2%;
 }
 #move_form{
-	position: absolute;
-	left: -220px;
+    position: absolute;
+    left: -220px;
 }
 #move_form ul{
-	margin-top: 7px
+    margin-top: 7px
 }
 #move_form li:before{
-	content: "\f178 "
+    content: "\f178 "
 }
 #move_form li{
-	float: none;
-	overflow: hidden;
-	white-space: nowrap;
-	margin-bottom: 4px
+    float: none;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 4px
 }
 #all_we_are li *{
-	display: block;
-	margin-bottom: 4px
+    display: block;
+    margin-bottom: 4px
 }
 #all_we_are li{
-	width: 31.6%;
-	margin-right: 0.5%;
-	margin-bottom: 0.5%;
-	border: 1px #ccc solid;
-	padding: 0.5%;
-	float: left
+    width: 31.6%;
+    margin-right: 0.5%;
+    margin-bottom: 0.5%;
+    border: 1px #ccc solid;
+    padding: 0.5%;
+    float: left
 }
 #all_we_are li:hover{
-	background: #eee
+    background: #eee
 }
 #all_we_are li a{
-	margin-left: 0;
-	margin-right: 0
+    margin-left: 0;
+    margin-right: 0
 }
 .public:before{
-	float: right;
-	content: "\f0ac";
-	margin-top: 2px;
-	opacity: .7;
-	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+    float: right;
+    content: "\f0ac";
+    margin-top: 2px;
+    opacity: .7;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
 }
 .private-lock{
-	position: absolute;
-	right: 3px
+    position: absolute;
+    right: 3px
 }
 .private-lock:before{
-	float: right;
-	content: "\f0c0";
-	margin-top: 2px;
-	opacity: .7;
-	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+    float: right;
+    content: "\f0c0";
+    margin-top: 2px;
+    opacity: .7;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
 }
 #date_line{
-	float: left;
-	padding: 0;
-	margin: 5px 0 14px;
-	width: 100%
+    float: left;
+    padding: 0;
+    margin: 5px 0 6px;
+    width: 100%
 }
 #date_line *{
-	list-style-type: none;
+    list-style-type: none;
 }
 #date_line li{
-	position: relative;
-	float: left;
-	width: 3.03%
+    position: relative;
+    float: left;
+    width: 3.03%
 }
 #date_line a{
-	border: 1px solid #999;
-	float: left;
-	width: 88%;
-	text-align: center;
-	/*margin: 2px;*/
+    border: 1px solid #999;
+    float: left;
+    width: 88%;
+    text-align: center;
 }
 #date_line li ul{
-	padding: 0;
-	position: absolute;
-	top: 100%;
-	background: #fff;
-	width: 240px;
-	overflow: hidden;
-	left: 7px;
-	display: none;
-	z-index: 100
+    padding: 0;
+    position: absolute;
+    top: 100%;
+    background: #fff;
+    width: 240px;
+    overflow: hidden;
+    left: 7px;
+    display: none;
+    z-index: 100
 }
 #date_line li ul li{
-	width: 100%;
-	border-bottom: 1px solid #333;
+    width: 100%;
+    border-bottom: 1px solid #333;
 }
 #date_line li ul li a{
-	border: none;
-	width: 100%;
-	text-align: left
+    border: none;
+    width: 100%;
+    text-align: left
 }
 #date_line .ring{
-	font-weight: bold;
-	background: #ff855c;
-	border-color: #c77405;
-	color: #fff
+    font-weight: bold;
+    background: #ff855c;
+    border-color: #c77405;
+    color: #fff
 }
 .middle_date{
-	font-weight: bold;
-	background: #f6f6f6;
-	color: #000
+    font-weight: bold;
+    background: #f6f6f6;
+    color: #000
 }
 #date_line .count{
-	position: absolute;
-	top: 75%;
-	right: -2px;
-	background: #b81900;
-	font-size: 63%;
-	-webkit-border-radius: 16px;
-	-moz-border-radius: 16px;
-	border-radius: 16px;
-	border: solid 1px #cd0a0a;
-	width: 11px;
-	height: 11px;
-	text-align: center;
-	color: #fff
+    position: absolute;
+    top: 75%;
+    right: -2px;
+    background: #b81900;
+    font-size: 63%;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    border: solid 1px #cd0a0a;
+    width: 11px;
+    height: 11px;
+    text-align: center;
+    color: #fff
 }
 #dl_today{
-	width: 6% !important;
+    width: 5.5% !important;
 }
 #dl_today a{
-	background: #fbcb09;
-	color: #363636;
-	margin: 0
+    background: #fbcb09;
+    color: #363636;
+    margin: 0
 }
 #dl_today a:hover{
-	color: #1c94c4
+    color: #1c94c4
+}
+.dl_month{
+    color: #fff;
+    font-size: 77%;
+    display: block;
+    margin-left: 5px;
 }
 #duefor{
-	clear: both;
-	background: #fdf5ce
+    clear: both;
+    background: #fdf5ce
 }
 #duefor h3{
-	margin: 7px 0 0 0;
-	padding: 3px;
-	background: #fbd850;
-	color: #0066ff;
+    margin: 7px 0 0 0;
+    padding: 3px;
+    background: #fbd850;
+    color: #0066ff;
 }
 #duefor ul{
-	border-top: 1px solid #333;
-	margin-bottom: 28px
+    border-top: 1px solid #333;
+    margin-bottom: 28px
 }
 #duefor li{
-	border-bottom: 1px solid #333;
-	padding: 4px
+    border-bottom: 1px solid #333;
+    padding: 4px
 }
 .b_inactive{
-	display: none
+    display: none
 }
 #b_task:hover .b_active{
-	display: none;
+    display: none;
 }
 #b_task:hover .b_inactive{
-	display: inline;
+    display: inline;
 }
 #context-actions .closed span:before{
-	content: "\f00c  "
+    content: "\f00c  "
 }
 #context-actions .opened span:before{
-	content: "\f017  "
+    content: "\f017  "
 }
 #aggressive_message{
-	background: #1c94c4;
-	color: #fff;
-	font-weight: bold;
-	height: 140px;
-	position: fixed;
-	top: 25%;
-	text-align: center;
-	padding: 28px 0;
-	z-index: 2000;
-	width: 100%;
-	display: none;
+    background: #1c94c4;
+    color: #fff;
+    font-weight: bold;
+    height: 140px;
+    position: fixed;
+    top: 25%;
+    text-align: center;
+    padding: 28px 0;
+    z-index: 2000;
+    width: 100%;
+    display: none;
 }
 #aggressive_message div{
-	display: table-cell;
-	vertical-align: middle
+    display: table-cell;
+    vertical-align: middle
 }
 .as_administrator{
-	display: inline !important
+    display: inline !important
 }
 #details li{
-	width: 98%;
-	margin-left: 2%
+    width: 98%;
+    margin-left: 2%
 }

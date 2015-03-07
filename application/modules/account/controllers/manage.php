@@ -82,7 +82,7 @@ class manage extends MX_Controller {
      * Account config form
      */
     public function config_form() {
-        is_connected();
+        is_connected('administrator');
 
         $this->load->helper('form');
 
@@ -123,7 +123,7 @@ class manage extends MX_Controller {
      * @return string
      */
     public function config() {
-        is_connected();
+        is_connected('administrator');
 
         $this->load->module('file/misc');
         if ($this->input->post('submit') === 'cancel') {
@@ -258,7 +258,7 @@ class manage extends MX_Controller {
      * Extends configuration
      */
     public function extends_form() {
-        is_connected();
+        is_connected('administrator');
         $this->tpl->variables(
                 array(
                     'title' => lang('extensions_manager'),

@@ -34,7 +34,7 @@ class cc_extends extends MX_Controller {
      * @param string $extend
      */
     protected function _activation($extend, $type = 'components', $status = FALSE) {
-        is_connected();
+        is_connected('administrator');
 
         $this->load->module('file/write');
 
