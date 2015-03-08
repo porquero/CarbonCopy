@@ -73,7 +73,6 @@ a.topic{
 }
 .container{
     font-size: 108%;
-    min-height: 750px;
     min-width: 980px;
     text-align: left;
     position: relative;
@@ -399,7 +398,7 @@ button{
 #din-content{
     position: relative;
     background: #fff;
-    min-height: 600px;
+    min-height: 480px;
     color:#2E3436;
     padding: 1px 21px;
     margin-top: 4px
@@ -605,4 +604,9 @@ button{
 #details li{
     width: 98%;
     margin-left: 2%
+}
+#cc_footer{
+    text-align: center;
+    color: #fff;
+    margin: 7px 0
 }
