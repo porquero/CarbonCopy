@@ -400,7 +400,7 @@ button{
     background: #fff;
     min-height: 480px;
     color:#2E3436;
-    padding: 1px 21px;
+    padding: 1px 21px 21px 21px;
     margin-top: 4px
 }
 #tm-topics li{
