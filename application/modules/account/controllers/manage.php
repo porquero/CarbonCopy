@@ -146,11 +146,12 @@ class manage extends MX_Controller {
             $this->load->module('file/write');
 
             // Save config data.
-            $account_conifg = Modules::run('account/configuration/load') + $this->_date_format($this->input->post('date_format')) + array(
+            $account_conifg = $this->_date_format($this->input->post('date_format')) + array(
                 'language' => $this->input->post('language'),
                 'context_label' => $this->input->post('context_label'),
                 'topic_label' => $this->input->post('topic_label'),
-            );
+            ) + Modules::run('account/configuration/load');
+
             $config_saved = $this->write->archive("_accounts/{$this->session->userdata('current_account')}/config.json", json_encode($account_conifg));
 
             // Save info data.
