@@ -1,5 +1,5 @@
 <?php
-if (isset($participants) === TRUE):
+if (isset($participants) === TRUE && connected_user() !== FALSE):
 	?>
 	<div id="participants">
 		<h3><?php
