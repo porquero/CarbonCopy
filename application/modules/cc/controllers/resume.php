@@ -60,6 +60,7 @@ class resume extends MX_Controller {
                     'msg_type' => isset($msg_type) ? $msg_type : '',
                     'msg' => isset($msg) ? $msg : '',
                     'due_date_topics' => $this->m_due->for_day($ts_date),
+                    'due_future_topics' => $this->m_due->future($ts_date),
                     'only_opened' => TRUE,
                 )
         );

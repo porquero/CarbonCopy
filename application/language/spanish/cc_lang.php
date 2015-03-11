@@ -176,3 +176,4 @@ $lang['name'] = 'Nombre';
 $lang['principal'] = 'Principal';
 $lang['extensions'] = 'Extensiones';
 $lang['component_disabled'] = 'Componente desactivado.';
+$lang['to_do_next_days'] = 'Por hacer los próximos días.';

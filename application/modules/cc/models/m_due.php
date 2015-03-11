@@ -61,6 +61,34 @@ PQR;
 		return $result;
 	}
 
+		/**
+	 * Get topic with due date in the future
+	 *
+	 * @param string $from_date YYYY-MM-DD
+	 * @param integer $days_range
+	 *
+	 * @return array
+	 */
+	public function range_future($from_date, $days_range = 15)
+	{
+		$q = <<<PQR
+SELECT *
+FROM  `{$this->_table}`
+WHERE  `date`
+BETWEEN  '{$from_date}'
+AND  '{$from_date}' + INTERVAL {$days_range} DAY
+PQR;
+
+		$r = $this->db->query($q);
+		$result = array();
+
+		foreach ($r->result() as $topic) {
+			$result[$topic->date][] = $topic->topic_context;
+		}
+
+		return $result;
+	}
+
 	/**
 	 * Add new topic due date.
 	 *
@@ -158,6 +186,20 @@ PQR;
 		$date = is_null($date) ? date('Y-m-d') : $date;
 
 		return $this->range($date, 0);
+	}
+
+	/**
+	 * Return future topics from date
+	 *
+	 * @param string $date YYYY-MM-DD
+	 *
+	 * @return array
+	 */
+	public function future($date, $days_range = 15)
+	{
+		$date = is_null($date) ? date('Y-m-d') : $date;
+
+		return $this->range_future($date, $days_range);
 	}
 
 }

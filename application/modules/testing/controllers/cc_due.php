@@ -14,6 +14,13 @@ class cc_due extends MX_Controller {
 		Plogger::var_dump($this->m_due->range('2014-11-05', 7));
 	}
 
+	public function range_future()
+	{
+		$this->load->model('cc/m_due');
+
+		Plogger::var_dump($this->m_due->range_future('2014-11-05'));
+	}
+
 	public function change()
 	{
 		$this->load->model('cc/m_due');
