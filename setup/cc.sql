@@ -31,8 +31,9 @@ CREATE TABLE IF NOT EXISTS `cc_timeline` (
 
 -- Due table.
 CREATE TABLE IF NOT EXISTS `cc_due` (
-  `topic_context` text collate utf8_bin NOT NULL,
-  `date` date NOT NULL
+  `topic_context` text COLLATE utf8_bin NOT NULL,
+  `date` date NOT NULL,
+  `opened` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- User table.

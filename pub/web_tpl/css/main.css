@@ -551,21 +551,21 @@ button{
     display: block;
     margin-left: 5px;
 }
-#duefor{
+.duefor{
     clear: both;
     background: #fdf5ce
 }
-#duefor h3{
+.duefor h3{
     margin: 7px 0 0 0;
     padding: 3px;
     background: #fbd850;
     color: #0066ff;
 }
-#duefor ul{
+.duefor ul{
     border-top: 1px solid #333;
     margin-bottom: 28px
 }
-#duefor li{
+.duefor li{
     border-bottom: 1px solid #333;
     padding: 4px
 }

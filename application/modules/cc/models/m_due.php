@@ -49,6 +49,7 @@ FROM  `{$this->_table}`
 WHERE  `date` 
 BETWEEN  '{$middle_date}' - INTERVAL {$days_range} DAY
 AND  '{$middle_date}' + INTERVAL {$days_range} DAY
+AND `opened` = 1
 PQR;
 
 		$r = $this->db->query($q);
@@ -77,6 +78,7 @@ FROM  `{$this->_table}`
 WHERE  `date`
 BETWEEN  '{$from_date}'
 AND  '{$from_date}' + INTERVAL {$days_range} DAY
+AND `opened` = 1
 PQR;
 
 		$r = $this->db->query($q);
@@ -157,6 +159,17 @@ PQR;
 		}
 		else {
 			return $this->add($topic_context, $new_date);
+		}
+	}
+
+	public function status($topic_context, $status)
+	{
+		if ($this->exists($topic_context)) {
+			return $this->db->where('topic_context', $topic_context)
+					->update($this->_table, array('opened' => $status));
+		}
+		else {
+			return $this->add($topic_context, $status);
 		}
 	}
 

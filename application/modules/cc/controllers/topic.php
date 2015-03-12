@@ -967,6 +967,7 @@ PQR;
         if ($this->input->is_ajax_request() && $this->input->get('status') !== FALSE && $this->input->get('context') !== FALSE) {
             $this->load->module('file/misc');
             $this->load->model('m_timeline');
+            $this->load->model('m_due');
 
             $topic = "_accounts/{$this->session->userdata('current_account')}/contexts/{$this->misc->unslug($this->input->get('context'))}";
 
@@ -974,6 +975,7 @@ PQR;
 
             $info = $this->info($this->input->get('context'));
             $statuses = array('opened' => 'closed', 'closed' => 'opened');
+            $due_statuses = array('opened' => 0, 'closed' => 1);
             $topic_info = array(
                 'id' => $info['info']['id'],
                 'title' => $info['info']['title'],
@@ -991,8 +993,11 @@ PQR;
                     . topic_real_path(unslug_path($this->input->get('context')));
 
             $this->write->archive($dir_path . '/info_topic.json', $content);
-
+						
             $this->_unlock($topic);
+
+						// Due status.
+						$this->m_due->status($this->input->get('context'), $due_statuses[$this->input->get('status')]);
 
             // Timeline info.
             $tm_status = array(
