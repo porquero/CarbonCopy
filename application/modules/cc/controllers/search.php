@@ -151,7 +151,7 @@ PQR;
 		chdir(_INC_ROOT . '_accounts/' . $account);
 
 		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-			$exec = 'Findstr /Smi "' . json_encode(urldecode($q)) . '" ' . $file;
+			$exec = 'Findstr /Smi ' . json_encode(urldecode($q)) . ' ' . $file;
 			exec($exec, $output);
 			$output = array_map('back2slash', $output);
 		}

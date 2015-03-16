@@ -1,5 +1,6 @@
 {
     "name": "Example",
+		"description": "Section example",
     "author": "Playa EIRL",
     "web": "http://www.playasoluciones.cl",
     "trigger": {

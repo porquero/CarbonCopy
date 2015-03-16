@@ -86,7 +86,7 @@ class context extends MX_Controller {
         // Run enabled sections.
         foreach (Modules::run('extends/section/installed') as $section) {
             if ($section['enabled'] && $section['data']->trigger->context === TRUE) {
-                Modules::run('extends/section/run', $section['id']);
+                Modules::run('extends/section/run', $section['id'], $context);
             }
         }
 
