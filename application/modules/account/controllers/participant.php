@@ -584,7 +584,6 @@ PQR;
         );
 
         $res = $this->write->archive($participant_config_path, json_encode($participant_info)) === TRUE ? '1' : 'fail';
-        $this->session->set_userdata('user_info', Modules::run('file/read/json_content', $participant_config_path));
 
         if ($this->input->is_ajax_request()) {
             echo $res;
@@ -615,7 +614,6 @@ PQR;
         );
 
         $res = $this->write->archive($participant_config_path, json_encode($participant_info)) === TRUE ? '1' : 'fail';
-        $this->session->set_userdata('user_info', Modules::run('file/read/json_content', $participant_config_path));
 
         if ($this->input->is_ajax_request()) {
             echo $res;
