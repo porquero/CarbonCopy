@@ -397,6 +397,7 @@ button{
     border-top: none;
     border-right: none;
     border-bottom: none;
+    height: 21px
 }
 #din-content{
     position: relative;
@@ -471,7 +472,7 @@ button{
 #date_line{
     float: left;
     padding: 0;
-    margin: 5px 0 6px;
+    margin: 5px 0 9px;
     width: 100%
 }
 #date_line *{
