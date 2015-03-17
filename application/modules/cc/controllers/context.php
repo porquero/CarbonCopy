@@ -82,7 +82,7 @@ class context extends MX_Controller {
         }
         $tl_date = is_null($ts_date) ? '' : ': ' . account_date_format($ts_date);
         $labels = $this->labels($context);
-        
+
         // Run enabled sections.
         foreach (Modules::run('extends/section/installed') as $section) {
             if ($section['enabled'] && $section['data']->trigger->context === TRUE) {
@@ -443,7 +443,6 @@ class context extends MX_Controller {
                     'label_inherit' => (int) $this->input->post('label_inherit'),
                     'context_label' => trim($this->input->post('context_label')),
                     'topic_label' => trim($this->input->post('topic_label')),
-                    'modified_by' => connected_user(),
                 );
 
                 if ($this->input->post('visibility') !== FALSE) {
@@ -565,7 +564,6 @@ class context extends MX_Controller {
                             . ',' . connected_user(), ','),
             'created_by' => $info['info']['created_by'],
             'created_date' => $info['info']['created_date'],
-            'modified_date' => date('Y-m-d'),
         );
         $content = json_encode($context_info);
         $dir_path = _INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/contexts/'
@@ -742,7 +740,6 @@ PQR;
                 'participants' => $info['info']['participants'],
                 'created_by' => $info['info']['created_by'],
                 'created_date' => $info['info']['created_date'],
-                'modified_date' => date('Y-m-d'),
             );
 
             if (empty($to_context)) {

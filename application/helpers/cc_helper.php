@@ -512,3 +512,20 @@ function glob_recursive($pattern, $flags = 0) {
 
     return $files;
 }
+
+/**
+ * Slug full topic path
+ * 
+ * @param string $full_path Full topic path
+ * 
+ * @return string
+ */
+function slug_full_topic_path($full_path) {
+    $replace = array(
+        '../_accounts/cc/contexts/',
+        '/_topics',
+        '/info_topic.json'
+    );
+
+    return slug_path(str_replace($replace, '', str_replace(_INC, '', $full_path)));
+}

@@ -58,13 +58,13 @@ $current_account = current_account_info();
                         <?php
                         echo '<h1>' . @ucfirst($title) . '</h1>';
                         echo '<h2>' . @ucfirst($subtitle) . '</h2>';
+                        echo @$_section_before_content;
                         echo '<article>' . @ucfirst($description) . '</article>';
                         ?>
                     </div>
                     <?php
                     echo @$_section_after_content;
                     echo @$_view;
-                    echo @$_section_before_content;
                     ?>
                     <div class="clear"></div>
                 </div>

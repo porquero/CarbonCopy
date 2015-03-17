@@ -46,7 +46,7 @@ class resume extends MX_Controller {
                 array(
                     'title' => $info['name'],
                     'tl_title' => lang('timeline') . $tl_date,
-                    'subtitle' => $info['info'],
+                    'description' => $info['info'],
                     'contexts' => $contexts,
                     'context_label' => $account_config['context_label'],
                     'participants' => Modules::run('account/participant/list_for_resume'),

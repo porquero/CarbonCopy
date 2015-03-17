@@ -81,7 +81,7 @@ PQR;
         // Run enabled sections.
         foreach (Modules::run('extends/section/installed') as $section) {
             if ($section['enabled'] && $section['data']->trigger->topic === TRUE) {
-                Modules::run('extends/section/run', $section['id']);
+                Modules::run('extends/section/run', $section['id'], $context, get_name_from_slug($context));
             }
         }
 
@@ -561,7 +561,6 @@ PQR;
                             . ',' . connected_user(), ','),
             'created_by' => $info['info']['created_by'],
             'created_date' => $info['info']['created_date'],
-            'modified_date' => date('Y-m-d'),
         );
         $content = json_encode($topic_info);
         $dir_path = _INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/contexts/'
@@ -701,7 +700,6 @@ PQR;
                     'participants' => $info['info']['participants'],
                     'created_by' => $info['info']['created_by'],
                     'created_date' => $info['info']['created_date'],
-                    'modified_by' => connected_user(),
                 );
 
                 $this->load->model('m_timeline');
@@ -986,7 +984,6 @@ PQR;
                 'participants' => $info['info']['participants'],
                 'created_by' => $info['info']['created_by'],
                 'created_date' => $info['info']['created_date'],
-                'modified_date' => date('Y-m-d'),
             );
             $content = json_encode($topic_info);
             $dir_path = _INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/contexts/'
