@@ -17,7 +17,7 @@ $current_account = current_account_info();
         ?>
         <script type="text/javascript">
             var site_url = '<?php echo preg_replace('/\/$/', '', site_url()); ?>/';
-            var base_url = '<?php echo base_url() ?>/';
+            var base_url = '<?php echo final_slash(base_url()) ?>';
         </script>
     </head>
     <body>
