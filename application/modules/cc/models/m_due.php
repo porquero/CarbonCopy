@@ -79,6 +79,7 @@ WHERE  `date`
 BETWEEN  '{$from_date}'
 AND  '{$from_date}' + INTERVAL {$days_range} DAY
 AND `opened` = 1
+ORDER BY `date`
 PQR;
 
 		$r = $this->db->query($q);
