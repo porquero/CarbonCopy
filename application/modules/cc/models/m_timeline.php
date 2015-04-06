@@ -37,6 +37,7 @@ class m_timeline extends CI_Model {
 		$date_format = account_date_format_mysql();
 
 		$this->db
+                        ->distinct()
 			->limit(50)
 			->from("{$this->_table} t")
 			->select(
@@ -75,6 +76,7 @@ class m_timeline extends CI_Model {
 		$date_format = account_date_format_mysql();
 
 		$this->db
+                        ->distinct()
 			->from("{$this->_table} t")
 			->select(
 				"DATE_FORMAT(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, t.to_participant, t.title, t.id_topic, a.name, t.id_context"
@@ -113,6 +115,7 @@ class m_timeline extends CI_Model {
 		$result = array();
 
 		$this->db
+                        ->distinct()
 			->from("{$this->_table} t")
 			->select('t.title, t.id_topic, t.context')
 			->join('action a', 't.action_id = a.id')
@@ -153,6 +156,7 @@ class m_timeline extends CI_Model {
 		$date_format = account_date_format_mysql();
 
 		$account_timeline = $this->db
+                        ->distinct()
 			->from("{$this->_table} t")
 			->select(
 				"DATE_FORMAT(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, t.to_participant, t.title, t.id_topic, a.name"
@@ -184,7 +188,9 @@ class m_timeline extends CI_Model {
 	{
 		$date_format = account_date_format_mysql();
 
-		$this->db->select(
+		$this->db
+                        ->distinct()
+                        ->select(
 				"DATE_FORMAT(t.ts, '{$date_format}') ts, date(t.ts) sql_date, t.context, t.from_participant, t.to_participant, t.title, t.id_topic, a.name, t.id_context"
 				, FALSE)
 			->from($this->_table . ' t')

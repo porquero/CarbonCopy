@@ -301,8 +301,8 @@ form label span{
     clear: both;
     width: 100%
 }
-article ul, ol{
-    margin: 14px 0 14px 28px;
+article ul, ol, form ul, form ol{
+    margin: 7px 0 7px 28px;
 }
 article ul, form ul{
     list-style-type: disc
