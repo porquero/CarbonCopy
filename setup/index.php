@@ -55,6 +55,8 @@ PQR;
 			<hr />
 			<i>CarbonCopy is developed using CodeIgniter 2.2.0 PHP Framework and wiredesignz HMVC.</i>
 			<ol>
+				<li>Rename file application/config/config-dist.php to application/config/config.php.</li>
+				<li>Rename file application/config/database-dist.php to application/config/database.php.</li>
 				<li>Modify file application/config/config.php to set Base Site URL.</li>
 				<li>Modify file application/config/database.php to set database conection settings.</li>
 				<li>Create database using name used in database.php</li>
