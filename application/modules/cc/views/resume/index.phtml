@@ -1,79 +1,78 @@
 <?php
 if (connected_user() !== FALSE):
-	$key_date_due = key($due_date_topics);
-	if ( ! is_null($key_date_due) && count($due_date_topics[$key_date_due])):
-		?>
-		<h2><?php echo lang('to_do') ?></h2>
-		<div class="duefor">
-			<h3><?php echo lang('tasks_for') . account_date_format($key_date_due) ?></h3>
-			<ul>
-				<?php
-				$i = 0;
-				foreach ($due_date_topics[$key_date_due] as $topic_context):
-					$info = Modules::run('cc/topic/info', $topic_context);
+    $key_date_due = key($due_date_topics);
+    if (!is_null($key_date_due) && count($due_date_topics[$key_date_due])):
+        ?>
+        <h2><?php echo lang('to_do') ?></h2>
+        <div class="duefor">
+            <h3><?php echo lang('tasks_for') . account_date_format($key_date_due) ?></h3>
+            <ul>
+                <?php
+                $i = 0;
+                foreach ($due_date_topics[$key_date_due] as $topic_context):
+                    $info = Modules::run('cc/topic/info', $topic_context);
 
-					if ($info['info']['status'] == 'closed' && $only_opened === TRUE) {
-						continue;
-					}
+                    if ($info['info']['status'] == 'closed' && $only_opened === TRUE) {
+                        continue;
+                    }
 
-					if (belongs_to('topic', $topic_context, connected_user(), TRUE)):
-						?>
-						<li>
-							<a class="topic" href="<?php echo site_url('cc/topic/resume/' . $topic_context) ?>"><b><?php echo $info['info']['title'] ?></b></a>
-							<?php echo create_breadcrumb(parent_context($topic_context), $info['info']['id']) ?>
-						</li>
-						<?php
-					endif;
-					$i ++;
-				endforeach;
+                    if (belongs_to('topic', $topic_context, connected_user(), TRUE)):
+                        ?>
+                        <li>
+                            <a class="topic" href="<?php echo site_url('cc/topic/resume/' . $topic_context) ?>"><b><?php echo $info['info']['title'] ?></b></a>
+                            <?php echo create_breadcrumb(parent_context($topic_context), $info['info']['id']) ?>
+                        </li>
+                        <?php
+                    endif;
+                    $i ++;
+                endforeach;
 
-				if ($i === 0) {
-					echo '<li style="text-align:center">' . lang('nothing_happens') . '</li>';
-				}
-				?>
-			</ul>
-		</div>
-		<?php
-	elseif (count($due_future_topics)):
-		?>
-		<h2><?php echo lang('to_do_next_days') ?></h2>
-		<?php
-		foreach ($due_future_topics as $future_date => $future_topic) :
-			?>
-			<div class="duefor">
-				<h3><?php echo lang('tasks_for') . account_date_format($future_date) ?></h3>
-				<ul>
-					<?php
-					$i = 0;
-					foreach ($future_topic as $topic_context):
-						$info = Modules::run('cc/topic/info', $topic_context);
+                if ($i === 0) {
+                    echo '<li style="text-align:center">' . lang('nothing_happens') . '</li>';
+                }
+                ?>
+            </ul>
+        </div>
+        <?php elseif (count($due_future_topics)):
+        ?>
+        <h2><?php echo lang('to_do_next_days') ?></h2>
+        <?php
+        foreach ($due_future_topics as $future_date => $future_topic) :
+            ?>
+            <div class="duefor">
+                <h3><?php echo lang('tasks_for') . account_date_format($future_date) ?></h3>
+                <ul>
+                    <?php
+                    $i = 0;
+                    foreach ($future_topic as $topic_context):
+                        $info = Modules::run('cc/topic/info', $topic_context);
 
-						if ($info['info']['status'] == 'closed' && $only_opened === TRUE) {
-							continue;
-						}
+                        if ($info['info']['status'] == 'closed' && $only_opened === TRUE) {
+                            continue;
+                        }
 
-						if (belongs_to('topic', $topic_context, connected_user(), TRUE)):
-							?>
-							<li>
-								<a class="topic" href="<?php echo site_url('cc/topic/resume/' . $topic_context) ?>"><b><?php echo $info['info']['title'] ?></b></a>
-										<?php echo create_breadcrumb(parent_context($topic_context), $info['info']['id']) ?>
-							</li>
-							<?php
-						endif;
-						$i ++;
-					endforeach;
+                        if (belongs_to('topic', $topic_context, connected_user(), TRUE)):
+                            ?>
+                            <li>
+                                <a class="topic" href="<?php echo site_url('cc/topic/resume/' . $topic_context) ?>"><b><?php echo $info['info']['title'] ?></b></a>
+                                        <?php echo create_breadcrumb(parent_context($topic_context), $info['info']['id']) ?>
+                            </li>
+                            <?php
+                        endif;
+                        $i ++;
+                    endforeach;
 
-					if ($i === 0) {
-						echo '<li style="text-align:center">' . lang('nothing_happens') . '</li>';
-					}
-					?>
-				</ul>
-			</div>
-			<?php
-		endforeach;
-	endif;
+                    if ($i === 0) {
+                        echo '<li style="text-align:center">' . lang('nothing_happens') . '</li>';
+                    }
+                    ?>
+                </ul>
+            </div>
+            <?php
+        endforeach;
+    endif;
 endif;
 ?>
-<h2><?php echo lang('timeline') ?></h2>
+<h2><?php echo connected_user() !== FALSE ? lang('timeline') : null ?></h2>
 <?php
 include_once _INC . 'modules/cc/views/timeline/get_timeline.phtml';

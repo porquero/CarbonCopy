@@ -1,57 +1,59 @@
-<div id="timeline">
-	<h3><?php echo $tl_title ?></h3>
-	<?php
-	$tm_menu = <<<PQR
+<?php if (connected_user() !== FALSE): ?>
+    <div id="timeline">
+        <h3><?php echo $tl_title ?></h3>
+        <?php
+        $tm_menu = <<<PQR
 <div id="tim-t">
 	<h4><a href="{$url_all }" class="{$menu_act['all']}">{$this->lang->line('all')}</a></h4> |
 	<h4><a href="{$url_to_me}" class="{$menu_act['to_me']}">{$this->lang->line('to_me')}</a></h4>
 </div>
 PQR;
 
-	echo logged_data($participants, $tm_menu);
-	?>
-	<ul>
-		<?php
-		if (count($timeline) === 0) {
-			echo '<li style="text-align:center">' . lang('nothing_happens') . '</li>';
-		}
+        echo logged_data($participants, $tm_menu);
+        ?>
+        <ul>
+            <?php
+            if (count($timeline) === 0) {
+                echo '<li style="text-align:center">' . lang('nothing_happens') . '</li>';
+            }
 
-		foreach ((array) $timeline as $action):
-			// Validate user with contexts.
-			if ($action->id_topic === NULL) {
-				if (empty($action->context)) {
-					$id_context = $action->id_context;
-				}
-				else {
-					$id_context = $action->context . '_' . $action->id_context;
-				}
+            foreach ((array) $timeline as $action):
+                // Validate user with contexts.
+                if ($action->id_topic === NULL) {
+                    if (empty($action->context)) {
+                        $id_context = $action->id_context;
+                    } else {
+                        $id_context = $action->context . '_' . $action->id_context;
+                    }
 
-				if ( ! belongs_to('context', $id_context, connected_user())) {
-					continue;
-				}
-			}
-			// Validate user with topics.
-			else {
-				if ( ! belongs_to('topic', $action->context . $action->id_topic, connected_user())) {
-					continue;
-				}
-			}
-			?>
-			<li>
-				<a href="<?php echo $url_ts . '/' . $action->sql_date ?>"><?php echo $action->ts ?></a>
-				<a href="<?php echo site_url('/account/participant/profile/' . $action->from_participant); ?>" class="usr"><?php echo $action->from_participant ?></a>
-				<i><?php echo $action->name ?></i>
+                    if (!belongs_to('context', $id_context, connected_user())) {
+                        continue;
+                    }
+                }
+                // Validate user with topics.
+                else {
+                    if (!belongs_to('topic', $action->context . $action->id_topic, connected_user())) {
+                        continue;
+                    }
+                }
+                ?>
+                <li>
+                    <a href="<?php echo $url_ts . '/' . $action->sql_date ?>"><?php echo $action->ts ?></a>
+                    <a href="<?php echo site_url('/account/participant/profile/' . $action->from_participant); ?>" class="usr"><?php echo $action->from_participant ?></a>
+                    <i><?php echo $action->name ?></i>
 
-				<?php
-				if ($action->id_topic === NULL):
-					$tm_context = strlen($action->context) == 0 ? $action->context : $action->context . '_';
-					?>
-					<a href="<?php echo site_url('/cc/context/resume/' . $tm_context . $action->id_context) ?>" class="context"><b><?php echo $action->title ?></b></a>
-				<?php else: ?>
-					<a href="<?php echo site_url('/cc/topic/resume/' . $action->context . $action->id_topic) ?>" class="topic"><b><?php echo $action->title ?></b></a>
-						<?php endif; ?>
-						<?php echo create_breadcrumb($action->context, $action->id_topic) ?>
-			</li>
-		<?php endforeach; ?>
-	</ul>
-</div>
+                    <?php
+                    if ($action->id_topic === NULL):
+                        $tm_context = strlen($action->context) == 0 ? $action->context : $action->context . '_';
+                        ?>
+                        <a href="<?php echo site_url('/cc/context/resume/' . $tm_context . $action->id_context) ?>" class="context"><b><?php echo $action->title ?></b></a>
+                    <?php else: ?>
+                        <a href="<?php echo site_url('/cc/topic/resume/' . $action->context . $action->id_topic) ?>" class="topic"><b><?php echo $action->title ?></b></a>
+                            <?php endif; ?>
+                            <?php echo create_breadcrumb($action->context, $action->id_topic) ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?php
+ endif;
