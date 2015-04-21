@@ -206,41 +206,59 @@ $('#b_task').on('click', function () {
 
 });
 
-function aggressive_message(message) {
+function aggressive_message(message, load) {
+    show_load = load === undefined ? 'div span' : '';
+
     if (message !== undefined && typeof message === 'string') {
-        $('#aggressive_message div span').text(message);
+        $('#aggressive_message ' + show_load).html(message);
     }
     $('#aggressive_message').css('display', 'table');
 }
 
 function hide_aggressive_message() {
-    $('#aggressive_message').fadeOut();
+    $('#aggressive_message').fadeOut().html('<div><span></span></div>');
 }
 
+var key_map_help = new Array();
+
+// Shortkeys.
 $(function () {
-    // Shortkeys.
-    // Searxh.
-    $(document).bind('keydown', 'shift+7', function () {
+    // Search.
+    shortcut = 'shift+7';
+    key_map_help[shortcut] = 'Search focus';
+    $(document).bind('keydown', shortcut, function () {
         $('#search').focus().select();
         return false;
     });
+
     // Login form.
-    $(document).bind('keydown', 'alt+c', function () {
+    shortcut = 'alt+c';
+    key_map_help[shortcut] = 'Login form';
+    $(document).bind('keydown', shortcut, function () {
         document.location = site_url + 'cc/user/login_form';
         return false;
     });
+
     // Logout.
-    $(document).bind('keydown', 'alt+x', function () {
+    shortcut = 'alt+x';
+    key_map_help[shortcut] = 'Logout';
+    $(document).bind('keydown', shortcut, function () {
         document.location = site_url + 'cc/user/logout';
         return false;
     });
+
     // Go to Home.
-    $(document).bind('keydown', 'alt+7', function () {
+    shortcut = 'alt+7';
+    key_map_help[shortcut] = 'Go to Home';
+    $(document).bind('keydown', shortcut, function () {
         document.location = site_url;
         return false;
     });
+
     // Participants.
-    $(document).bind('keydown', 'alt+p', function () {
+    shortcut = 'alt+p';
+    key_map_help[shortcut] = 'Go to participants';
+    $(document).bind('keydown', shortcut, function () {
         document.location = site_url + 'account/participant/all_people';
         return false;
     });
@@ -249,4 +267,38 @@ $(function () {
     $('div.nicEdit-main').bind('keydown', 'shift+7', function (e) {
         e.stopPropagation();
     });
+
+    // Shortkeys map.
+    shortkeys_map = function () {
+        aggressive_message('<h2>Keyboard shortcuts</h2><ul id="shortcuts">' + $('#shortcuts').html() + '</ul>', 0);
+        count = 0;
+    };
+
+    // Generate key help html.
+    for (var key in key_map_help) {
+        $('#shortcuts').append($('<li><b>' + key + ':</b> ' + key_map_help[key] + '</li>'));
+    }
 });
+
+// Show shotcuts map.
+document.onkeydown = keydown;
+var count = 0;
+
+function keydown(evt) {
+    if (!evt)
+        evt = event.altKey;
+
+    if (evt.altKey && evt.target.nodeName !== "INPUT" && evt.target.classList[0] !== 'nicEdit-main') {
+        if (count === 9) {
+            shortkeys_map();
+        }
+
+        evt.preventDefault ? evt.preventDefault() : (evt.returnValue = false);
+
+        count++;
+    }
+
+    if (evt.keyCode === 27) {
+        hide_aggressive_message();
+    }
+}
