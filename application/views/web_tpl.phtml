@@ -33,7 +33,7 @@ $current_account = current_account_info();
                     <ul>
                         <li><a href="<?php echo site_url() ?>"><?php echo lang('home') ?></a></li>
                         <?php if (FALSE !== connected_user()): ?>
-                            <li><a href="<?php echo site_url('/account/participant/config_form') ?>"><?php echo connected_user() /*. lang('connected_in') . $current_account['name']*/ ?></a></li>
+                            <li><a href="<?php echo site_url('/account/participant/config_form') ?>"><?php echo connected_user() /* . lang('connected_in') . $current_account['name'] */ ?></a></li>
                             <li><a href="<?php echo site_url('/account/participant/all_people') ?>"><?php echo lang('all_people') ?></a></li>
                             <li><a href="<?php echo site_url('/cc/user/logout') ?>"><?php echo lang('logout') ?></a></li>
                         <?php else: ?>
@@ -85,6 +85,17 @@ $current_account = current_account_info();
                 <div class="clear"></div>
                 <?php
                 echo @$_sidebar;
+
+                // List enabled components.
+                $enabled_components = Modules::run('extends/component/enabled');
+                if (!empty($enabled_components)) {
+                    echo '<h3>' . lang('components') . '</h3><ul id="components_menu">';
+                    foreach ($enabled_components as $component) {
+                        echo '<li><a href="' . site_url('extends/component/run/' . $component['id']) . '">' . $component['data']->name . '</a></li>';
+                    }
+                    echo '</ul>';
+                }
+
                 echo @$_section_sidebar;
                 ?>
             </div>

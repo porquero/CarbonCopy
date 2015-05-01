@@ -40,6 +40,9 @@ define('FOPEN_WRITE_CREATE_STRICT', 'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
 /* CC constants */
+// Version.
+define('_CC_VERSION', '1.0');
+
 // Templates.
 define('_TEMPLATE', 'web_tpl.phtml');
 define('_TEMPLATE_BLANK_HTML', 'BLANK_html.phtml');
