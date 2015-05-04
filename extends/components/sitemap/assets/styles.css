@@ -1,0 +1,11 @@
+#sitemap, #sitemap ul{
+    list-style-type: circle;
+    list-style-position: inside;
+    padding-left: 21px
+}
+#sitemap .public:before{
+    float: none
+}
+#sitemap li{
+    margin: 7px 0
+}

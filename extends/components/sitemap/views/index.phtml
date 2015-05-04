@@ -1,0 +1,16 @@
+<ul id="sitemap">
+    <?php
+    foreach ($component->top_contexts as $context) {
+        if (!($context['info']['visibility'] == 'public' || belongs_to('context', $context['info']['id'], connected_user()))) {
+            continue;
+        }
+        $icon = context_icon($context);
+        $context_link = site_url('/cc/context/resume/' . $context['info']['id']);
+        echo <<<PQR
+<li><a href="{$context_link}" class="context">{$context['info']['title']} <span class="{$icon}"></span></a>
+PQR;
+
+        echo $component->contexts_tree($context['contexts']) . '</li>';
+    }
+    ?>
+</ul>
