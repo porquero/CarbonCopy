@@ -127,7 +127,7 @@ class context extends MX_Controller {
      *
      * @return array
      */
-    function info($context, &$counter = 0) {
+    function info($context, &$counter = 0, $depth = 1) {
         if (isset($this->_cache[$context])) {
             return $this->_cache[$context];
         }
@@ -146,7 +146,7 @@ class context extends MX_Controller {
         $directories = $contexts = array();
 
         // Avoid n recursivity.
-        if ($counter > 1) {
+        if ($counter > $depth) {
             return array(
                 'info' => $info,
                 'contexts' => $contexts,

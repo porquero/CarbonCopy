@@ -30,7 +30,6 @@ class component extends cc_extends {
             $this->session->set_flashdata('msg_type', _MSG_WARNING);
             redirect();
         }
-
         list($component_name, $action) = explode('_', $component, 2);
         is_null($action) ? $action = 'index' : NULL;
 
@@ -39,9 +38,12 @@ class component extends cc_extends {
         $component = new $component_name();
         $component->load->model('m_component');
 
-        include_once _INC_ROOT . '/extends/components/' . "{$component_name}/models/m_{$component_name}.php";
-        $m_component = "m_{$component_name}";
-        $component->$m_component = new $m_component;
+        $m_component_file = _INC_ROOT . '/extends/components/' . "{$component_name}/models/m_{$component_name}.php";
+        if (is_file($m_component_file)) {
+            include_once $m_component_file;
+            $m_component = "m_{$component_name}";
+            $component->$m_component = new $m_component;
+        }
 
         $component->$action();
 
@@ -104,7 +106,7 @@ class component extends cc_extends {
                 $result[] = $component;
             }
         }
-        
+
         return $result;
     }
 

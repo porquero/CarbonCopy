@@ -1,15 +1,15 @@
 <div id="timeline-s">
-	<h3><?php echo $topic_label . nbs() . logged_data($participants, '<a href="' . site_url('/cc/topic/add_form/' . $context) . '">[+]</a>') ?></h3>
-	<ul id="tm-topics">
-		<?php
-		foreach ((array) $full_timeline as $action):
-			// Validate if participant belongs to topic.
-			if ( ! belongs_to('topic', $action->context . $action->id_topic, connected_user())) {
-				continue;
-			}
-			$icon = topic_icon(Modules::run('cc/topic/info', $action->context . $action->id_topic));
-			?>
-			<li><a href="<?php echo site_url('/cc/topic/resume/' . $action->context . $action->id_topic) ?>" class="topic"><?php echo $action->title ?> <span class="<?php echo $icon ?>"></span></a></li>
-<?php endforeach; ?>
-	</ul>
+    <h3><?php echo $topic_label . nbs() . logged_data($participants, '<a href="' . site_url('/cc/topic/add_form/' . $context) . '">[+]</a>') ?></h3>
+    <ul id="tm-topics">
+        <?php
+        foreach ((array) $full_timeline as $action):
+            // Validate if participant belongs to topic.
+            if (!belongs_to('topic', $action->context . $action->id_topic, connected_user())) {
+                continue;
+            }
+            $icon = topic_icon(Modules::run('cc/topic/info', $action->context . $action->id_topic));
+            ?>
+            <li><a href="<?php echo site_url('/cc/topic/resume/' . $action->context . $action->id_topic) ?>" class="topic"><?php echo $action->title ?> <span class="<?php echo $icon ?>"></span></a></li>
+                <?php endforeach; ?>
+    </ul>
 </div>
