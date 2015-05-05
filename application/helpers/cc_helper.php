@@ -308,7 +308,7 @@ function current_account_info() {
 }
 
 /**
- * Helper Get user info.
+ * Helper to get user info.
  *
  * @return array
  */
@@ -337,7 +337,7 @@ function belongs_to($context_type, $context_or_user, $user = NULL, $strict = FAL
 }
 
 /**
- * Helper to get if user is connected.
+ * Helper to know if user is connected.
  * 
  * @return boolean
  */
@@ -528,4 +528,32 @@ function slug_full_topic_path($full_path) {
     );
 
     return slug_path(str_replace($replace, '', str_replace(_INC, '', $full_path)));
+}
+
+/**
+ * List enabled components
+ */
+function list_enabled_components() {
+    $enabled_components = Modules::run('extends/component/enabled');
+
+    if (!empty($enabled_components)) {
+        $components_list = '<h3>' . lang('components') . '</h3><ul id="components_menu">';
+        $in_menu = FALSE;
+
+        foreach ($enabled_components as $component) {
+
+            if ($component['data']->in_menu === FALSE || ($component['data']->public === FALSE && !connected_user())) {
+                continue;
+            }
+
+            $components_list .= '<li><a href="' . site_url('extends/component/run/' . $component['id']) . '">' . $component['data']->name . '</a></li>';
+            $in_menu = TRUE;
+        }
+
+        if ($in_menu === TRUE) {
+            return $components_list . '</ul>';
+        }
+    }
+
+    return '';
 }

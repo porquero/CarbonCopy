@@ -85,28 +85,7 @@ $current_account = current_account_info();
                 <div class="clear"></div>
                 <?php
                 echo @$_sidebar;
-
-                // List enabled components.
-                $enabled_components = Modules::run('extends/component/enabled');
-                if (!empty($enabled_components)) {
-                    $components_list = '<h3>' . lang('components') . '</h3><ul id="components_menu">';
-                    $in_menu = FALSE;
-
-                    foreach ($enabled_components as $component) {
-
-                        if ($component['data']->in_menu === FALSE) {
-                            continue;
-                        }
-
-                        $components_list .= '<li><a href="' . site_url('extends/component/run/' . $component['id']) . '">' . $component['data']->name . '</a></li>';
-                        $in_menu = TRUE;
-                    }
-
-                    if ($in_menu === TRUE) {
-                        echo $components_list . '</ul>';
-                    }
-                }
-
+                echo list_enabled_components();
                 echo @$_section_sidebar;
                 ?>
             </div>
