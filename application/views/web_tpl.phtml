@@ -52,7 +52,7 @@ $current_account = current_account_info();
                 <?php endif; ?>
                 <div class="clear"></div>
                 <div id="din-content">
-                    <div id="context_breadcrumb"><a href="<?php echo site_url() ?>">[/]</a><?php echo @$breadcrumb ?></div>
+                    <div id="context_breadcrumb"><a href="<?php echo site_url() ?>">[/]</a><?php echo !is_null($breadcrumb) ? ' &raquo; ' . $breadcrumb : null; ?></div>
                     <div class="header">
                         <p id="<?php echo @$msg_type; ?>" class="msg"><?php echo @$msg; ?></p>
                         <?php

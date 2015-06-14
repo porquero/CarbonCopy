@@ -21,6 +21,9 @@
 .rgt{
     float: right
 }
+.w50pp{
+    width: 49%
+}
 fieldset{
     padding: 14px;
     border: 1px #eee solid;
@@ -100,7 +103,7 @@ a.topic{
     padding: 2px 4px;
     text-align: left
 }
-.sidebar h3 a{
+.sidebar h3 a, .topics h3 a{
     float: right;
     padding: 0
 }
@@ -167,7 +170,7 @@ a.topic{
     margin: 1px 0;
 }
 #contexts ul a, a.context{
-    padding: 2px 2%;
+    padding: 0 1.5%;
     color: #fff;
     text-align: center;
     text-decoration: none;
@@ -226,25 +229,31 @@ a.topic{
 #timeline{
     clear: both
 }
-#timeline h3{
+
+#timeline h3, .duefor h3, .topics h3{
     margin: 7px 0 0 0;
-    padding: 3px;
+    padding: 3px 3px 3px 7px;
+}
+#timeline h3, .topics h3{
     background: #4B5558;
     color: #fff
 }
 #timeline ul{
-    border-top: 1px solid #333;
+    border-top: 1px solid #EEE;
 }
 #timeline li{
-    border-bottom: 1px solid #333;
-    padding: 4px
+    border-bottom: 1px solid #EEE;
+    padding: 4px 0 14px 7px
+}
+#timeline li:hover{
+    background: #EEE
 }
 #context_breadcrumb{
     margin: 0 0 4px 0;
     padding: 2px 0 4px;
     font-size:93%;
 }
-#context_breadcrumb a{
+#context_breadcrumb a{  
     margin: 0
 }
 .content form{
@@ -407,14 +416,23 @@ button{
     padding: 1px 21px 21px 21px;
     margin-top: 4px
 }
+#tm-topics h2{
+    font-weight: bold;
+    margin-bottom: 7px
+}
 #tm-topics li{
-    border-bottom: 1px #666 solid;
+    border-bottom: 1px #EEE solid;
+    padding-bottom: 14px;
+    margin-bottom: 21px
 }
 #tm-topics a{
     margin: 0;
     width: 98%;
-    display: block;
     padding: 3px 0 3px 2%;
+    font-size: 85%
+}
+#tm-topics img{
+    max-width: 60%
 }
 #move_form{
     position: absolute;
@@ -502,7 +520,7 @@ button{
 }
 #date_line li ul li{
     width: 100%;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #EEE;
 }
 #date_line li ul li a{
     border: none;
@@ -557,18 +575,18 @@ button{
     background: #fdf5ce
 }
 .duefor h3{
-    margin: 7px 0 0 0;
-    padding: 3px;
-    background: #fbd850;
-    color: #0066ff;
+    background: #FBCB09;
+    color: #FFF;
 }
 .duefor ul{
-    border-top: 1px solid #333;
-    margin-bottom: 28px
+    border-top: 1px solid #EEE;
 }
 .duefor li{
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #EEE;
     padding: 4px
+}
+.duefor li:hover{
+    background: #fbeea8
 }
 .b_inactive{
     display: none
@@ -622,4 +640,22 @@ button{
     text-align: left;
     margin: auto;
     width: 60%
+}
+#timeline .brcr a, .duefor .brcr a{
+    color: #3380CC;
+    font-size: 77%
+}
+#timeline .brcr, .duefor .brcr{
+    margin-bottom: 3px;
+    display: block
+}
+.tpcnfo{
+    margin-left: 2%
+}
+.tpcdtl{
+    text-align: right;
+    font-size: 85%;
+    float: right;
+    background: #EEE;
+    padding: 1px 4px 1px 2px
 }

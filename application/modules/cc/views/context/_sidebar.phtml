@@ -1,31 +1,30 @@
 <h3><?php echo lang('details'); ?></h3>
 <ul id="details">
-	<?php
-echo <<<PQR
+    <?php
+    echo <<<PQR
     <li><b>Resp.: </b> {$info['info']['responsible']}</li>
 PQR;
-	?>
+    ?>
 </ul>
 <div id="contexts">
-	<h3><?php echo $context_label . nbs() . logged_data($participants, '<a href="' . site_url('/cc/context/create_form/' . $context) . '">[+]</a>') ?></h3>
-	<ul>
-		<?php
-		foreach ($info['contexts'] as $context_slug => $context_info) {
-			if ( ! belongs_to('context', $context_slug, connected_user())) {
-				continue;
-			}
-			$context_name = preg_match('/\_[a-zA-Z0-9-]*$/', $context_slug, $m);
-			$context_name = preg_replace('/\_/', '', $m);
-			$context_link = site_url('/cc/context/resume/' . $context_slug);
-			$icon = context_icon($context_info);
-			echo <<<PQR
+    <h3><?php echo $context_label . nbs() . logged_data($participants, '<a href="' . site_url('/cc/context/create_form/' . $context) . '">[+]</a>') ?></h3>
+    <ul>
+        <?php
+        foreach ($info['contexts'] as $context_slug => $context_info) {
+            if (!belongs_to('context', $context_slug, connected_user())) {
+                continue;
+            }
+            $context_name = preg_match('/\_[a-zA-Z0-9-]*$/', $context_slug, $m);
+            $context_name = preg_replace('/\_/', '', $m);
+            $context_link = site_url('/cc/context/resume/' . $context_slug);
+            $icon = context_icon($context_info);
+            echo <<<PQR
 <li><a href="{$context_link}">{$context_info['info']['title']} <span class="{$icon}"></span></a></li>
 PQR;
-		}
-		?>
-	</ul>
+        }
+        ?>
+    </ul>
 </div>
 
 <?php
-include_once _INC . 'modules/cc/views/timeline/topics.phtml';
 include_once _INC . 'modules/cc/views/_inc/participants.phtml';

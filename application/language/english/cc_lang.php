@@ -177,3 +177,4 @@ $lang['principal'] = 'Principal';
 $lang['extensions'] = 'Extensions';
 $lang['component_disabled'] = 'Component disabled.';
 $lang['to_do_next_days'] = 'To do next days.';
+$lang['by'] = 'by';

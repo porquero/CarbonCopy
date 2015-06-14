@@ -8,6 +8,9 @@ hr{
 	margin-bottom: 14px;
 	word-wrap: break-word
 }
+#replies li:hover{
+    background: #EEE    
+}
 .r-date{
 	float: right;
 	color: #4B5558

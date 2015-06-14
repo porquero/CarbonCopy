@@ -16,7 +16,8 @@
 function create_breadcrumb($path, $id_topic = NULL) {
     $contexts = explode('_', $path);
     $breadcrumb = '';
-    $result = '';
+    $init_div = '<span class="brcr">';
+    $result = $init_div;
 
     foreach ($contexts as $context) {
         if ($context == $id_topic) {
@@ -30,7 +31,9 @@ function create_breadcrumb($path, $id_topic = NULL) {
 PQR;
     }
 
-    return $result;
+    $result = $result === $init_div ? $init_div . '<a href="' . site_url() . '">[/]</a>' : preg_replace('/ \&raquo; /', '', $result, 1);
+
+    return $result . '</span>';
 }
 
 /**

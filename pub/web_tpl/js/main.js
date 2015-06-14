@@ -263,6 +263,20 @@ $(function () {
         return false;
     });
 
+    // History back (recovering [ALT]+[LEFT ARROW])
+    shortcut = 'alt+left';
+    $(document).bind('keydown', shortcut, function () {
+        history.back(1);
+        return false;
+    });
+    
+    // History forward (recovering [ALT]+[RIGHT ARROW])
+    shortcut = 'alt+right';
+    $(document).bind('keydown', shortcut, function () {
+        history.back(1);
+        return false;
+    });
+    
     // Disabled Shortkeys.
     $('div.nicEdit-main').bind('keydown', 'shift+7', function (e) {
         e.stopPropagation();
@@ -278,6 +292,8 @@ $(function () {
     for (var key in key_map_help) {
         $('#shortcuts').append($('<li><b>' + key + ':</b> ' + key_map_help[key] + '</li>'));
     }
+    
+    
 });
 
 // Show shotcuts map.
