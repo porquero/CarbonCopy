@@ -5,8 +5,6 @@
  * For more information visit http://nicedit.com/
  * Do not remove this copyright message
  */
-var site_url = 'http://localhost/CarbonCopy/index.php/';
-var base_url = 'http://localhost/CarbonCopy/';
 
 var bkExtend = function () {
     var args = arguments;
