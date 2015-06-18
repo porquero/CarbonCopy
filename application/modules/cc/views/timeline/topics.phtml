@@ -4,17 +4,21 @@
         <?php
         foreach ((array) $full_timeline as $action):
             // Validate if participant belongs to topic.
-            if (!belongs_to('topic', $action->context . $action->id_topic, connected_user())) {
+            if ( ! belongs_to('topic', $action->context . $action->id_topic, connected_user())) {
                 continue;
             }
             $icon = topic_icon(Modules::run('cc/topic/info', $action->context . $action->id_topic));
             ?>
-            <li>
+            <li class="tstp">
                 <h2><a href="<?php echo site_url('/cc/topic/resume/' . $action->context . $action->id_topic) ?>" class="topic"><?php echo $action->title ?> <span class="<?php echo $icon ?>"></span></a></h2>
                 <div class="tpcnfo">
                     <?php $info_topic = Modules::run('cc/topic/info', $action->context . $action->id_topic) ?>
-                    <div class="tpcdtl"><a href="<?php echo site_url('/account/participant/profile/' . $info_topic['info']['created_by']); ?>" class="usr"><?php echo $info_topic['info']['created_by'] ?></a> <i><?php echo $info_topic['info']['status'] ?></i></div>
-                    <?php echo $info_topic['info']['description']?>
+                    <?php echo $info_topic['info']['description'] ?>
+                    <div class="tpcdtl">
+                        <span class="ts"><?php echo $info_topic['info']['created_date'] ?></span>
+                        <a href="<?php echo site_url('/account/participant/profile/' . $info_topic['info']['created_by']); ?>" class="usr"><?php echo $info_topic['info']['created_by'] ?></a> 
+                        <i><?php echo $info_topic['info']['status'] ?></i>
+                    </div>
                 </div>
             </li>
         <?php endforeach; ?>

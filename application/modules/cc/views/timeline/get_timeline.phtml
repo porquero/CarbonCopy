@@ -40,6 +40,9 @@ PQR;
                 <li>
                     <?php echo create_breadcrumb($action->context, $action->id_topic) ?>
                     <div class="tpdt">
+                        <a href="<?php echo $url_ts . '/' . $action->sql_date ?>" class="ts"><?php echo $action->ts ?></a>
+                        <a href="<?php echo site_url('/account/participant/profile/' . $action->from_participant); ?>" class="usr"><?php echo $action->from_participant ?></a>
+                        <i><?php echo $action->name ?></i>
                         <?php
                         if ($action->id_topic === NULL):
                             $tm_context = strlen($action->context) == 0 ? $action->context : $action->context . '_';
@@ -48,9 +51,6 @@ PQR;
                         <?php else: ?>
                             <a href="<?php echo site_url('/cc/topic/resume/' . $action->context . $action->id_topic) ?>" class="topic"><b><?php echo $action->title ?></b></a>
                         <?php endif; ?>
-                        <i><?php echo $action->name . ' ' . lang('by') . ' ' ?></i>
-                        <a href="<?php echo site_url('/account/participant/profile/' . $action->from_participant); ?>" class="usr"><?php echo $action->from_participant ?></a>
-                        <a href="<?php echo $url_ts . '/' . $action->sql_date ?>" class="rgt"><?php echo $action->ts ?></a>
                     </div>
                 </li>
             <?php endforeach; ?>
