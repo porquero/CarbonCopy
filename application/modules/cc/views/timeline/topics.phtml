@@ -1,26 +1,29 @@
-<div id="timeline-s">
-    <h3><?php echo $topic_label . nbs() . logged_data($participants, '<a href="' . site_url('/cc/topic/add_form/' . $context) . '">[+]</a>') ?></h3>
-    <ul id="tm-topics">
-        <?php
-        foreach ((array) $full_timeline as $action):
-            // Validate if participant belongs to topic.
-            if ( ! belongs_to('topic', $action->context . $action->id_topic, connected_user())) {
-                continue;
-            }
-            $icon = topic_icon(Modules::run('cc/topic/info', $action->context . $action->id_topic));
-            ?>
-            <li class="tstp">
-                <h2><a href="<?php echo site_url('/cc/topic/resume/' . $action->context . $action->id_topic) ?>" class="topic"><?php echo $action->title ?> <span class="<?php echo $icon ?>"></span></a></h2>
-                <div class="tpcnfo">
-                    <?php $info_topic = Modules::run('cc/topic/info', $action->context . $action->id_topic) ?>
-                    <?php echo $info_topic['info']['description'] ?>
-                    <div class="tpcdtl">
-                        <span class="ts"><?php echo $info_topic['info']['created_date'] ?></span>
-                        <a href="<?php echo site_url('/account/participant/profile/' . $info_topic['info']['created_by']); ?>" class="usr"><?php echo $info_topic['info']['created_by'] ?></a> 
-                        <i><?php echo $info_topic['info']['status'] ?></i>
+<?php if (count((array) $full_timeline) > 0): ?>
+    <div id="timeline-s">
+        <h3><?php echo $topic_label . nbs() . logged_data($participants, '<a href="' . site_url('/cc/topic/add_form/' . $context) . '">[+]</a>') ?></h3>
+        <ul id="tm-topics">
+            <?php
+            foreach ((array) $full_timeline as $action):
+                // Validate if participant belongs to topic.
+                if (!belongs_to('topic', $action->context . $action->id_topic, connected_user())) {
+                    continue;
+                }
+                $icon = topic_icon(Modules::run('cc/topic/info', $action->context . $action->id_topic));
+                ?>
+                <li class="tstp">
+                    <h2><a href="<?php echo site_url('/cc/topic/resume/' . $action->context . $action->id_topic) ?>" class="topic"><?php echo $action->title ?> <span class="<?php echo $icon ?>"></span></a></h2>
+                    <div class="tpcnfo">
+                        <?php $info_topic = Modules::run('cc/topic/info', $action->context . $action->id_topic) ?>
+                        <?php echo $info_topic['info']['description'] ?>
+                        <div class="tpcdtl">
+                            <span class="ts"><?php echo $info_topic['info']['created_date'] ?></span>
+                            <a href="<?php echo site_url('/account/participant/profile/' . $info_topic['info']['created_by']); ?>" class="usr"><?php echo $info_topic['info']['created_by'] ?></a> 
+                            <i><?php echo $info_topic['info']['status'] ?></i>
+                        </div>
                     </div>
-                </div>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-</div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?php
+ endif;

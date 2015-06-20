@@ -75,7 +75,7 @@ PQR;
 
         $user_locking = $this->_user_locking($topic);
         if ($user_locking !== FALSE) {
-            $msg = lang('topic_being_manipulated');
+            $msg = sprintf(lang('topic_being_manipulated'), $user_locking);
             $msg_type = 'msg_warning';
         }
 
