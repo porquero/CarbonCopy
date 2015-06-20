@@ -296,7 +296,7 @@ form label span{
     height: 23px;
     vertical-align: middle
 }
-#context-actions li a:before{
+#context-actions li a:before, #search_results .brcr:before{
     content: "\f0da  ";
     color: #c77405
 }
@@ -419,6 +419,10 @@ button{
 }
 #tm-topics li.tstp{
     margin-bottom: 21px;
+    border-left: 1px dashed transparent
+}
+#tm-topics li.tstp:hover{
+    border-left-color: #CCC
 }
 #tm-topics h2{
     margin-left: 2%
@@ -633,7 +637,7 @@ button{
     margin: auto;
     width: 60%
 }
-#timeline .brcr a, .duefor .brcr a{
+#timeline .brcr a, .duefor .brcr a, #search_results .brcr a{
     color: #3380CC;
     font-size: 77%
 }
