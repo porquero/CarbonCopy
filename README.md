@@ -1,7 +1,7 @@
 CarbonCopy
 ===========
 
-CarbonCopy is a collaborative project manager based in contexts, using the basis of communication and user defined structures:
+CarbonCopy is a collaborative communication manager based in contexts, using the basis of communication and user defined structures:
 
 ![Context Structure](https://raw.githubusercontent.com/porquero/CarbonCopy/master/pub/readme/context-structure.png)
 
