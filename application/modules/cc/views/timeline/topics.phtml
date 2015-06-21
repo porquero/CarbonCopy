@@ -1,7 +1,7 @@
-<?php if (count((array) $full_timeline) > 0): ?>
-    <div id="timeline-s">
-        <h3><?php echo $topic_label . nbs() . logged_data($participants, '<a href="' . site_url('/cc/topic/add_form/' . $context) . '">[+]</a>') ?></h3>
-        <ul id="tm-topics">
+<div id="timeline-s">
+    <h3><?php echo $topic_label . nbs() . logged_data($participants, '<a href="' . site_url('/cc/topic/add_form/' . $context) . '">[+]</a>') ?></h3>
+    <ul id="tm-topics">
+        <?php if (count((array) $full_timeline) > 0): ?>
             <?php
             foreach ((array) $full_timeline as $action):
                 // Validate if participant belongs to topic.
@@ -23,7 +23,7 @@
                     </div>
                 </li>
             <?php endforeach; ?>
-        </ul>
-    </div>
-    <?php
- endif;
+        <?php else: echo '<li class="tpcnfo">Nothing for now.</li>';
+        endif ?>
+    </ul>
+</div>
