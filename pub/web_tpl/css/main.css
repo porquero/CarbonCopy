@@ -245,6 +245,9 @@ a.topic{
 #timeline li:hover{
     background: #EEE
 }
+#timeline-s{
+    word-wrap: break-word
+}
 #context_breadcrumb{
     margin: 0 0 4px 0;
     padding: 2px 0 4px;
