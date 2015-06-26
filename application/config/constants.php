@@ -41,7 +41,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
 /* CC constants */
 // Version.
-define('_CC_VERSION', '1.1');
+define('_CC_VERSION', '1.11');
 
 // Templates.
 define('_TEMPLATE', 'web_tpl.phtml');
