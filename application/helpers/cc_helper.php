@@ -579,7 +579,7 @@ function list_enabled_components()
     $enabled_components = Modules::run('extends/component/enabled');
 
     if ( ! empty($enabled_components)) {
-        $components_list = '<h3>' . lang('components') . '</h3><ul id="components_menu">';
+        $components_list = '<div class="clear"></div><h3>' . lang('components') . '</h3><ul id="components_menu">';
         $in_menu = FALSE;
 
         foreach ($enabled_components as $component) {
