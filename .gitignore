@@ -8,3 +8,5 @@
 /_accounts/cc/_participants/criffoh.json
 /application/logs/
 /_accounts/cc/
+/application/config/database.php
+/application/config/config.php
