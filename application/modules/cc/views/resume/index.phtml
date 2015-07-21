@@ -1,8 +1,8 @@
-<div class="lft w50pp">
+<div class="lft w60pp">
     <?php
     if (connected_user() !== FALSE):
         $key_date_due = key($due_date_topics);
-        if (!is_null($key_date_due) && count($due_date_topics[$key_date_due])):
+        if ( ! is_null($key_date_due) && count($due_date_topics[$key_date_due])):
             ?>
             <h2><?php echo lang('to_do') ?></h2>
             <div class="duefor">
@@ -34,7 +34,8 @@
                     ?>
                 </ul>
             </div>
-        <?php elseif (count($due_future_topics)):
+            <?php
+        elseif (count($due_future_topics)):
             ?>
             <h2><?php echo lang('to_do_next_days') ?></h2>
             <?php
@@ -71,12 +72,16 @@
                 </div>
                 <?php
             endforeach;
+        else:
+            echo '<h2>' . lang('to_do') . '</h2><div class="duefor"><h3>&nbsp;</h3><ul><li>' . lang('nothing_happens') . '</li></ul></div>';
         endif;
+    else:
+        echo '<h2>' . lang('to_do') . '</h2><div class="duefor"><h3>&nbsp;</h3><ul><li>' . lang('only_user_tasks') . '</li></ul></div>';
     endif;
     ?>
 </div>
-<div class="rgt w50pp">
-    <h2><?php echo connected_user() !== FALSE ? lang('timeline') : null ?></h2>
+<div class="rgt w40pp">
+    <h2><?php echo connected_user() === FALSE ? 'Public ' : null; echo lang('timeline'); ?></h2>
     <?php
     include_once _INC . 'modules/cc/views/timeline/get_timeline.phtml';
     ?>

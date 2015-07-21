@@ -24,6 +24,18 @@
 .w50pp{
     width: 49%
 }
+.w60pp{
+    width: 59%
+}
+.w40pp{
+    width: 39%
+}
+.w70pp{
+    width: 69%
+}
+.w30pp{
+    width: 29%
+}
 fieldset{
     padding: 14px;
     border: 1px #eee solid;
@@ -411,7 +423,6 @@ button{
 #din-content{
     position: relative;
     background: #fff;
-    min-height: 480px;
     color:#2E3436;
     padding: 1px 21px 21px 21px;
     margin-top: 4px

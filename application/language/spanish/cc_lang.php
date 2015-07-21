@@ -178,3 +178,4 @@ $lang['extensions'] = 'Extensiones';
 $lang['component_disabled'] = 'Componente desactivado.';
 $lang['to_do_next_days'] = 'Por hacer los próximos días.';
 $lang['by'] = 'by';
+$lang['only_user_tasks'] = 'Acá tus tareas (Sólo usuarios conectados.).';
