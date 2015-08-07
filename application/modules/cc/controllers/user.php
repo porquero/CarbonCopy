@@ -83,7 +83,7 @@ class user extends MX_Controller {
                 $subject = 'CarbonCopy - ' . lang('email_validation');
                 $message_mail = nl2br(sprintf(lang('email_validation_message'), $this->input->post('name'), site_url_ws()
                                 , md5($this->input->post('password')) . md5($this->input->post('email'))));
-                $this->email->from('noreply@carboncpm.com', 'CarbonCopy');
+                $this->email->from('noreply@carboncopycc.com', 'CarbonCopy');
                 $this->email->to($recipient);
 
                 $this->email->subject($subject);
@@ -476,7 +476,7 @@ class user extends MX_Controller {
         $mail_body = nl2br(sprintf(lang('reset_mail'), site_url() . "/cc/user/validate_reset_password/{$hash}", site_url_ws()));
 
         // TODO Load email from configuration
-        $this->email->from('noreply@carboncpm.com', 'CarbonCopy');
+        $this->email->from('noreply@carboncopycc.com', 'CarbonCopy');
         $this->email->to($this->input->post('email'));
 
         $this->email->subject(lang('reset_subject'));

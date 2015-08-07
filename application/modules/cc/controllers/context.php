@@ -462,6 +462,7 @@ class context extends MX_Controller {
                     $data = array(
                         'title' => $this->input->post('title'),
                         'from_participant' => connected_user(),
+                        'to_participant' => $this->input->post('responsible'),
                         'context' => $context,
                         'action_id' => 5,
                         'id_context' => $this->input->post('id'),

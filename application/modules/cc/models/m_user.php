@@ -11,7 +11,8 @@ class m_user extends CI_Model {
 
     protected $_table_name = 'user';
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->db = $this->load->database('default', TRUE);
     }
@@ -23,7 +24,8 @@ class m_user extends CI_Model {
      *
      * @return bool
      */
-    public function user_exists($username) {
+    public function user_exists($username)
+    {
         return $this->db->from($this->_table_name)->where('username', $username)->count_all_results() == 1;
     }
 
@@ -34,7 +36,8 @@ class m_user extends CI_Model {
      *
      * @return bool
      */
-    public function email_exists($email) {
+    public function email_exists($email)
+    {
         return $this->db->from($this->_table_name)->where('email', $email)->count_all_results() == 1;
     }
 
@@ -45,7 +48,8 @@ class m_user extends CI_Model {
      *
      * @return bool
      */
-    public function create($data) {
+    public function create($data)
+    {
         return $this->db->insert($this->_table_name, $data);
     }
 
@@ -57,9 +61,10 @@ class m_user extends CI_Model {
      *
      * @return boolean
      */
-    public function login($email, $psw) {
+    public function login($email, $psw)
+    {
         $r = $this->db->select('username, principal_account')->from($this->_table_name)->where('email', $email)
-                        ->where('password', md5($psw))->get()->row();
+            ->where('password', md5($psw))->get()->row();
 
         if (isset($r->username)) {
             return $r;
@@ -75,11 +80,12 @@ class m_user extends CI_Model {
      *
      * @return bool
      */
-    public function can_validate($token) {
+    public function can_validate($token)
+    {
         return $this->db->from($this->_table_name)
-                        ->where('concat(password, md5(email)) = \'' . $token . '\'')
-                        ->where('validated', 0)
-                        ->count_all_results() == 1;
+            ->where('concat(password, md5(email)) = \'' . $token . '\'')
+            ->where('validated', 0)
+            ->count_all_results() == 1;
     }
 
     /**
@@ -88,9 +94,10 @@ class m_user extends CI_Model {
      * @param type $email
      * @return type
      */
-    public function validated($email) {
+    public function validated($email)
+    {
         return $this->db->from($this->_table_name)->where('email', $email)->where('validated', 1)
-                        ->count_all_results() == 1;
+            ->count_all_results() == 1;
     }
 
     /**
@@ -100,7 +107,8 @@ class m_user extends CI_Model {
      *
      * @return bool
      */
-    public function validate($token) {
+    public function validate($token)
+    {
         $this->db->where('concat(password, md5(email)) = \'' . $token . '\'')->update($this->_table_name, array('validated' => 1));
 
         $r = $this->db->select('username')->from($this->_table_name)->where('concat(password, md5(email)) = \'' . $token . '\'')->get()->row();
@@ -116,7 +124,8 @@ class m_user extends CI_Model {
      *
      * @return bool
      */
-    public function update($user, $data) {
+    public function update($user, $data)
+    {
         return $this->db->where('username', $user)->update($this->_table_name, $data);
     }
 
@@ -127,12 +136,13 @@ class m_user extends CI_Model {
      *
      * @return array list of users
      */
-    public function where_in($participants) {
+    public function where_in($participants)
+    {
         $result = array();
         $participants = implode("','", $participants);
 
         $r = $this->db->select('username, name, email, ts')->from($this->_table_name)
-                        ->where('username in(\'' . $participants . '\')')->get();
+            ->where('username in(\'' . $participants . '\')')->get();
 
         foreach ($r->result() as $user) {
             $result[$user->username]['user'] = $user;
@@ -149,21 +159,23 @@ class m_user extends CI_Model {
      *
      * @return object
      */
-    public function data($username) {
+    public function data($username)
+    {
         $r = $this->db->get_where($this->_table_name, array('username' => $username))->row();
 
         if (is_array($r)) {
             return (object) array(
-                        'username' => '',
-                        'name' => '',
-                        'email' => '',
-                        'password' => '',
-                        'accounts' => '',
-                        'principal_account' => '',
-                        'validated' => '',
-                        'ts' => '',
+                  'username' => '',
+                  'name' => '',
+                  'email' => '',
+                  'password' => '',
+                  'accounts' => '',
+                  'principal_account' => '',
+                  'validated' => '',
+                  'ts' => '',
             );
-        } else {
+        }
+        else {
             return $r;
         }
     }
@@ -176,7 +188,8 @@ class m_user extends CI_Model {
      *
      * @return boolean
      */
-    public function add_account($username, $account) {
+    public function add_account($username, $account)
+    {
         if ($this->has_account($username, $account)) {
             return TRUE;
         }
@@ -195,11 +208,13 @@ class m_user extends CI_Model {
      * 
      * @return boolean
      */
-    public function has_account($username, $account) {
+    public function has_account($username, $account)
+    {
         $user_data = $this->data($username);
         if (strstr($user_data->accounts, '_') !== FALSE) {
             $accounts = explode('_', $user_data->accounts);
-        } else {
+        }
+        else {
             return $user_data->accounts === $account;
         }
 
@@ -213,7 +228,8 @@ class m_user extends CI_Model {
      *
      * @return boolean
      */
-    public function has_not_default_account($username) {
+    public function has_not_default_account($username)
+    {
         $r = $this->db->select('principal_account')->from($this->_table_name)->where(array('username' => $username))->get()->row();
 
         return empty($r->principal_account);
@@ -226,7 +242,8 @@ class m_user extends CI_Model {
      *
      * @return string
      */
-    public function username($email) {
+    public function username($email)
+    {
         $r = $this->db->select('username')->from($this->_table_name)->where(array('email' => $email))->get()->row();
 
         return $r->username;
@@ -241,11 +258,13 @@ class m_user extends CI_Model {
      *
      * @todo Validate if account exists!
      */
-    public function accounts($username) {
+    public function accounts($username)
+    {
         if ($username === FALSE) {
             $r = new stdClass();
             $r->accounts = 'cc';
-        } else {
+        }
+        else {
             $r = $this->db->select('accounts')->from($this->_table_name)->where('username', $username)->get()->row();
         }
 
@@ -257,13 +276,15 @@ class m_user extends CI_Model {
                 $info_account_file = "_accounts/{$account}/info_account.json";
                 if (is_file($info_account_file)) {
                     $info_accounts[] = Modules::run('file/read/json_content', $info_account_file);
-                } else {
+                }
+                else {
                     Plogger::log('Account file doesn\'t exists!: ' . $info_account_file);
                 }
             }
 
             return $info_accounts;
-        } else {
+        }
+        else {
             return array(0 => Modules::run('file/read/json_content', "_accounts/{$r->accounts}/info_account.json"));
         }
     }
@@ -275,12 +296,31 @@ class m_user extends CI_Model {
      *
      * @return array
      */
-    public function timeline($username) {
+    public function timeline($username)
+    {
         $r = $this->db->get_where($this->_table_name, array('username' => $username));
         $result = array();
 
         foreach ($r->result() as $action) {
             $result[] = $action;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get email participants
+     * 
+     * @return array
+     */
+    public function emails()
+    {
+        $result = array();
+
+        $r = $this->db->select('username, email')->from($this->_table_name)->get();
+
+        foreach ($r->result() as $user) {
+            $result[$user->username] = $user->email;
         }
 
         return $result;

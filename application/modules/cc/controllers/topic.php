@@ -743,6 +743,7 @@ PQR;
                     $data = array(
                         'title' => $this->input->post('topic_title'),
                         'from_participant' => connected_user(),
+                        'to_participant' => $this->input->post('responsible'),
                         'context' => $context,
                         'action_id' => 5,
                         'id_topic' => '_' . $topic_name_slug,

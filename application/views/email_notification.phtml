@@ -1,0 +1,83 @@
+<?php
+/*
+ * Note: This view is used out of HMVC because is transversal to all views.
+ */
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <title>CarbonCopy News!</title>
+    </head>
+    <body style="font-family: 'Oxygen', sans-serif;">
+        <div>
+            <a href="<?php echo site_url() ?>" title="CarbonCopy - Collaboration Manager" style="background: #FF855C;float: left;width: 24px;height: 24px;text-align: center;color: #fff;padding: 3px;text-decoration: none;margin: 0 3px;"><span style="font-weight: bold;display: block;margin-top: 3px;">CC</span></a>
+            <h2 style="margin: 6px 0 0 6px;float: left;font-size: 100%;">CarbonCopy</h2>
+        </div>
+        <div style="clear: both"></div>
+        <h1>What happened</h1>
+        <h2 style="background: #4B5558;color: #fff;margin: 7px 0 0 0;padding: 3px 3px 3px 7px;">Activity resume</h2>
+        <ul style="border-top: 1px solid #EEE;list-style-type: none">
+            <?php
+            echo count($resume) === 0 ? '<li><i>Nothing for now</i></li>' : NULL;
+            foreach ($resume as $action):
+                ?>
+                <li style="border-bottom: 1px solid #EEE;padding: 4px 0 14px 7px;">
+                    <span style="margin-bottom: 3px;display: block;">
+                        <a href="" style="color: #3380CC;font-size: 77%;text-decoration: none;margin: 0 3px;"></a>
+                    </span><br>
+                    <div>
+                        <a href="<?php echo site_url('/cc/context/resume/' . $action->context) . '/all/' . $action->sql_date ?>" style="color: #999;text-decoration: none;margin: 0 3px;"><?php echo $action->ts ?></a>
+                        <a href="<?php echo site_url('/account/participant/profile/' . $action->from_participant); ?>" style="color: #FF855C;text-decoration: none;margin: 0 3px;"><?php echo $action->from_participant ?></a>
+                        <i><?php echo $action->name ?></i>
+                        <?php
+                        if ($action->id_topic === NULL):
+                            $tm_context = strlen($action->context) == 0 ? $action->context : $action->context . '_';
+                            ?>
+                            <!-- context -->
+                            <a href="<?php echo site_url('/cc/context/resume/' . $tm_context . $action->id_context) ?>" style="padding: 0 1.5%;color: #fff;text-align: center;text-decoration: none;background: #3380CC;"><b><?php echo $action->title ?></b></a>
+                        <?php else: ?>
+                            <!-- topic -->
+                            <a href="<?php echo site_url('/cc/topic/resume/' . $action->context . $action->id_topic) ?>"><b><?php echo $action->title ?></b></a>
+                        <?php endif; ?>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <div style="margin-top: 28px"></div>
+        <h2 style="background: #4B5558;color: #fff;margin: 7px 0 0 0;padding: 3px 3px 3px 7px;">Your activity</h2>
+        <ul style="border-top: 1px solid #EEE;list-style-type: none">
+            <?php
+            echo count($user_activity) === 0 ? '<li><i>Nothing for now</i></li>' : NULL;
+            foreach ($user_activity as $action):
+                ?>
+                <li style="border-bottom: 1px solid #EEE;padding: 4px 0 14px 7px;">
+                    <span style="margin-bottom: 3px;display: block;">
+                        <a href="" style="color: #3380CC;font-size: 77%;text-decoration: none;margin: 0 3px;"></a>
+                    </span><br>
+                    <div>
+                        <a href="<?php echo site_url('/cc/context/resume/' . $action->context) . '/all/' . $action->sql_date ?>" style="color: #999;text-decoration: none;margin: 0 3px;"><?php echo $action->ts ?></a>
+                        <a href="<?php echo site_url('/account/participant/profile/' . $action->from_participant); ?>" style="color: #FF855C;text-decoration: none;margin: 0 3px;">You</a>
+                        <i><?php echo $action->name ?></i>
+                        <?php
+                        if ($action->id_topic === NULL):
+                            $tm_context = strlen($action->context) == 0 ? $action->context : $action->context . '_';
+                            ?>
+                            <!-- context -->
+                            <a href="<?php echo site_url('/cc/context/resume/' . $tm_context . $action->id_context) ?>" style="padding: 0 1.5%;color: #fff;text-align: center;text-decoration: none;background: #3380CC;"><b><?php echo $action->title ?></b></a>
+                        <?php else: ?>
+                            <!-- topic -->
+                            <a href="<?php echo site_url('/cc/topic/resume/' . $action->context . $action->id_topic) ?>"><b><?php echo $action->title ?></b></a>
+                        <?php endif; ?>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+
+        <div style="margin-top: 28px"></div>
+        <div id="foot"><a href="http://www.carboncopycc.com">CarbonCopy</a> - Collaboration manager.</div>
+    </body>
+</html>
+
+
+

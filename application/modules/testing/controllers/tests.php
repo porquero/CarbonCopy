@@ -19,4 +19,10 @@ class tests extends MX_Controller {
         Plogger::var_dump(glob(_INC_ROOT . '/extends/components/*'));
     }
 
+    public function emails()
+    {
+        $this->load->model('cc/m_user');
+        
+        Plogger::var_dump($this->m_user->emails());
+    }
 }
