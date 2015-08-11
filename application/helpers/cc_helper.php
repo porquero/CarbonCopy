@@ -422,11 +422,11 @@ function logged_data($participants, $data_logged, $data_not_logged = '', $user_l
 
     $plist = '';
     foreach ($participants as $participant) {
-        if ( ! isset($participant['info']['id'])) {
+        if ( ! isset($participant->info['id'])) {
             continue;
         }
 
-        $plist .= $participant['info']['id'] . '|';
+        $plist .= $participant->info['id'] . '|';
     }
 
     if (FALSE !== connected_user() && strstr($plist, connected_user()) !== FALSE) {

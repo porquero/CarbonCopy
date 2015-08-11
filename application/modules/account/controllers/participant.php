@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('BASEPATH'))
+if ( ! defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /**
@@ -17,7 +17,8 @@ class participant extends MX_Controller {
      *
      * @return array
      */
-    function list_for_resume() {
+    function list_for_resume()
+    {
         $this->load->module('file/read');
 
         $context = '_accounts/' . Modules::run('file/misc/final_slash', $this->session->userdata('current_account')) . '_participants/';
@@ -25,7 +26,7 @@ class participant extends MX_Controller {
         $result = array();
 
         foreach ($participants as $participant) {
-            $result[] = $this->read->json_content($participant);
+            $result[] = (object) $this->read->json_content($participant);
         }
 
         return $result;
@@ -37,7 +38,8 @@ class participant extends MX_Controller {
      * @param string $context
      * @return array
      */
-    public function list_for_context($context, $kind = 'context') {
+    public function list_for_context($context, $kind = 'context')
+    {
         if (empty($context)) {
             die('Empty context!');
         }
@@ -46,7 +48,7 @@ class participant extends MX_Controller {
         $result = array();
 
         // TODO: add type validation to avoid server lock!
-        if (!is_array($context_info)) {
+        if ( ! is_array($context_info)) {
             Plogger::var_dump($context_info);
             die("Fix this!. [{$context}]" . __FILE__ . __LINE__);
         }
@@ -58,9 +60,10 @@ class participant extends MX_Controller {
                 if (empty($participant)) {
                     continue;
                 }
-                $result[]['info']['id'] = $participant;
+                $result[] = $this->info($participant);
             }
-        } elseif ($context_info['participants'] === '') {
+        }
+        elseif ($context_info['participants'] === '') {
             $context = preg_replace('/\/_topics/', '', $context);
             $context = preg_replace('/\/[a-z0-9-]*$/', '', $context);
 
@@ -69,8 +72,9 @@ class participant extends MX_Controller {
             }
 
             return $this->list_for_context($context);
-        } else {
-            $result[]['info']['id'] = $context_info['participants'];
+        }
+        else {
+            $result[] = $this->info($context_info['participants']);
         }
 
         return $result;
@@ -81,7 +85,8 @@ class participant extends MX_Controller {
      *
      * @return type
      */
-    public function list_for_account() {
+    public function list_for_account()
+    {
         $this->load->module('file/read');
         $participants = $this->read->files_basename(_INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/_participants');
 
@@ -94,7 +99,8 @@ class participant extends MX_Controller {
      * @param string $id_name
      * @return string html output
      */
-    public function html_select_for_account($id_name, $select = NULL) {
+    public function html_select_for_account($id_name, $select = NULL)
+    {
         $participants = $this->list_for_account();
         $output = '<select name="' . $id_name . '" id="' . $id_name . '">';
         $select = $select === NULL ? connected_user() : $select;
@@ -116,7 +122,8 @@ class participant extends MX_Controller {
      *
      * @return string html output
      */
-    public function html_select_for_context($context, $id_name, $select = NULL, $is_topic = FALSE) {
+    public function html_select_for_context($context, $id_name, $select = NULL, $is_topic = FALSE)
+    {
         if (empty($context)) {
             die('Contexto vacío!');
         }
@@ -129,7 +136,7 @@ class participant extends MX_Controller {
         $output = '<select name="' . $id_name . '" id="' . $id_name . '">';
 
         foreach ($participants as $participant) {
-            $participant = trim($participant['info']['id']);
+            $participant = trim($participant->info['id']);
             $selected = $participant == $select ? 'selected' : '';
             $output .= '<option value="' . $participant . '" ' . $selected . '>' . $participant . '</option>';
         }
@@ -144,7 +151,8 @@ class participant extends MX_Controller {
      * @param type $id_name
      * @return type
      */
-    public function html_checkbox_for_account($id_name, $check = array()) {
+    public function html_checkbox_for_account($id_name, $check = array())
+    {
         $participants = $this->list_for_account();
         $checked_all = count($check) > 0 ? '' : 'checked="checked"';
         $inherit = lang('inherit');
@@ -162,7 +170,7 @@ PQR;
 
             $checked = in_array($participant, $check) ? 'checked' : '';
             $output .= '<label><input type="checkbox" value="' . $participant . '" name="' . $id_name . '[]" '
-                    . $checked . '/> <span>' . $participant . '</span></label>';
+              . $checked . '/> <span>' . $participant . '</span></label>';
         }
         $me = lang('me');
         $output .=<<<PQR
@@ -182,7 +190,8 @@ PQR;
      *
      * @return string
      */
-    public function html_checkbox_for_context($context, $id_name, $for_check = array(), $is_topic = FALSE) {
+    public function html_checkbox_for_context($context, $id_name, $for_check = array(), $is_topic = FALSE)
+    {
         if (empty($context)) {
             die(lang('empty_context'));
         }
@@ -199,14 +208,14 @@ PQR;
 PQR;
 
         foreach ($participants as $participant) {
-            $participant = trim($participant['info']['id']);
+            $participant = trim($participant->info['id']);
 
             if (connected_user() === $participant) {
                 continue;
             }
             $checked = in_array($participant, $for_check) ? 'checked' : '';
             $output .= '<label><input type="checkbox" class="pp" value="' . $participant . '" name="' . $id_name . '[]" ' . $checked
-                    . ' /> <span>' . $participant . '</span></label>';
+              . ' /> <span>' . $participant . '</span></label>';
         }
         $me = lang('me');
         $output .=<<<PQR
@@ -223,7 +232,8 @@ PQR;
      *
      * @param string $username
      */
-    public function profile($username, $menu_act = 'all', $ts_date = NULL) {
+    public function profile($username, $menu_act = 'all', $ts_date = NULL)
+    {
         is_connected();
 
         $this->load->module('cc/timeline');
@@ -247,24 +257,25 @@ PQR;
             $tl_date = is_null($ts_date) ? '' : ': ' . account_date_format($ts_date);
 
             $this->tpl->variables(
-                    array(
-                        'title' => $info->name,
-                        'tl_title' => lang('user_timeline') . $tl_date,
-                        'url_all' => '',
-                        'url_to_me' => '',
-                        'description' => $detail,
-                        'participants' => Modules::run('account/participant/list_for_resume'),
-                        'breadcrumb' => create_breadcrumb(''),
-                        'timeline' => $this->timeline->get_for_participant($username, TRUE, $participant_id, $ts_date),
-                        'menu_act' => $this->timeline->menu_act,
-                        'url_all' => site_url('/account/participant/profile/' . $username),
-                        'url_to_me' => site_url('/account/participant/profile/' . $username . '/to_me'),
-                        'url_ts' => site_url('/account/participant/profile/' . $username . '/' . $menu_act),
+              array(
+                  'title' => $info->name,
+                  'tl_title' => lang('user_timeline') . $tl_date,
+                  'url_all' => '',
+                  'url_to_me' => '',
+                  'description' => $detail,
+                  'participants' => Modules::run('account/participant/list_for_resume'),
+                  'breadcrumb' => create_breadcrumb(''),
+                  'timeline' => $this->timeline->get_for_participant($username, TRUE, $participant_id, $ts_date),
+                  'menu_act' => $this->timeline->menu_act,
+                  'url_all' => site_url('/account/participant/profile/' . $username),
+                  'url_to_me' => site_url('/account/participant/profile/' . $username . '/to_me'),
+                  'url_ts' => site_url('/account/participant/profile/' . $username . '/' . $menu_act),
             ));
             $this->tpl->section('_view', 'profile.phtml');
             $this->tpl->section('_sidebar', '_sidebar_profile.phtml');
             $this->tpl->load_view(_TEMPLATE);
-        } else {
+        }
+        else {
             echo lang('participant_not_found');
         }
     }
@@ -272,7 +283,8 @@ PQR;
     /**
      * LIst all people for account
      */
-    public function all_people() {
+    public function all_people()
+    {
         is_connected();
         $this->load->helper('form');
         $this->load->model('cc/m_user');
@@ -284,12 +296,12 @@ PQR;
         }
 
         $this->tpl->variables(
-                array(
-                    'title' => lang('people'),
-                    'footer' => js_tag('pub/web_tpl/js/people.js'),
-                    'description' => lang('all_we_are'),
-                    'info_participants' => $this->m_user->where_in($where_in),
-                    'breadcrumb' => create_breadcrumb(''),
+          array(
+              'title' => lang('people'),
+              'footer' => js_tag('pub/web_tpl/js/people.js'),
+              'description' => lang('all_we_are'),
+              'info_participants' => $this->m_user->where_in($where_in),
+              'breadcrumb' => create_breadcrumb(''),
         ));
         $this->tpl->section('_view', 'all_people.phtml');
         $this->tpl->section('_sidebar', '_sidebar_people.phtml');
@@ -299,7 +311,8 @@ PQR;
     /**
      * Try to Invite user by email
      */
-    public function invite() {
+    public function invite()
+    {
         $this->load->library('form_validation');
         $this->load->helper(array('form', 'language'));
         $this->load->language('cc_form_validation');
@@ -325,7 +338,7 @@ PQR;
 
         // Check if user belongs to account.
         if ($this->m_user->email_exists($this->input->post('email'))
-                AND $this->m_user->has_account($this->m_user->username($this->input->post('email')), $this->session->userdata('current_account'))) {
+          AND $this->m_user->has_account($this->m_user->username($this->input->post('email')), $this->session->userdata('current_account'))) {
             echo json_encode(array(
                 'result' => 'fail',
                 'message' => lang('already_belongs')
@@ -366,9 +379,10 @@ PQR;
      *
      * @return object
      */
-    public function info($username) {
+    public function info($username)
+    {
         $this->load->model('cc/m_user');
-
+        
         return $this->m_user->data($username);
     }
 
@@ -380,12 +394,13 @@ PQR;
      *
      * @return type
      */
-    public function belongs_to_account($user) {
+    public function belongs_to_account($user)
+    {
         $participants = Modules::run('account/participant/list_for_resume');
 
         $plist = '';
         foreach ($participants as $participant) {
-            $plist .= $participant['info']['id'] . '|';
+            $plist .= $participant->info['id'] . '|';
         }
 
         return strstr($plist, $user) !== FALSE;
@@ -394,7 +409,8 @@ PQR;
     /**
      * Participant config for current account.
      */
-    public function config_form() {
+    public function config_form()
+    {
         is_connected();
 
         $this->load->helper('form');
@@ -404,18 +420,18 @@ PQR;
         $user_data = $this->m_user->data(connected_user());
 
         $this->tpl->variables(
-                array(
-                    'title' => 'Account config',
-                    'description' => '',
-                    'user_language' => $user_config['info']['language'],
-                    'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/web_tpl/js/participant_config.js'),
-                    'language' => array(
-                        'english' => 'english',
-                        'spanish' => 'spanish',
-                    ),
-                    'user_data' => $user_data,
-                    'msg_type' => isset($msg_type) ? $msg_type : '',
-                    'msg' => isset($msg) ? $msg : '',
+          array(
+              'title' => 'Account config',
+              'description' => '',
+              'user_language' => $user_config['info']['language'],
+              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/web_tpl/js/participant_config.js'),
+              'language' => array(
+                  'english' => 'english',
+                  'spanish' => 'spanish',
+              ),
+              'user_data' => $user_data,
+              'msg_type' => isset($msg_type) ? $msg_type : '',
+              'msg' => isset($msg) ? $msg : '',
         ));
 
         $this->tpl->section('_view', 'config_form.phtml');
@@ -427,7 +443,8 @@ PQR;
      * 
      * @return string
      */
-    public function config() {
+    public function config()
+    {
         is_connected();
 
         $this->load->module('file/misc');
@@ -440,7 +457,8 @@ PQR;
             if ($this->input->is_ajax_request()) {
                 echo json_encode($result);
                 return;
-            } else {
+            }
+            else {
                 return $result;
             }
         }
@@ -464,13 +482,15 @@ PQR;
 
                     if ($this->input->is_ajax_request()) {
                         echo json_encode($result);
-                    } else {
+                    }
+                    else {
                         return $result;
                     }
 
                     // Only for break!
                     return;
-                } else {
+                }
+                else {
                     $update_data['email'] = $this->input->post('email');
                 }
             }
@@ -480,30 +500,22 @@ PQR;
                 $update_data['password'] = md5($this->input->post('password'));
             }
 
-            $this->m_user->update(connected_user(), $update_data);
+            $this->m_user->_update(connected_user(), $update_data);
 
             // Save participant data.
             $this->load->module('file/write');
 
             // Save info data.
+            $res = $this->_update(connected_user(), array('language' => $this->input->post('language')));
             $participant_config_path = "_accounts/{$this->session->userdata('current_account')}/_participants/" . connected_user() . ".json";
-            $participant_info = Modules::run('file/read/json_content', $participant_config_path);
-            $participant_info = array(
-                'info' => array(
-                    'id' => $participant_info['info']['id'],
-                    'language' => $this->input->post('language'),
-                ),
-                'type' => $participant_info['type'],
-            );
-
-            $res = $this->write->archive($participant_config_path, json_encode($participant_info)) === TRUE ? 'ok' : 'fail';
             $this->session->set_userdata('user_info', Modules::run('file/read/json_content', $participant_config_path));
 
             $message = '';
             if ($res == 'fail') {
                 //@todo Error number is manual now. Create secuencial system error codes next.
                 $message = 'Sytem error number #7732143. Please contact us and send the error number.';
-            } else {
+            }
+            else {
                 $this->session->set_flashdata('msg', lang('config_saved'));
                 $this->session->set_flashdata('msg_type', 'msg_ok');
             }
@@ -512,7 +524,8 @@ PQR;
                 'result' => $res,
                 'message' => $message,
             );
-        } else {
+        }
+        else {
             $message = validation_errors();
             $result = array(
                 'result' => 'fail',
@@ -522,7 +535,8 @@ PQR;
 
         if ($this->input->is_ajax_request()) {
             echo json_encode($result);
-        } else {
+        }
+        else {
             return $result;
         }
     }
@@ -532,7 +546,8 @@ PQR;
      * 
      * @return array
      */
-    public function validate_form() {
+    public function validate_form()
+    {
         $this->load->library('form_validation');
         $this->load->helper(array('form'));
         $this->load->language('cc_form_validation');
@@ -567,27 +582,18 @@ PQR;
      *
      * @param string $user
      */
-    public function as_administrator($user) {
+    public function as_administrator($user)
+    {
         is_connected('administrator');
 
         $this->load->module('file/write');
 
-        // Save info data.
-        $participant_config_path = "_accounts/{$this->session->userdata('current_account')}/_participants/{$user}.json";
-        $participant_info = Modules::run('file/read/json_content', $participant_config_path);
-        $participant_info = array(
-            'info' => array(
-                'id' => $participant_info['info']['id'],
-                'language' => $participant_info['info']['language'],
-            ),
-            'type' => 'administrator',
-        );
-
-        $res = $this->write->archive($participant_config_path, json_encode($participant_info)) === TRUE ? '1' : 'fail';
+        $res = $this->_update($user, array('type' => 'administrator'));
 
         if ($this->input->is_ajax_request()) {
             echo $res;
-        } else {
+        }
+        else {
             return $res;
         }
     }
@@ -597,29 +603,61 @@ PQR;
      *
      * @param string $user
      */
-    public function as_participant($user) {
+    public function as_participant($user)
+    {
         is_connected('administrator');
 
         $this->load->module('file/write');
 
-        // Save info data.
-        $participant_config_path = "_accounts/{$this->session->userdata('current_account')}/_participants/{$user}.json";
-        $participant_info = Modules::run('file/read/json_content', $participant_config_path);
-        $participant_info = array(
-            'info' => array(
-                'id' => $participant_info['info']['id'],
-                'language' => $participant_info['info']['language'],
-            ),
-            'type' => 'participant',
-        );
-
-        $res = $this->write->archive($participant_config_path, json_encode($participant_info)) === TRUE ? '1' : 'fail';
+        $res = $this->_update($user, array('type' => 'participant'));
 
         if ($this->input->is_ajax_request()) {
             echo $res;
-        } else {
+        }
+        else {
             return $res;
         }
+    }
+
+    /**
+     * Set participant as administrator.
+     *
+     * @param string $user
+     */
+    public function activation($user)
+    {
+        is_connected('administrator');
+
+        $this->load->module('file/write');
+
+        $participant_config_path = "_accounts/{$this->session->userdata('current_account')}/_participants/{$user}.json";
+        $participant_info = Modules::run('file/read/json_content', $participant_config_path);
+
+        $res = $this->_update($user, array('active' => ! $participant_info['active']));
+
+        if ($this->input->is_ajax_request()) {
+            echo $res;
+        }
+        else {
+            return $res;
+        }
+    }
+
+    /**
+     * Update user config with sent data.
+     * 
+     * @param array $data
+     * 
+     * @return string 1|fail
+     */
+    private function _update($user, $data)
+    {
+        $participant_config_path = "_accounts/{$this->session->userdata('current_account')}/_participants/{$user}.json";
+        $participant_info = array_replace_recursive(Modules::run('file/read/json_content', $participant_config_path), $data);
+
+        $res = $this->write->archive($participant_config_path, json_encode($participant_info)) === TRUE ? '1' : 'fail';
+
+        return $res;
     }
 
 }

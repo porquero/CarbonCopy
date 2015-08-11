@@ -163,20 +163,25 @@ class m_user extends CI_Model {
     {
         $r = $this->db->get_where($this->_table_name, array('username' => $username))->row();
 
+        $participant_config_path = "_accounts/{$this->session->userdata('current_account')}/_participants/{$username}.json";
+        $participant_info = Modules::run('file/read/json_content', $participant_config_path);
+
         if (is_array($r)) {
-            return (object) array(
-                  'username' => '',
-                  'name' => '',
-                  'email' => '',
-                  'password' => '',
-                  'accounts' => '',
-                  'principal_account' => '',
-                  'validated' => '',
-                  'ts' => '',
-            );
+            $r = array(
+                'username' => '',
+                'name' => '',
+                'email' => '',
+                'password' => '',
+                'accounts' => '',
+                'principal_account' => '',
+                'validated' => '',
+                'ts' => '',
+              ) + $participant_info;
+
+            return (object) $r;
         }
         else {
-            return $r;
+            return (object) array_merge((array) $r, $participant_info);
         }
     }
 

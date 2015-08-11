@@ -191,3 +191,4 @@ $lang['thursday'] = 'Jueves';
 $lang['friday'] = 'Viernes';
 $lang['saturday'] = 'Sábado';
 $lang['sunday'] = 'Domingo';
+$lang['not_active'] = 'Usuario no activo.';

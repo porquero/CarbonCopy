@@ -17,7 +17,8 @@ class user extends MX_Controller {
      * 
      * @return type
      */
-    public function register_form($invitation_hash = '') {
+    public function register_form($invitation_hash = '')
+    {
         // Only for not connected.
         if (connected_user() !== FALSE) {
             redirect();
@@ -26,17 +27,18 @@ class user extends MX_Controller {
 
         $this->load->helper('form');
         $this->tpl->variables(
-                array(
-                    'title' => lang('register_new_user'),
-                    'description' => lang('complete_form'),
-                    'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/web_tpl/js/user_register.js'),
-                    'invitation_hash' => $invitation_hash,
+          array(
+              'title' => lang('register_new_user'),
+              'description' => lang('complete_form'),
+              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/web_tpl/js/user_register.js'),
+              'invitation_hash' => $invitation_hash,
         ));
 
         // User register disabled means make compatible extends with it.
         if (strlen($invitation_hash) > 0) {
             $this->tpl->section('_view', 'register_form.phtml');
-        } else {
+        }
+        else {
             $this->tpl->section('_view', 'register_form_disabled.phtml');
         }
         $this->tpl->load_view(_TEMPLATE);
@@ -47,7 +49,8 @@ class user extends MX_Controller {
      *
      * @return string json
      */
-    public function register() {
+    public function register()
+    {
         $result = $this->validate_register_form();
 
         if ($result['result'] === 'ok') {
@@ -82,7 +85,7 @@ class user extends MX_Controller {
                 $recipient = $this->input->post('email');
                 $subject = 'CarbonCopy - ' . lang('email_validation');
                 $message_mail = nl2br(sprintf(lang('email_validation_message'), $this->input->post('name'), site_url_ws()
-                                , md5($this->input->post('password')) . md5($this->input->post('email'))));
+                    , md5($this->input->post('password')) . md5($this->input->post('email'))));
                 $this->email->from('noreply@carboncopycc.com', 'CarbonCopy');
                 $this->email->to($recipient);
 
@@ -91,7 +94,8 @@ class user extends MX_Controller {
 
                 $this->email->set_mailtype('html');
                 $this->email->send();
-            } else {
+            }
+            else {
                 $res = 'fail';
                 $message = 'An error as occurred. Please try again.';
             }
@@ -100,7 +104,8 @@ class user extends MX_Controller {
                 'result' => $res,
                 'message' => $message,
             );
-        } else {
+        }
+        else {
             $result = array(
                 'result' => 'fail',
                 'message' => validation_errors(),
@@ -109,7 +114,8 @@ class user extends MX_Controller {
 
         if ($this->input->is_ajax_request()) {
             echo json_encode($result);
-        } else {
+        }
+        else {
             return $result;
         }
     }
@@ -117,11 +123,12 @@ class user extends MX_Controller {
     /**
      * Register ok view.
      */
-    public function register_ok($token) {
+    public function register_ok($token)
+    {
         $this->tpl->variables(
-                array(
-                    'title' => lang('registration_successful'),
-                    'description' => lang('check_email'),
+          array(
+              'title' => lang('registration_successful'),
+              'description' => lang('check_email'),
         ));
         $this->tpl->load_view(_TEMPLATE);
     }
@@ -133,7 +140,8 @@ class user extends MX_Controller {
      *
      * @return bool
      */
-    public function create($data) {
+    public function create($data)
+    {
         $this->load->model('m_user');
 
         return $this->m_user->create($data);
@@ -142,19 +150,20 @@ class user extends MX_Controller {
     /**
      * Login form
      */
-    public function login_form($redirect = '') {
+    public function login_form($redirect = '')
+    {
         if (connected_user() !== FALSE) {
             redirect();
         }
 
         $this->load->helper('form');
         $this->tpl->variables(
-                array(
-                    'title' => lang('login_form'),
-                    'description' => lang('connect_cc'),
-                    'redirect' => $redirect,
-                    'msg_type' => $this->session->flashdata('msg_type'),
-                    'msg' => $this->session->flashdata('msg'),
+          array(
+              'title' => lang('login_form'),
+              'description' => lang('connect_cc'),
+              'redirect' => $redirect,
+              'msg_type' => $this->session->flashdata('msg_type'),
+              'msg' => $this->session->flashdata('msg'),
         ));
         $this->tpl->section('_sidebar', '_sidebar.phtml');
         $this->tpl->section('_view', 'login_form.phtml');
@@ -164,7 +173,8 @@ class user extends MX_Controller {
     /**
      * Login action
      */
-    public function login($redirect = '') {
+    public function login($redirect = '')
+    {
         $this->load->model('m_user');
         $user_data = $this->m_user->login($this->input->post('email'), $this->input->post('password'));
 
@@ -176,13 +186,22 @@ class user extends MX_Controller {
                 redirect('/cc/user/login_form', 'refresh');
             }
 
+            $user_info = Modules::run('file/read/json_content', "_accounts/{$user_data->principal_account}/_participants/{$user_data->username}.json");
+            // Validate if activated.
+            if ( ! $user_info['active'] !== FALSE) {
+                $this->session->set_flashdata('msg', lang('not_active'));
+                $this->session->set_flashdata('msg_type', 'msg_error');
+                redirect('/cc/user/login_form', 'refresh');
+            }
+
             $this->session->set_userdata('connected_user', $user_data->username);
             $this->session->set_userdata('current_account', $user_data->principal_account);
             $this->session->set_userdata('current_account_info', Modules::run('file/read/json_content', "_accounts/{$user_data->principal_account}/info_account.json"));
-            $this->session->set_userdata('user_info', Modules::run('file/read/json_content', "_accounts/{$user_data->principal_account}/_participants/{$user_data->username}.json"));
+            $this->session->set_userdata('user_info', $user_info);
             sleep(1);
             redirect(base64_decode($redirect), 'refresh');
-        } else {
+        }
+        else {
             $this->session->set_flashdata('msg', lang('invalid_login'));
             $this->session->set_flashdata('msg_type', 'msg_error');
             redirect('/cc/user/login_form', 'refresh');
@@ -193,7 +212,8 @@ class user extends MX_Controller {
      * Destroy session and send to Home.
      *
      */
-    public function logout() {
+    public function logout()
+    {
         $this->session->sess_destroy();
         redirect('', 'refresh');
     }
@@ -205,14 +225,16 @@ class user extends MX_Controller {
      *
      * @return bool
      */
-    public function user_exists($username) {
+    public function user_exists($username)
+    {
         $this->load->model('m_user');
 
         $result = $this->m_user->user_exists($username);
 
         if ($this->input->is_ajax_request()) {
             echo (int) $result;
-        } else {
+        }
+        else {
             return $result;
         }
     }
@@ -224,14 +246,16 @@ class user extends MX_Controller {
      *
      * @return bool
      */
-    public function email_exists($email) {
+    public function email_exists($email)
+    {
         $this->load->model('m_user');
 
         $result = $this->m_user->email_exists($email);
 
         if ($this->input->is_ajax_request()) {
             echo (int) $result;
-        } else {
+        }
+        else {
             return $result;
         }
     }
@@ -241,7 +265,8 @@ class user extends MX_Controller {
      *
      * @return array
      */
-    public function validate_register_form() {
+    public function validate_register_form()
+    {
         $this->load->database();
         $this->load->library('form_validation');
         $this->load->helper(array('form'));
@@ -281,7 +306,8 @@ class user extends MX_Controller {
      *
      * @param string $token
      */
-    public function validate($token = NULL) {
+    public function validate($token = NULL)
+    {
         if (is_null($token)) {
             redirect();
         }
@@ -290,12 +316,13 @@ class user extends MX_Controller {
 
         if ($this->m_user->can_validate($token) === FALSE) {
             $this->tpl->variables(
-                    array(
-                        'title' => lang('invalid_data'),
-                        'description' => '',
+              array(
+                  'title' => lang('invalid_data'),
+                  'description' => '',
             ));
             $this->tpl->load_view(_TEMPLATE);
-        } else {
+        }
+        else {
             $username = $this->m_user->validate($token);
 
             // Create account.
@@ -303,9 +330,9 @@ class user extends MX_Controller {
 //            $this->manage->create($username);
 
             $this->tpl->variables(
-                    array(
-                        'title' => lang('registration_successful'),
-                        'description' => sprintf(lang('can_login'), site_url_ws()),
+              array(
+                  'title' => lang('registration_successful'),
+                  'description' => sprintf(lang('can_login'), site_url_ws()),
             ));
             $this->tpl->load_view(_TEMPLATE);
         }
@@ -320,14 +347,15 @@ class user extends MX_Controller {
      *
      * @return type
      */
-    public function belongs_to_context($context, $user, $strict = FALSE) {
+    public function belongs_to_context($context, $user, $strict = FALSE)
+    {
         $this->load->module('file/misc');
         $path_context = "_accounts/{$this->session->userdata('current_account')}/contexts/{$this->misc->unslug($context)}";
         $participants = Modules::run('account/participant/list_for_context', $path_context);
-
         $plist = '';
+
         foreach ($participants as $participant) {
-            $plist .= $participant['info']['id'] . '|';
+            $plist .= $participant->info['id'] . '|';
         }
 
         return (Modules::run('cc/context/is_private', $context) === FALSE && $strict === FALSE) || strstr($plist, $user) !== FALSE;
@@ -342,14 +370,15 @@ class user extends MX_Controller {
      *
      * @return type
      */
-    public function belongs_to_topic($context, $user, $strict = FALSE) {
+    public function belongs_to_topic($context, $user, $strict = FALSE)
+    {
         $this->load->module('file/misc');
         $topic = "_accounts/{$this->session->userdata('current_account')}/contexts/{$this->misc->unslug($context)}";
         $participants = Modules::run('account/participant/list_for_context', topic_real_path($topic), 'topic');
-
         $plist = '';
+
         foreach ($participants as $participant) {
-            $plist .= $participant['info']['id'] . '|';
+            $plist .= $participant->info['id'] . '|';
         }
 
         return (Modules::run('cc/context/is_private', $context) === FALSE && $strict === FALSE) || strstr($plist, $user) !== FALSE;
@@ -360,7 +389,8 @@ class user extends MX_Controller {
      *
      * @param type $hash
      */
-    public function invited($hash = NULL) {
+    public function invited($hash = NULL)
+    {
         if ($hash === NULL) {
             redirect();
         }
@@ -383,9 +413,9 @@ class user extends MX_Controller {
                 $this->add_account($this->m_user->username($email), $hash_data[0]);
 
                 $this->tpl->variables(
-                        array(
-                            'title' => lang('invitation_successful'),
-                            'description' => lang('access_invited'),
+                  array(
+                      'title' => lang('invitation_successful'),
+                      'description' => lang('access_invited'),
                 ));
                 $this->tpl->load_view(_TEMPLATE);
 
@@ -400,11 +430,11 @@ class user extends MX_Controller {
 
         // Only on fail!
         $this->tpl->variables(
-                array(
-                    'title' => lang('error'),
-                    'description' => '',
-                    'msg_type' => 'msg_error',
-                    'msg' => lang('error_validating_invitation'),
+          array(
+              'title' => lang('error'),
+              'description' => '',
+              'msg_type' => 'msg_error',
+              'msg' => lang('error_validating_invitation'),
         ));
         $this->tpl->load_view(_TEMPLATE);
     }
@@ -417,7 +447,8 @@ class user extends MX_Controller {
      *
      * @return boolean
      */
-    public function add_account($username, $account) {
+    public function add_account($username, $account)
+    {
         $account_config = Modules::run('account/configuration/load');
 
         $username_data = json_encode(array(
@@ -442,7 +473,8 @@ class user extends MX_Controller {
     /**
      * Generate password form.
      */
-    public function reset_password_form() {
+    public function reset_password_form()
+    {
         // Only for not connected.
         if (connected_user() !== FALSE) {
             redirect();
@@ -452,10 +484,10 @@ class user extends MX_Controller {
         $this->load->helper('form');
 
         $this->tpl->variables(
-                array(
-                    'title' => lang('reset_form'),
-                    'description' => lang('reset_description'),
-                    'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/web_tpl/js/user_reset_password.js'),
+          array(
+              'title' => lang('reset_form'),
+              'description' => lang('reset_description'),
+              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/web_tpl/js/user_reset_password.js'),
         ));
 
         $this->tpl->section('_view', 'reset_password.phtml');
@@ -465,7 +497,8 @@ class user extends MX_Controller {
     /**
      * Generate hash to reset password by email link.
      */
-    public function reset_password() {
+    public function reset_password()
+    {
         $this->load->module('file/write');
         $this->load->library('email');
 
@@ -499,7 +532,8 @@ class user extends MX_Controller {
      *
      * @param string $hash
      */
-    public function validate_reset_password($hash = NULL) {
+    public function validate_reset_password($hash = NULL)
+    {
         if ($hash === NULL) {
             redirect();
         }
@@ -521,9 +555,9 @@ class user extends MX_Controller {
                 $this->add_account($this->m_user->username($password), $hash[0]);
 
                 $this->tpl->variables(
-                        array(
-                            'title' => lang('invitation_successful'),
-                            'description' => lang('access_invited'),
+                  array(
+                      'title' => lang('invitation_successful'),
+                      'description' => lang('access_invited'),
                 ));
                 $this->tpl->load_view(_TEMPLATE);
 
@@ -538,11 +572,11 @@ class user extends MX_Controller {
 
         // Only on fail!
         $this->tpl->variables(
-                array(
-                    'title' => lang('error'),
-                    'description' => '',
-                    'msg_type' => 'msg_error',
-                    'msg' => lang('error_validating_invitation'),
+          array(
+              'title' => lang('error'),
+              'description' => '',
+              'msg_type' => 'msg_error',
+              'msg' => lang('error_validating_invitation'),
         ));
         $this->tpl->load_view(_TEMPLATE);
     }

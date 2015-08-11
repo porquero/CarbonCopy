@@ -588,9 +588,9 @@ PQR;
 
         $participants = '';
         foreach (Modules::run('account/participant/list_for_context', topic_real_path($topic), 'topic') as $participant) {
-            $url = site_url('/account/participant/profile/' . trim($participant['info']['id']));
+            $url = site_url('/account/participant/profile/' . trim($participant->info['id']));
             $participants .= <<<PQR
-<li><a href="{$url}" class="usr">{$participant['info']['id']}</a></li>
+<li><a href="{$url}" class="usr">{$participant->info['id']}</a></li>
 PQR;
         }
         if ($archive_created) {

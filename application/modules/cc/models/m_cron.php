@@ -46,7 +46,6 @@ class m_cron extends CI_Model {
     {
         $date_format = account_date_format_mysql();
         $participation = "from_participant = '{$participant}'";
-
         if ($type === 'to') {
             $participation = "to_participant = '{$participant}' AND from_participant != '{$participant}'";
         } elseif($type === 'all'){

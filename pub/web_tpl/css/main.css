@@ -630,7 +630,11 @@ button{
     display: table-cell;
     vertical-align: middle
 }
-.as_administrator{
+#user_options u{
+    margin-top: 7px;
+    border-top: 1px solid #E0E0E0
+}
+#user_options input{
     display: inline !important
 }
 #details li{

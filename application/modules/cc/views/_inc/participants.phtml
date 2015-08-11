@@ -1,26 +1,37 @@
 <?php
 if (isset($participants) === TRUE && connected_user() !== FALSE):
-	?>
-	<div id="participants">
-		<h3><?php
-			echo lang('participants');
-			if ($this->router->fetch_class() !== 'resume') {
-				echo logged_data($participants, '<a href="' . site_url($manage_participants_link) . '" class="config-ico man-lst"><span></span></a>', '', isset($user_locking) ? $user_locking : FALSE);
-			}
-			?></h3>
-		<div id="manage_participants_div" class="mdl"></div>
-		<ul>
-			<?php
-			foreach ($participants as $participant) {
-				$url = site_url('/account/participant/profile/' . trim($participant['info']['id']));
-				echo <<<PQR
-<li><a href="{$url}" class="usr">{$participant['info']['id']}</a></li>
+    ?>
+    <div id="participants">
+        <h3><?php
+            echo lang('participants');
+            if ($this->router->fetch_class() !== 'resume') {
+                echo logged_data($participants, '<a href="' . site_url($manage_participants_link) . '" class="config-ico man-lst"><span></span></a>', '', isset($user_locking) ? $user_locking : FALSE);
+            }
+            ?></h3>
+        <div id="manage_participants_div" class="mdl"></div>
+        <ul>
+            <?php
+            foreach ($participants as $participant) {
+                $url = site_url('/account/participant/profile/' . trim($participant->info['id']));
+                if ($participant->active === TRUE) {
+                    $username = $participant->info['id'];
+                }
+                else {
+                    $username = '<strike>' . $participant->info['id'] . '</strike>';
+                }
+
+                echo <<<PQR
+<li><a href="{$url}" class="usr">{$username}</a></li>
 PQR;
-			}
-			?>
-		</ul>
-	</div>
-	<div class="clear"></div>
-	<?php
+            }
+            ?>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <?php
+
+
+
+
 
 endif;
