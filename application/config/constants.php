@@ -53,5 +53,8 @@ define('_MSG_OK', 'msg_ok');
 define('_MSG_WARNING', 'msg_warning');
 define('_MSG_ERROR', 'msg_error');
 
+// Cron key. Change uniquid() for your cron key!
+define('_CRON_KEY', uniqid());
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

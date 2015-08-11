@@ -25,8 +25,13 @@ class cron extends MX_Controller {
     /**
      * Generates a send email notification to CC users.
      */
-    public function email_notification()
+    public function email_notification($key = NULL)
     {
+        if(is_null($key) || (string) $key !== (string) _CRON_KEY){
+            echo 'Not allowed!';
+            exit;
+        }
+        
         $this->load->module('file/read');
 
         $config = $this->read->json_content("_accounts/cc/config.json");
@@ -82,13 +87,13 @@ class cron extends MX_Controller {
 
             $message = $this->load->view('email_notification.phtml', $data, true);
             // Test only!
-            echo $message;
+//            echo $message;
 
             $this->email->set_mailtype('html');
             $this->email->from('noreply@carboncopycc.com', 'CarbonCopy');
-//            $this->email->to($emails[$participant->info['id']]);
+            $this->email->to($emails[$participant->info['id']]);
             // Test only!
-            $this->email->to('criffoh@gmail.com, criffoh@yahoo.es');
+//            $this->email->to('criffoh@gmail.com, criffoh@yahoo.es');
 
             $this->email->subject('CarbonCopy News! - ' . date('d-m-Y'));
             $this->email->message($message);
