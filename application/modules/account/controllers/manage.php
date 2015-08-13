@@ -126,6 +126,7 @@ class manage extends MX_Controller {
                   'saturday' => lang('saturday'),
                   'sunday' => lang('sunday'),
               ),
+              'future_tasks' => $account_config['future_tasks'],
         ));
 
         $this->tpl->section('_sidebar', '_sidebar.phtml');

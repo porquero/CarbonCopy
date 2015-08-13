@@ -16,10 +16,13 @@ echo form_open_multipart('/account/manage/config', $attributes);
 </fieldset>
 <fieldset>
 	<legend><?php echo lang('email_notification') ?></legend>
+        <label><b>Activity resume</b></label>
         <label><span><?php echo lang('none') ?></span> <?php echo form_radio('notification', '', $notification === '') ?></label>
         <label><span><?php echo lang('daily') ?></span> <?php echo form_radio('notification', 'daily', $notification === 'daily') ?></label>
         <label><span><?php echo lang('weekly') ?></span> <?php echo form_radio('notification', 'weekly', $notification === 'weekly') ?></label>
         <label><span><?php echo lang('send_every') ?></span> <?php echo form_dropdown('week_day', $week_days, $notification_day) . ' (' . lang('weekly') . ')' ?></label>
+        <label><b>Scheduled tasks</b></label>
+        <label><span><?php echo lang('future_tasks') ?></span> <?php echo form_input('future_tasks', $future_tasks, 'maxlength="2"') ?></label>
 </fieldset>
 <div class="argt">
 	<button type="submit" name="submit" value="cancel"><?php echo lang('cancel') ?></button>

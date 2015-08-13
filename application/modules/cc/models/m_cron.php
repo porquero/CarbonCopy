@@ -48,7 +48,8 @@ class m_cron extends CI_Model {
         $participation = "from_participant = '{$participant}'";
         if ($type === 'to') {
             $participation = "to_participant = '{$participant}' AND from_participant != '{$participant}'";
-        } elseif($type === 'all'){
+        }
+        elseif ($type === 'all') {
             $participation = 1;
         }
 
@@ -60,6 +61,27 @@ JOIN action a ON t.action_id = a.id
 WHERE t.ts BETWEEN date_sub(NOW(), INTERVAL 1 {$interval}) AND NOW()
 AND {$participation}
 ORDER BY t.id DESC
+PQR;
+
+        $r = $this->db->query($q);
+
+        return $r->result();
+    }
+
+    /**
+     * Return future tasks for n days.
+     * 
+     * @param integer $days
+     * 
+     * @return object
+     */
+    public function get_future_tasks($days)
+    {
+        $q = <<<PQR
+SELECT * 
+FROM `cc_due` 
+WHERE opened = 1 
+and date < adddate(now(), INTERVAL {$days} day)
 PQR;
 
         $r = $this->db->query($q);

@@ -25,25 +25,25 @@ class cron extends MX_Controller {
     /**
      * Generates a send email notification to CC users.
      */
-    public function email_notification($key = NULL)
+    public function run($key = NULL)
     {
-        if(is_null($key) || (string) $key !== (string) _CRON_KEY){
+        if (is_null($key) || (string) $key !== (string) _CRON_KEY) {
             echo 'Not allowed!';
             exit;
         }
-        
+
         $this->load->module('file/read');
 
         $config = $this->read->json_content("_accounts/cc/config.json");
 
         // Run daily.
         if ($config['notification'] === 'daily') {
-            $this->_run($this->_interval[$config['notification']]);
+            $this->_email_notifications($this->_interval[$config['notification']]);
             echo 'Sent daily notifications!';
         }
         // Run weekly.
         elseif ($config['notification_day'] === strtolower(date('l'))) {
-            $this->_run($this->_interval[$config['notification']]);
+            $this->_email_notifications($this->_interval[$config['notification']]);
             echo 'Sent weekly notifications!';
         }
         else {
@@ -56,7 +56,7 @@ class cron extends MX_Controller {
      * 
      * @param string $interval DAY|WEEK
      */
-    private function _run($interval)
+    private function _email_notifications($interval)
     {
         $this->load->model('m_cron');
         $this->load->model('m_user');
@@ -169,6 +169,26 @@ class cron extends MX_Controller {
           return $participating_actions;
           }
          */
+    }
+
+    private function _tasks_notification($participant)
+    {
+        $this->load->model('m_cron');
+
+        $all_tasks = $this->m_cron->get_future_tasks();
+
+        foreach ($all_tasks as $task) {
+            $context = preg_replace('/[\/\/]{2,}/', '/', '_accounts/cc/contexts/' . $this->misc->unslug($task->context) . '/' . substr($task->id_topic, 1));
+            $participants_context = Modules::run('account/participant/list_for_context', topic_real_path($context), 'topic');
+
+            foreach ($participants_context as $participant_context) {
+                if ($participant_context->info['id'] === $participant->info['id'] AND $participant->info['id'] !== $task->from_participant) {
+                    $tasks_participating[] = $task;
+                }
+            }
+        }
+
+        return $tasks_participating;
     }
 
 }

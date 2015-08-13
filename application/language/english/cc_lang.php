@@ -192,3 +192,4 @@ $lang['friday'] = 'Friday';
 $lang['saturday'] = 'Saturday';
 $lang['sunday'] = 'Sunday';
 $lang['not_active'] = 'User not active.';
+$lang['future_tasks'] = 'Future tasks day limit ';
