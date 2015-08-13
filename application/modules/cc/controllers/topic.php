@@ -976,7 +976,7 @@ PQR;
             // Change topic_context for due date.
             if ($info['info']['due'] !== '') {
                 $this->load->model('m_due');
-                $this->m_due->move($from_context . '_' . $id_topic, $to_context . '_' . $id_topic);
+                $this->m_due->move_topic($from_context . '_' . $id_topic, $to_context . '_' . $id_topic);
             }
 
             $this->session->set_flashdata('msg', lang('topic_moved'));

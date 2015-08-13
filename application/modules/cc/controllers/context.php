@@ -750,7 +750,10 @@ PQR;
             $this->write->archive(_INC_ROOT . $move_to . '/info_context.json', json_encode($context_info));
 
             $this->load->model('m_timeline');
+            $this->load->model('m_due');
+            
             $this->m_timeline->move_context($id_context, $from_context, $to_context);
+            $this->m_due->move_context(trim($from_context . '_' . $id_context, '_'), trim($to_context . '_' . $id_context, '_'));
 
             $this->session->set_flashdata('msg', lang('context_moved'));
             $this->session->set_flashdata('msg_type', 'msg_ok');

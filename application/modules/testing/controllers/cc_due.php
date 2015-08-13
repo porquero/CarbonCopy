@@ -30,7 +30,7 @@ class cc_due extends MX_Controller {
 	public function move()
 	{
 		$this->load->model('cc/m_due');
-		Plogger::var_dump($this->m_due->move('proyecto-1_545b8a09da3ea', 'proyecto-1_subproyecto_545b8a09da3ea'));
+		Plogger::var_dump($this->m_due->move_topic('proyecto-1_545b8a09da3ea', 'proyecto-1_subproyecto_545b8a09da3ea'));
 	}
 
 	public function date_range()
