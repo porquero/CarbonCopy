@@ -500,7 +500,7 @@ PQR;
                 $update_data['password'] = md5($this->input->post('password'));
             }
 
-            $this->m_user->_update(connected_user(), $update_data);
+            $this->m_user->update(connected_user(), $update_data);
 
             // Save participant data.
             $this->load->module('file/write');
@@ -655,7 +655,7 @@ PQR;
         $participant_config_path = "_accounts/{$this->session->userdata('current_account')}/_participants/{$user}.json";
         $participant_info = array_replace_recursive(Modules::run('file/read/json_content', $participant_config_path), $data);
 
-        $res = $this->write->archive($participant_config_path, json_encode($participant_info)) === TRUE ? '1' : 'fail';
+        $res = $this->write->archive($participant_config_path, json_encode($participant_info)) === TRUE ? 'ok' : 'fail';
 
         return $res;
     }

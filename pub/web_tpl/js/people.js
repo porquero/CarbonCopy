@@ -23,7 +23,7 @@ $('.as_administrator').on('click', function () {
             url: site_url + 'account/participant/as_administrator/' + $(this).val(),
             cache: false,
             success: function (result) {
-                if (result !== "1") {
+                if (result !== "ok") {
                     alert('Error trying to setting as administrator. Please try again later.');
                     window.location = document.URL;
                 }
@@ -36,7 +36,7 @@ $('.as_administrator').on('click', function () {
             url: site_url + 'account/participant/as_participant/' + $(this).val(),
             cache: false,
             success: function (result) {
-                if (result !== "1") {
+                if (result !== "ok") {
                     alert('Error trying to setting as participant. Please try again later.');
                     window.location = document.URL;
                 }
@@ -52,7 +52,7 @@ $('.activation').on('click', function () {
         url: site_url + 'account/participant/activation/' + $(this).val(),
         cache: false,
         success: function (result) {
-            if (result !== "1") {
+            if (result !== "ok") {
                 alert('Error changing user activation. Please try again later.');
                 window.location = document.URL;
             }
