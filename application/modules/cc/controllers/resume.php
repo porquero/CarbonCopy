@@ -67,6 +67,7 @@ class resume extends MX_Controller {
 
         $this->tpl->section('_view', 'index.phtml');
         $this->tpl->section('_sidebar', '_sidebar.phtml');
+        $this->tpl->section('_aside', '_timeline.phtml');
         $this->tpl->load_view(_TEMPLATE);
     }
 

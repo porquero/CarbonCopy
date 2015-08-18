@@ -80,9 +80,3 @@
     endif;
     ?>
 </div>
-<div class="rgt w40pp">
-    <h2><?php echo connected_user() === FALSE ? 'Public ' : null; echo lang('timeline'); ?></h2>
-    <?php
-    include_once _INC . 'modules/cc/views/timeline/get_timeline.phtml';
-    ?>
-</div>

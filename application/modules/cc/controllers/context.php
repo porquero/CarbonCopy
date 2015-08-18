@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('BASEPATH'))
+if ( ! defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /**
@@ -25,7 +25,8 @@ class context extends MX_Controller {
      * @param string $context context slugged
      * @param string $menu_act Indicates wich timeline is active. To being used in css.
      */
-    public function resume($context = null, $menu_act = 'all', $ts_date = NULL) {
+    public function resume($context = null, $menu_act = 'all', $ts_date = NULL)
+    {
         if (is_null($context)) {
             $this->session->keep_flashdata('msg_type');
             $this->session->keep_flashdata('msg');
@@ -41,7 +42,7 @@ class context extends MX_Controller {
         $context_path = context_real_path($context);
 
         // Validate if context exists.
-        if (!is_dir(_INC_ROOT . $context_path)) {
+        if ( ! is_dir(_INC_ROOT . $context_path)) {
             header('HTTP/1.1 404 Not Found');
 
             $this->tpl->variables(array(
@@ -61,12 +62,12 @@ class context extends MX_Controller {
         }
 
         // Validate if participant belongs to context.
-        if (!belongs_to('context', $context, connected_user())) {
+        if ( ! belongs_to('context', $context, connected_user())) {
             $this->tpl->variables(
-                    array(
-                        'title' => lang('error'),
-                        'breadcrumb' => create_breadcrumb($context),
-                        'description' => lang('not_belongs_to_context'),
+              array(
+                  'title' => lang('error'),
+                  'breadcrumb' => create_breadcrumb($context),
+                  'description' => lang('not_belongs_to_context'),
             ));
             $this->tpl->load_view(_TEMPLATE);
             return;
@@ -91,30 +92,31 @@ class context extends MX_Controller {
         }
 
         $this->tpl->variables(
-                array(
-                    'title' => $info['info']['title'],
-                    'tl_title' => lang('timeline') . $tl_date,
-                    'info' => $info,
-                    'description' => $info['info']['description'],
-                    'participants' => Modules::run('account/participant/list_for_context', $context_path),
-                    'manage_participants_link' => '/cc/context/manage_participants_form/' . $context,
-                    'full_timeline' => $this->timeline->contexts_topics($context, TRUE, $participant_id, $ts_date),
-                    'topics' => $this->timeline->get_for_context($context, TRUE, $participant_id, $ts_date),
-                    'breadcrumb' => create_breadcrumb($context),
-                    'id_context' => $info['info']['id'],
-                    'context_label' => $labels['context_label'],
-                    'topic_label' => $labels['topic_label'],
-                    'context' => $context,
-                    'url_all' => site_url('/cc/context/resume/' . $context),
-                    'url_to_me' => site_url('/cc/context/resume/' . $context . '/to_me'),
-                    'url_ts' => site_url('/cc/context/resume/' . $context . '/' . $menu_act),
-                    'menu_act' => $this->timeline->menu_act,
-                    '_this' => $this,
-                    'user_locking' => $user_locking,
-                    'msg_type' => isset($msg_type) ? $msg_type : '',
-                    'msg' => isset($msg) ? $msg : '',
+          array(
+              'title' => $info['info']['title'],
+              'tl_title' => lang('timeline') . $tl_date,
+              'info' => $info,
+              'description' => $info['info']['description'],
+              'participants' => Modules::run('account/participant/list_for_context', $context_path),
+              'manage_participants_link' => '/cc/context/manage_participants_form/' . $context,
+              'full_timeline' => $this->timeline->contexts_topics($context, TRUE, $participant_id, $ts_date),
+              'topics' => $this->timeline->get_for_context($context, TRUE, $participant_id, $ts_date),
+              'breadcrumb' => create_breadcrumb($context),
+              'id_context' => $info['info']['id'],
+              'context_label' => $labels['context_label'],
+              'topic_label' => $labels['topic_label'],
+              'context' => $context,
+              'url_all' => site_url('/cc/context/resume/' . $context),
+              'url_to_me' => site_url('/cc/context/resume/' . $context . '/to_me'),
+              'url_ts' => site_url('/cc/context/resume/' . $context . '/' . $menu_act),
+              'menu_act' => $this->timeline->menu_act,
+              '_this' => $this,
+              'user_locking' => $user_locking,
+              'msg_type' => isset($msg_type) ? $msg_type : '',
+              'msg' => isset($msg) ? $msg : '',
         ));
         $this->tpl->section('_sidebar', '_sidebar.phtml');
+        $this->tpl->section('_aside', '_timeline.phtml');
         $this->tpl->section('_view', 'resume.phtml');
         $this->tpl->load_view(_TEMPLATE);
     }
@@ -127,7 +129,8 @@ class context extends MX_Controller {
      *
      * @return array
      */
-    function info($context, &$counter = 0, $depth = 1) {
+    function info($context, &$counter = 0, $depth = 1)
+    {
         if (isset($this->_cache[$context])) {
             return $this->_cache[$context];
         }
@@ -158,7 +161,8 @@ class context extends MX_Controller {
             $dir_preg = slug_path(preg_replace('/_accounts\/[a-z0-9]*\/contexts\//', '', $dir));
             if (preg_match("/^{$env_sl}\_/", $dir) === 1) {
                 $directories[] = $dir_preg;
-            } else {
+            }
+            else {
                 $contexts[$dir_preg] = $this->info($dir_preg, $counter);
             }
         }
@@ -176,7 +180,8 @@ class context extends MX_Controller {
      * Create context
      *
      */
-    public function create() {
+    public function create()
+    {
         is_connected();
 
         $result = $this->validate_form();
@@ -199,7 +204,8 @@ class context extends MX_Controller {
 
                 if ($this->input->is_ajax_request()) {
                     echo json_encode($result);
-                } else {
+                }
+                else {
                     return $result;
                 }
 
@@ -222,7 +228,7 @@ class context extends MX_Controller {
                     'context_label' => $this->input->post('context_label'),
                     'topic_label' => $this->input->post('topic_label'),
                     'participants' => $participants == 'all' ? '' : implode(',', (array) $participants)
-                            . ',' . connected_user(),
+                      . ',' . connected_user(),
                     'created_by' => connected_user(),
                     'created_date' => date('Y-m-d'),
                 );
@@ -239,7 +245,8 @@ class context extends MX_Controller {
                 if ($res == 'fail') {
                     //@todo Error number is manual now. Create secuencial system error codes next.
                     $message = 'Sytem error number #32143. Please contact us and send the error number.';
-                } else {
+                }
+                else {
                     $data = array(
                         'title' => $this->input->post('id'),
                         'from_participant' => connected_user(),
@@ -254,13 +261,15 @@ class context extends MX_Controller {
                     'result' => $res,
                     'message' => $message,
                 );
-            } else {
+            }
+            else {
                 $result = array(
                     'result' => 'fail',
                     'message' => lang('error_context_write')
                 );
             }
-        } else {
+        }
+        else {
             $message = validation_errors();
             $result = array(
                 'result' => 'fail',
@@ -270,7 +279,8 @@ class context extends MX_Controller {
 
         if ($this->input->is_ajax_request()) {
             echo json_encode($result);
-        } else {
+        }
+        else {
             return $result;
         }
     }
@@ -280,31 +290,32 @@ class context extends MX_Controller {
      *
      * @param type $context
      */
-    public function create_form($context = '') {
+    public function create_form($context = '')
+    {
         is_connected();
 
         $this->load->helper(array('form'));
 
         $this->tpl->variables(
-                array(
-                    'title' => lang('add_context'),
-                    'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/edit_context.js'),
-                    'description' => '',
-                    'breadcrumb' => create_breadcrumb($context),
-                    'context' => $context,
-                    'mode_edition' => 'create',
-                    'context_participants' => array(),
-                    'responsible' => NULL,
-                    'context_description' => '',
-                    'id' => '',
-                    '_this' => $this,
-                    'info' => array(
-                        'info' => array(
-                            'label_inherit' => 1,
-                            'context_label' => '',
-                            'topic_label' => '',
-                        )
-                    ),
+          array(
+              'title' => lang('add_context'),
+              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/edit_context.js'),
+              'description' => '',
+              'breadcrumb' => create_breadcrumb($context),
+              'context' => $context,
+              'mode_edition' => 'create',
+              'context_participants' => array(),
+              'responsible' => NULL,
+              'context_description' => '',
+              'id' => '',
+              '_this' => $this,
+              'info' => array(
+                  'info' => array(
+                      'label_inherit' => 1,
+                      'context_label' => '',
+                      'topic_label' => '',
+                  )
+              ),
         ));
         $this->tpl->section('_view', 'create_form.phtml');
         $this->tpl->load_view(_TEMPLATE);
@@ -315,7 +326,8 @@ class context extends MX_Controller {
      *
      * @return string
      */
-    public function validate_form() {
+    public function validate_form()
+    {
         $this->load->library('form_validation');
         $this->load->helper(array('form'));
         $this->load->language('cc_form_validation');
@@ -348,7 +360,8 @@ class context extends MX_Controller {
      *
      * @return bool
      */
-    public function is_private($context) {
+    public function is_private($context)
+    {
         preg_match('/[a-z0-9-]*/', $context, $m);
         $top_context = isset($m[0]) ? $m[0] : $context;
 
@@ -362,8 +375,9 @@ class context extends MX_Controller {
      *
      * @param type $context
      */
-    public function modify_form($context) {
-        if (!(is_connected() && belongs_to('context', $context, connected_user()))) {
+    public function modify_form($context)
+    {
+        if ( ! (is_connected() && belongs_to('context', $context, connected_user()))) {
             die(lang('not_belongs'));
         }
 
@@ -377,18 +391,18 @@ class context extends MX_Controller {
         $info = $this->info($context);
 
         $this->tpl->variables(
-                array(
-                    'title' => lang('modify_context'),
-                    'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/edit_context.js'),
-                    'description' => '',
-                    'breadcrumb' => create_breadcrumb($context),
-                    'context' => $context,
-                    'mode_edition' => 'modify',
-                    'context_participants' => empty($info['info']['participants']) ? array() : explode(',', $info['info']['participants']),
-                    'responsible' => $info['info']['responsible'],
-                    'context_description' => $info['info']['description'],
-                    'info' => $info,
-                    'id' => $info['info']['id']
+          array(
+              'title' => lang('modify_context'),
+              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/edit_context.js'),
+              'description' => '',
+              'breadcrumb' => create_breadcrumb($context),
+              'context' => $context,
+              'mode_edition' => 'modify',
+              'context_participants' => empty($info['info']['participants']) ? array() : explode(',', $info['info']['participants']),
+              'responsible' => $info['info']['responsible'],
+              'context_description' => $info['info']['description'],
+              'info' => $info,
+              'id' => $info['info']['id']
         ));
         $this->tpl->section('_view', 'modify_form.phtml');
         $this->tpl->load_view(_TEMPLATE);
@@ -399,7 +413,8 @@ class context extends MX_Controller {
      *
      * @return mixed json(ajax) array(call)
      */
-    public function modify() {
+    public function modify()
+    {
         is_connected();
 
         $context = preg_replace('/\_*+' . $this->input->post('id') . '$/', '', $this->input->post('context'));
@@ -414,7 +429,8 @@ class context extends MX_Controller {
             if ($this->input->is_ajax_request()) {
                 echo json_encode($result);
                 return;
-            } else {
+            }
+            else {
                 return $result;
             }
         }
@@ -427,7 +443,7 @@ class context extends MX_Controller {
 
             $context_name_slug = slug_path(strtolower($this->input->post('id')));
             $dir_path = _INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/contexts/'
-                    . unslug_path($context) . '/' . $context_name_slug;
+              . unslug_path($context) . '/' . $context_name_slug;
             $this->_unlock($id_context);
             $info = $this->info($context . '_' . $this->input->post('id'));
 
@@ -458,7 +474,8 @@ class context extends MX_Controller {
                 if ($res == 'fail') {
                     //@todo Error number is manual now. Create secuencial system error codes next.
                     $message = 'Sytem error number #32143. Please contact us and send the error number.';
-                } else {
+                }
+                else {
                     $data = array(
                         'title' => $this->input->post('title'),
                         'from_participant' => connected_user(),
@@ -474,14 +491,16 @@ class context extends MX_Controller {
                     'result' => $res,
                     'message' => $message,
                 );
-            } else {
+            }
+            else {
                 $result = array(
                     'result' => 'fail',
                     //@todo Error number is manual now. Create secuencial system error codes next.
                     'message' => 'Sytem error number #32193. Please contact us and send the error number.'
                 );
             }
-        } else {
+        }
+        else {
             $message = validation_errors();
             $result = array(
                 'result' => 'fail',
@@ -491,7 +510,8 @@ class context extends MX_Controller {
 
         if ($this->input->is_ajax_request()) {
             echo json_encode($result);
-        } else {
+        }
+        else {
             return $result;
         }
     }
@@ -501,7 +521,8 @@ class context extends MX_Controller {
      *
      * @param string $context
      */
-    public function manage_participants_form($context) {
+    public function manage_participants_form($context)
+    {
         is_connected();
 
         $this->load->helper(array('form'));
@@ -515,12 +536,12 @@ class context extends MX_Controller {
         $info = $this->info($context);
 
         $this->tpl->variables(
-                array(
-                    'title' => lang('manage_participants'),
-                    'footer' => js_tag('pub/js/jquery.form.js'),
-                    'context' => $context,
-                    'id_topic' => get_name_from_slug($context),
-                    'participants' => empty($info['info']['participants']) ? array() : explode(',', $info['info']['participants']),
+          array(
+              'title' => lang('manage_participants'),
+              'footer' => js_tag('pub/js/jquery.form.js'),
+              'context' => $context,
+              'id_topic' => get_name_from_slug($context),
+              'participants' => empty($info['info']['participants']) ? array() : explode(',', $info['info']['participants']),
         ));
         $this->tpl->section('_view', 'manage_participants_form.phtml');
         $this->tpl->load_view(_TEMPLATE_BLANK_TXT);
@@ -533,7 +554,8 @@ class context extends MX_Controller {
      *
      * @return string html participants list
      */
-    public function manage_participants($context) {
+    public function manage_participants($context)
+    {
         $this->load->module('file/misc');
         $this->load->module('file/write');
 
@@ -547,7 +569,8 @@ class context extends MX_Controller {
             if ($this->input->is_ajax_request()) {
                 echo json_encode($result);
                 return;
-            } else {
+            }
+            else {
                 return $result;
             }
         }
@@ -562,13 +585,13 @@ class context extends MX_Controller {
             'responsible' => $info['info']['responsible'],
             'visibility' => $info['info']['visibility'],
             'participants' => trim($this->input->post('participants') == 'all' ? '' : implode(',', (array) $this->input->post('participants'))
-                            . ',' . connected_user(), ','),
+                . ',' . connected_user(), ','),
             'created_by' => $info['info']['created_by'],
             'created_date' => $info['info']['created_date'],
         );
         $content = json_encode($context_info);
         $dir_path = _INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/contexts/'
-                . unslug_path($context);
+          . unslug_path($context);
         $archive_created = $this->write->archive($dir_path . '/info_context.json', $content);
 
         $participants = '';
@@ -596,7 +619,8 @@ PQR;
                 'result' => 'ok',
                 'message' => '<ul>' . $participants . '</ul>'
             );
-        } else {
+        }
+        else {
             $result = array(
                 'result' => 'fail',
                 'message' => 'System Error #49874684'
@@ -605,7 +629,8 @@ PQR;
 
         if ($this->input->is_ajax_request()) {
             echo json_encode($result);
-        } else {
+        }
+        else {
             return $result;
         }
     }
@@ -615,7 +640,8 @@ PQR;
      *
      * @param type $contexti
      */
-    private function _try_lock($contexti) {
+    private function _try_lock($contexti)
+    {
         $this->load->module('file/write');
         $this->load->module('file/misc');
 
@@ -630,7 +656,8 @@ PQR;
             ));
 
             $this->tpl->load_view(_TEMPLATE);
-        } else {
+        }
+        else {
             $context_lock = $this->misc->final_slash($context_path) . 'LOCK';
             $this->write->archive($context_lock, connected_user());
 
@@ -645,7 +672,8 @@ PQR;
      *
      * @return mixed false or username locking
      */
-    private function _user_locking($context) {
+    private function _user_locking($context)
+    {
         $this->load->module('file/read');
         $this->load->module('file/misc');
 
@@ -666,7 +694,8 @@ PQR;
      *
      * @param type $context
      */
-    private function _unlock($context) {
+    private function _unlock($context)
+    {
         $this->load->module('file/misc');
 
         $lock_file = $this->misc->final_slash($context) . 'LOCK';
@@ -683,7 +712,8 @@ PQR;
      *
      * @param type $data
      */
-    public function move_form($data) {
+    public function move_form($data)
+    {
         list($id_context, $from_context) = explode('|', urldecode($data));
         $contexts = array();
 
@@ -692,7 +722,7 @@ PQR;
             $this_context = trim($from_context . '_' . $id_context, '_');
             $belongs = empty($context['context']) ? belongs_to('account', connected_user()) : belongs_to('context', $context['context'], connected_user());
 
-            if (!$belongs || $from_context === $context['context'] || $context['context'] === $this_context || strstr($context['context'], $this_context . '_')) {
+            if ( ! $belongs || $from_context === $context['context'] || $context['context'] === $this_context || strstr($context['context'], $this_context . '_')) {
                 continue;
             }
             $contexts[$k] = $context;
@@ -709,7 +739,8 @@ PQR;
         if ($this->input->is_ajax_request()) {
             $this->tpl->section('_view', 'move_form.phtml');
             $this->tpl->load_view(_TEMPLATE_BLANK_TXT);
-        } else {
+        }
+        else {
             return $variables;
         }
     }
@@ -719,7 +750,8 @@ PQR;
      *
      * @param string $data id_context|from_context|to_context
      */
-    public function move($data) {
+    public function move($data)
+    {
         $message = lang('error_context_moved');
         list($id_context, $from_context, $to_context) = explode('|', urldecode($data));
 
@@ -730,7 +762,8 @@ PQR;
 
         if (is_dir($move_to)) {
             $message = lang('same_context');
-        } elseif (rename($move_from, _INC_ROOT . $move_to)) {
+        }
+        elseif (rename($move_from, _INC_ROOT . $move_to)) {
             $info = $this->info($to_context . '_' . $id_context);
 
             $context_info = array(
@@ -751,7 +784,7 @@ PQR;
 
             $this->load->model('m_timeline');
             $this->load->model('m_due');
-            
+
             $this->m_timeline->move_context($id_context, $from_context, $to_context);
             $this->m_due->move_context(trim($from_context . '_' . $id_context, '_'), trim($to_context . '_' . $id_context, '_'));
 
@@ -776,7 +809,8 @@ PQR;
      *
      * @param string $data id_context|context
      */
-    public function delete($data) {
+    public function delete($data)
+    {
         $this->load->model('m_timeline');
         $this->load->model('m_due');
 
@@ -788,7 +822,7 @@ PQR;
         $deleted_path = $trash_path . '/' . $id_context;
 
         // Validate if _trash exists.
-        if (!is_dir($trash_path)) {
+        if ( ! is_dir($trash_path)) {
             mkdir($trash_path);
         }
 
@@ -811,7 +845,8 @@ PQR;
             $this->session->set_flashdata('msg', lang('context_deleted'));
 
             redirect('/cc/context/resume/' . $context);
-        } else {
+        }
+        else {
             $this->tpl->variables(array(
                 'msg_type' => 'msg_error',
                 'msg' => lang('error_delete_context'),
@@ -828,7 +863,8 @@ PQR;
      *
      * @return array
      */
-    public function labels($context) {
+    public function labels($context)
+    {
         if (empty($context)) {
             $account_config = Modules::run('file/read/json_content', "_accounts/{$this->session->userdata('current_account')}/config.json");
 
@@ -842,7 +878,7 @@ PQR;
         $context_info = $this->info($context, $counter);
 
         // TODO: add type validation to avoid server lock!
-        if (!is_array($context_info)) {
+        if ( ! is_array($context_info)) {
             Plogger::var_dump($context_info);
             die("Fix this!. [{$context}]" . __FILE__ . __LINE__);
         }
@@ -852,7 +888,8 @@ PQR;
                 'context_label' => $context_info['info']['context_label'],
                 'topic_label' => $context_info['info']['topic_label'],
             );
-        } else {
+        }
+        else {
             $context = preg_replace('/\_?[a-z0-9-]*$/', '', $context);
 
             return $this->labels($context);
