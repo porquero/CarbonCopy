@@ -62,7 +62,7 @@ $current_account = current_account_info();
                 </nav>
             </header>
             <div class="content">
-                <section><?php
+                <section class="default-skin"><?php
                     echo @$_sidebar;
                     echo list_enabled_components();
                     echo @$_section_sidebar;
@@ -80,7 +80,7 @@ $current_account = current_account_info();
                     ?>
                 </article>
                 <?php if (isset($_aside)): ?>
-                    <aside><?php echo $_aside; ?></aside>
+                <aside class="default-skin"><?php echo $_aside; ?></aside>
                 <?php endif; ?>
             </div>
         </div>

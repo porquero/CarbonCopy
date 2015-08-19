@@ -21,22 +21,18 @@ header{
     will-change: overflow;
 }
 aside, section, article{
-    overflow: auto;
     height: auto;
+    max-height: 100%;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
+    box-sizing: border-box;
 }
 section {
-    left: 350px;
     width: 220px;
-    overflow-y: auto;
 }
 article {
-    right: 0;
     flex: 1;
-    overflow-y:auto
 }
 aside {
     width: 350px;
-    overflow-y: auto;
 }

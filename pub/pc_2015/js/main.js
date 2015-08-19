@@ -1,3 +1,3 @@
 $(window).load(function () {
-    $("aside").customScrollbar({updateOnWindowResize: true});
+    $("section, article, aside").customScrollbar({updateOnWindowResize: true});
 });
