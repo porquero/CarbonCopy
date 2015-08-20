@@ -25,62 +25,81 @@ $current_account = current_account_info();
     <body>
         <div id="delegate" class="container">
             <header>
-                <div id="cc">
-                    <div>
-                        <a href="<?php echo site_url() ?>" title="CarbonCopy - Collaboration Manager"><span>CC</span></a>
-                        <h2>CarbonCopy</h2>
+                <div class="pad">
+                    <div class="flexc">
+
+                        <div id="cc">
+                            <div>
+                                <a href="<?php echo site_url() ?>" title="CarbonCopy - Collaboration Manager"><span>CC</span></a>
+                                <h2>CarbonCopy</h2>
+                            </div>
+                        </div>
+                        <?php
+                        if (connected_user() !== FALSE) {
+                            echo Modules::run('cc/due/date_line', preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $this->uri->segment(5)) === 1 ? $this->uri->segment(5) : date('Y-m-d'), 15, TRUE);
+                        }
+                        ?>
+                    </div>
+                    <div class="flexc">
+                        <?php
+                        if (connected_user() !== FALSE):
+                            ?>
+                            <div id="search-box">
+                                <input type="text" name="seach" id="search" placeholder="Search" tabindex="1" />
+                                <div id="search_results"></div>
+                            </div>
+                        <?php endif; ?>
+                        <nav>
+                            <ul>
+                                <li><a href="<?php echo site_url() ?>"><?php echo lang('home') ?></a></li>
+                                <?php if (FALSE !== connected_user()): ?>
+                                    <li><a href="<?php echo site_url('/account/participant/config_form') ?>"><?php echo connected_user() /* . lang('connected_in') . $current_account['name'] */ ?></a></li>
+                                    <li><a href="<?php echo site_url('/account/participant/all_people') ?>"><?php echo lang('all_people') ?></a></li>
+                                    <li><a href="<?php echo site_url('/cc/user/logout') ?>"><?php echo lang('logout') ?></a></li>
+                                    <?php
+                                    if ($this->router->fetch_class() !== 'manage' && $this->router->fetch_class() !== 'config_form' && is_administrator()) {
+                                        echo logged_data(isset($participants) ? $participants : array(), '<li><a href="' . site_url('account/manage/config_form') . '">config</a></li>', '', isset($user_locking) ? $user_locking : FALSE);
+                                    }
+                                    ?>
+                                <?php else: ?>
+                                    <!--<li><a href="<?php echo site_url('/cc/user/register_form') ?>"><?php echo lang('register') ?></a></li>-->
+                                    <li><a href="<?php echo site_url('/cc/user/login_form') ?>"><?php echo lang('login') ?></a></li>
+                                <?php endif; ?>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
-                <?php
-                if (connected_user() !== FALSE) {
-                    echo Modules::run('cc/due/date_line', preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $this->uri->segment(5)) === 1 ? $this->uri->segment(5) : date('Y-m-d'), 15, TRUE);
-                }
-                if (connected_user() !== FALSE):
-                    ?>
-                    <div id="search-box">
-                        <input type="text" name="seach" id="search" placeholder="Search" tabindex="1" />
-                        <div id="search_results"></div>
-                    </div>
-                <?php endif; ?>
-                <nav>
-                    <ul>
-                        <li><a href="<?php echo site_url() ?>"><?php echo lang('home') ?></a></li>
-                        <?php if (FALSE !== connected_user()): ?>
-                            <li><a href="<?php echo site_url('/account/participant/config_form') ?>"><?php echo connected_user() /* . lang('connected_in') . $current_account['name'] */ ?></a></li>
-                            <li><a href="<?php echo site_url('/account/participant/all_people') ?>"><?php echo lang('all_people') ?></a></li>
-                            <li><a href="<?php echo site_url('/cc/user/logout') ?>"><?php echo lang('logout') ?></a></li>
-                            <?php
-                            if ($this->router->fetch_class() !== 'manage' && $this->router->fetch_class() !== 'config_form' && is_administrator()) {
-                                echo logged_data(isset($participants) ? $participants : array(), '<li><a href="' . site_url('account/manage/config_form') . '">config</a></li>', '', isset($user_locking) ? $user_locking : FALSE);
-                            }
-                            ?>
-                        <?php else: ?>
-                            <!--<li><a href="<?php echo site_url('/cc/user/register_form') ?>"><?php echo lang('register') ?></a></li>-->
-                            <li><a href="<?php echo site_url('/cc/user/login_form') ?>"><?php echo lang('login') ?></a></li>
-                        <?php endif; ?>
-                    </ul>
-                </nav>
             </header>
             <div class="content">
-                <section class="default-skin"><?php
-                    echo @$_sidebar;
-                    echo list_enabled_components();
-                    echo @$_section_sidebar;
-                    ?></section>
+                <section class="default-skin">
+                    <div class="pad">
+                        <?php
+                        echo @$_sidebar;
+                        echo list_enabled_components();
+                        echo @$_section_sidebar;
+                        ?>
+                    </div>
+                </section>
                 <article class="default-skin">
-                    <div id="context_breadcrumb"><a href="<?php echo site_url() ?>">[/]</a><?php echo ! is_null($breadcrumb) ? ' &raquo; ' . $breadcrumb : null; ?></div>
-                    <p id="<?php echo @$msg_type; ?>" class="msg"><?php echo @$msg; ?></p>
-                    <?php
-                    echo '<h1>' . @ucfirst($title) . '</h1>';
-                    echo '<h2>' . @ucfirst($subtitle) . '</h2>';
-                    echo @$_section_before_content;
-                    echo '<div class="description">' . @ucfirst($description) . '</div>';
-                    echo @$_section_after_content;
-                    echo @$_view;
-                    ?>
+                    <div class="pad">
+                        <div id="context_breadcrumb"><a href="<?php echo site_url() ?>">[/]</a><?php echo!is_null($breadcrumb) ? ' &raquo; ' . $breadcrumb : null; ?></div>
+                        <p id="<?php echo @$msg_type; ?>" class="msg"><?php echo @$msg; ?></p>
+                        <?php
+                        echo '<h1>' . @ucfirst($title) . '</h1>';
+                        echo '<h2>' . @ucfirst($subtitle) . '</h2>';
+                        echo @$_section_before_content;
+                        echo '<div class="description">' . @ucfirst($description) . '</div>';
+                        echo @$_section_after_content;
+                        echo @$_view;
+                        ?>
+                    </div>
                 </article>
                 <?php if (isset($_aside)): ?>
-                <aside class="default-skin"><?php echo $_aside; ?></aside>
+                    <aside class="default-skin">
+                        <div class="pad">
+                            <?php echo $_aside; ?>
+                        </div>
+                    </aside>
                 <?php endif; ?>
             </div>
         </div>
