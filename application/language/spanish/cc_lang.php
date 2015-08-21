@@ -1,6 +1,6 @@
 <?php
 
-$lang['home'] = 'Inicio';
+$lang['home'] = 'inicio';
 $lang['connected_in'] = ' en ';
 $lang['login'] = 'conectar';
 $lang['logout'] = 'salir';

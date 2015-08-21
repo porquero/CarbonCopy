@@ -36,7 +36,7 @@
     width: 29%
 }
 .pad{
-    padding: 3px;
+    padding: 7px;
 }
 .flexc, .flexr{
     display: flex;
@@ -60,13 +60,13 @@ h1{
     max-width: 60%
 }
 a{
-    color: #FF855C;
+    color: #4B5558;
     text-decoration: none;
     margin:0 3px
 }
 a:hover{
-    color: #fff;
-    background: #FF855C
+    text-decoration: underline;
+    color: #1c94c4
 }
 hr{
     margin: 14px 0
@@ -93,9 +93,20 @@ body, html{
 }
 header{
     width: 100%;
-    height: 120px;
+    height: 78px;
     overflow: hidden;
     position: relative;
+}
+header .lt{
+    border-bottom: 1px solid #CCC;
+}
+header .sn{
+    padding: 7px 14px 7px 0;
+    background: #4B5558
+}
+header .sn a{
+    color: #fff;
+    font-size: 113%
 }
 header nav{
     flex:1;
@@ -107,13 +118,13 @@ header nav ul{
 .content {
     display: flex;
     overflow: hidden;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 78px);
     position: relative;
     width: 100%;
     backface-visibility: hidden;
     will-change: overflow;
 }
-aside, section, article{
+section, article, aside{
     height: auto;
     max-height: 100%;
     -webkit-overflow-scrolling: touch;
@@ -121,20 +132,32 @@ aside, section, article{
     box-sizing: border-box;
 }
 section {
-    width: 220px;
+    width: 208px;
+    background: #eee
+}
+section h3{
+    font-weight: bold;
+    margin: 7px 0
+}
+#contexts ul a{
+    padding-top: 2% !important;
+    padding-bottom: 2% !important
 }
 article {
     flex: 1;
+    border-right: 1px #eee solid;
+    border-left: 1px #eee solid;
 }
 aside {
     width: 350px;
+    background: #fafafa
 }
 #cc{
     margin: 0 0 6px;
-    width: 180px
+    width: 208px
 }
 #cc div{
-    margin: 0 0 0 2px;
+    margin: 5px 0 0 8px;
 }
 #cc:hover a.config-ico{
     color: #4B5558 !important;
@@ -160,7 +183,7 @@ aside {
     margin-top:3px
 }
 #date_line{
-    padding: 0;
+    padding: 0 12px 0 0;
     margin: 5px 0 9px;
     width: 100%;
     flex: 1;
@@ -178,6 +201,7 @@ aside {
     float: left;
     width: 88%;
     text-align: center;
+    color: #666
 }
 #date_line li ul{
     padding: 0;
@@ -201,14 +225,14 @@ aside {
 }
 #date_line .ring{
     font-weight: bold;
-    background: #ff855c;
+    background: #FDF5CE;
     border-color: #c77405;
-    color: #fff
+    color: #666
 }
 .middle_date{
     font-weight: bold;
-    background: #f6f6f6;
-    color: #000
+    color: #666 !important;
+    border-bottom-width: 2px !important
 }
 #date_line .count{
     position: absolute;
@@ -229,21 +253,20 @@ aside {
     width: 5.5% !important;
 }
 #dl_today a{
-    background: #fbcb09;
+    background: #EEE;
     color: #363636;
     margin: 0
-}
-#dl_today a:hover{
-    color: #1c94c4
 }
 .dl_month{
     font-size: 77%;
     display: block;
     margin-left: 5px;
+    color: #333;
+    font-weight: bold
 }
 #search-box{
     position: relative;
-    margin-left: 180px
+    margin-left: 208px
 }
 #search_results{
     position: absolute;
@@ -268,10 +291,62 @@ aside {
 }
 #search{
     width: 350px;
-    background: #666;
-    color: #fff;
     border-top: none;
     border-right: none;
     border-bottom: none;
     height: 21px
+}
+#aggressive_message{
+    background: #1c94c4;
+    color: #fff;
+    font-weight: bold;
+    height: 140px;
+    position: fixed;
+    top: 25%;
+    text-align: center;
+    padding: 28px 0;
+    z-index: 2000;
+    width: 100%;
+    display: none;
+}
+#aggressive_message div{
+    display: table-cell;
+    vertical-align: middle
+}
+#shortcuts{
+    text-align: left;
+    margin: auto;
+    width: 60%
+}
+#contexts ul a{
+    display: block;
+    margin: 1px 0;
+}
+#contexts ul a, a.context{
+    padding: 0 1.5%;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    background: #3380CC;
+    position: relative
+}
+#contexts ul a:hover, a.context:hover{
+    background: #0066cc
+}
+#add{
+    background: #13A864;
+    padding: 2% 0;
+    width: 100%;
+    color: #fff;
+    margin: 0 0 14px 0;
+    display: block;
+    font-weight: bold;
+    text-align: center
+}
+#add:hover{
+    background: #8cdda0;
+    text-decoration: none
+}
+#participants li{
+    float: left
 }
