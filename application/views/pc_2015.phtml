@@ -53,12 +53,12 @@ $current_account = current_account_info();
                             <?php if (FALSE !== connected_user()): ?>
                                 <li><a href="<?php echo site_url('/account/participant/config_form') ?>"><?php echo connected_user() /* . lang('connected_in') . $current_account['name'] */ ?></a></li>
                                 <li><a href="<?php echo site_url('/account/participant/all_people') ?>"><?php echo lang('all_people') ?></a></li>
-                                <li><a href="<?php echo site_url('/cc/user/logout') ?>"><?php echo lang('logout') ?></a></li>
                                 <?php
                                 if ($this->router->fetch_class() !== 'manage' && $this->router->fetch_class() !== 'config_form' && is_administrator()) {
                                     echo logged_data(isset($participants) ? $participants : array(), '<li><a href="' . site_url('account/manage/config_form') . '">config</a></li>', '', isset($user_locking) ? $user_locking : FALSE);
                                 }
                                 ?>
+                                <li><a href="<?php echo site_url('/cc/user/logout') ?>"><?php echo lang('logout') ?></a></li>
                             <?php else: ?>
                                 <!--<li><a href="<?php echo site_url('/cc/user/register_form') ?>"><?php echo lang('register') ?></a></li>-->
                                 <li><a href="<?php echo site_url('/cc/user/login_form') ?>"><?php echo lang('login') ?></a></li>
@@ -68,7 +68,7 @@ $current_account = current_account_info();
                 </div>
             </header>
             <div class="content">
-                <section class="default-skin">
+                <section>
                     <div class="pad">
                         <?php
                         echo @$_sidebar;
@@ -77,9 +77,9 @@ $current_account = current_account_info();
                         ?>
                     </div>
                 </section>
-                <article class="default-skin">
+                <article>
                     <div class="pad">
-                        <div id="context_breadcrumb"><a href="<?php echo site_url() ?>">[/]</a><?php echo!is_null($breadcrumb) ? ' &raquo; ' . $breadcrumb : null; ?></div>
+                        <div id="context_breadcrumb"><a href="<?php echo site_url() ?>">[/]</a><?php echo ! is_null($breadcrumb) ? ' &raquo; ' . $breadcrumb : null; ?></div>
                         <p id="<?php echo @$msg_type; ?>" class="msg"><?php echo @$msg; ?></p>
                         <?php
                         echo '<h1>' . @ucfirst($title) . '</h1>';
@@ -92,10 +92,8 @@ $current_account = current_account_info();
                     </div>
                 </article>
                 <?php if (isset($_aside)): ?>
-                    <aside class="default-skin">
-                        <div class="pad">
-                            <?php echo $_aside; ?>
-                        </div>
+                    <aside>
+                        <?php echo $_aside; ?>
                     </aside>
                 <?php endif; ?>
             </div>
