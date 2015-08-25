@@ -1,8 +1,9 @@
-<div class="lft w60pp">
+<div class="tasks">
+
     <?php
     if (connected_user() !== FALSE):
         $key_date_due = key($due_date_topics);
-        if ( ! is_null($key_date_due) && count($due_date_topics[$key_date_due])):
+        if (!is_null($key_date_due) && count($due_date_topics[$key_date_due])):
             ?>
             <h2><?php echo lang('to_do') ?></h2>
             <div class="duefor">
@@ -34,9 +35,7 @@
                     ?>
                 </ul>
             </div>
-            <?php
-        elseif (count($due_future_topics)):
-            ?>
+        <?php elseif (count($due_future_topics)): ?>
             <h2><?php echo lang('to_do_next_days') ?></h2>
             <?php
             foreach ($due_future_topics as $future_date => $future_topic) :

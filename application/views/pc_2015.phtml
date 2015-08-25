@@ -12,7 +12,7 @@ $current_account = current_account_info();
         link_tag('pub/css/reset.css')
         . link_tag('pub/css/font-awesome.css')
         . link_tag('pub/css/ui-lightness/jquery-ui-1.10.3.custom.min.css')
-        . link_tag('pub/js/jquery-custom-scrollbar/jquery.custom-scrollbar.css')
+//        . link_tag('pub/js/jquery-custom-scrollbar/jquery.custom-scrollbar.css')
         . link_tag('pub/formalize/css/formalize.css')
         . link_tag('pub/pc_2015/css/main.css')
         . @$head . @$_head;
@@ -78,9 +78,13 @@ $current_account = current_account_info();
                     </div>
                 </section>
                 <article>
+                    <div id="context_breadcrumb">
+                        <div class="pad">
+                            <a href="<?php echo site_url() ?>">[/]</a><?php echo!is_null($breadcrumb) ? ' &raquo; ' . $breadcrumb : null; ?>
+                        </div>
+                    </div>
+                    <p id="<?php echo @$msg_type; ?>" class="msg"><?php echo @$msg; ?></p>
                     <div class="pad">
-                        <div id="context_breadcrumb"><a href="<?php echo site_url() ?>">[/]</a><?php echo ! is_null($breadcrumb) ? ' &raquo; ' . $breadcrumb : null; ?></div>
-                        <p id="<?php echo @$msg_type; ?>" class="msg"><?php echo @$msg; ?></p>
                         <?php
                         echo '<h1>' . @ucfirst($title) . '</h1>';
                         echo '<h2>' . @ucfirst($subtitle) . '</h2>';
@@ -108,7 +112,7 @@ $current_account = current_account_info();
         . js_tag('pub/js/jquery-ui-1.10.3.custom.min.js')
         . js_tag('pub/js/jquery.form.js')
         . js_tag('pub/js/jquery.hotkeys/jquery.hotkeys.latam.js')
-        . js_tag('pub/js/jquery-custom-scrollbar/jquery.custom-scrollbar.js')
+//        . js_tag('pub/js/jquery-custom-scrollbar/jquery.custom-scrollbar.js')
         . @$footer;
         ?>
     </body>

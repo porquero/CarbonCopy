@@ -301,7 +301,6 @@ PQR;
               'footer' => js_tag('pub/web_tpl/js/people.js'),
               'description' => lang('all_we_are'),
               'info_participants' => $this->m_user->where_in($where_in),
-              'breadcrumb' => create_breadcrumb(''),
         ));
         $this->tpl->section('_view', 'all_people.phtml');
         $this->tpl->section('_sidebar', '_sidebar_people.phtml');

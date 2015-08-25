@@ -93,8 +93,7 @@ body, html{
 }
 header{
     width: 100%;
-    height: 78px;
-    overflow: hidden;
+    height: 84px;
     position: relative;
 }
 header .lt{
@@ -114,12 +113,14 @@ header nav{
 }
 header nav ul{
     display: flex;
-    justify-content: flex-end
+    justify-content: flex-end;
+    margin-top: 4px
 }
 .content {
     display: flex;
-    overflow: hidden;
-    height: calc(100vh - 78px);
+    overflow-y: auto; /* Remove for customScrollbar. */
+    /*overflow: hidden;*/ /* Use for customScrollbar. */
+    height: calc(100vh - 84px);
     position: relative;
     width: 100%;
     backface-visibility: hidden;
@@ -128,9 +129,10 @@ header nav ul{
 section, article, aside{
     height: auto;
     max-height: 100%;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: none;
-    box-sizing: border-box;
+    overflow-y: auto; /* Remove for customScrollbar. */
+    /*    -webkit-overflow-scrolling: touch; 
+        -ms-overflow-style: none;
+        box-sizing: border-box;*/ /* Use for customScrollbar. */
 }
 section {
     width: 208px;
@@ -138,7 +140,7 @@ section {
 }
 section h3{
     font-weight: bold;
-    margin: 7px 0
+    margin: 14px 0 7px 0
 }
 #contexts ul a{
     padding-top: 2% !important;
@@ -154,7 +156,7 @@ aside {
     background: #fafafa
 }
 #cc{
-    margin: 0 0 6px;
+    margin: 0 0 12px;
     width: 208px
 }
 #cc div{
@@ -181,11 +183,11 @@ aside {
 #cc a span{
     font-weight: bold;
     display:block;
-    margin-top:3px
+    margin-top:5px
 }
 #date_line{
     padding: 0 12px 0 0;
-    margin: 5px 0 9px;
+    margin: 10px 0 9px;
     width: 100%;
     flex: 1;
 }
@@ -208,7 +210,7 @@ aside {
     padding: 0;
     position: absolute;
     top: 100%;
-    background: #fff;
+    background: #fafafa;
     width: 240px;
     overflow: hidden;
     left: 7px;
@@ -217,12 +219,18 @@ aside {
 }
 #date_line li ul li{
     width: 100%;
-    border-bottom: 1px solid #EEE;
+    border-bottom: 1px solid #999;
+}
+#date_line li ul li:hover{
+    background: #eee
 }
 #date_line li ul li a{
     border: none;
     width: 100%;
     text-align: left
+}
+#date_line li ul li a:hover{
+    text-decoration: none
 }
 #date_line .ring{
     font-weight: bold;
@@ -284,7 +292,11 @@ aside {
 }
 #search_results a{
     padding: 2px 1px;
-    margin: 0
+    margin: 0;
+    color: #333
+}
+#search_results a.context{
+    color: #fff
 }
 #search_results a:focus{
     text-decoration: underline;
@@ -292,9 +304,6 @@ aside {
 }
 #search{
     width: 350px;
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
     height: 21px
 }
 #aggressive_message{
@@ -348,6 +357,23 @@ aside {
     background: #8cdda0;
     text-decoration: none
 }
+#add_opt{
+    background: #fafafa;
+    margin-top: -13px;
+    position: absolute;
+    width: 210px;
+    border-right: 1px #999 solid;
+    border-bottom: 1px #999 solid;
+    display: none
+}
+#add_opt li{
+    padding: 4px 0;
+    width: 100%
+}
+#add_opt li a{
+    display: block;
+    width: 100%
+}
 #participants li{
     float: left
 }
@@ -369,13 +395,13 @@ aside {
     clear: both
 }
 
-#timeline h3, .duefor h3, .topics h3{
+#timeline h3, .duefor h3{
     margin: 0;
     padding: 3px 3px 3px 7px;
 }
 #timeline h3, .topics h3{
-    background: #4B5558;
-    color: #fff
+    font-weight: bold;
+    margin: 3px 0
 }
 #timeline ul{
     border-top: 1px solid #EEE;
@@ -384,16 +410,17 @@ aside {
     border-bottom: 1px solid #EEE;
     padding: 4px 0 14px 7px
 }
-#timeline li:hover{
-    background: #EEE
-}
 #timeline-s{
     word-wrap: break-word
 }
+#timeline-s h3{
+    border-bottom: 1px solid #eee;
+    padding: 4px 0
+}
 #context_breadcrumb{
-    margin: 0 0 4px 0;
-    padding: 2px 0 4px;
+    margin: 1px 0 4px 0;
     font-size:93%;
+    border-bottom: 1px solid #eee
 }
 #context_breadcrumb a{  
     margin: 0
@@ -452,11 +479,14 @@ form label span{
     clear: both;
     width: 100%
 }
-article ul, ol, form ul, form ol{
+.description ul, ol, form ul, form ol{
     margin: 7px 0 7px 28px;
 }
-article ul, form ul{
+.description ul, form ul{
     list-style-type: disc
+}
+.description h2, .tasks h2{
+    margin: 14px 0 7px 0
 }
 form ul{
     padding-left: 24px
@@ -513,13 +543,6 @@ button{
 }
 #tm-topics li.tstp{
     margin-bottom: 21px;
-    border-left: 1px dashed transparent
-}
-#tm-topics li.tstp:hover{
-    border-left-color: #CCC
-}
-#tm-topics h2{
-    margin-left: 2%
 }
 #tm-topics a{
     margin: 0;
@@ -543,6 +566,9 @@ button{
     overflow: hidden;
     white-space: nowrap;
     margin-bottom: 4px
+}
+#all_we_are{
+    list-style-type: none !important
 }
 #all_we_are li *{
     display: block;
@@ -578,9 +604,6 @@ button{
     border-bottom: 1px solid #EEE;
     padding: 4px
 }
-.duefor li:hover{
-    background: #fbeea8
-}
 .b_inactive{
     display: none
 }
@@ -615,4 +638,36 @@ button{
 #home_info{
     width: 100%;
     height: 320px
+}
+#tim-t{
+    padding: 3px 4px;
+    background: #eee
+}
+#tim-t *{
+    display: inline
+}
+#tim-t a{
+    text-decoration: none
+}
+.ts{
+    color: #999
+}
+#timeline .brcr a, .duefor .brcr a, #search_results .brcr a{
+    color: #3380CC;
+    font-size: 85%
+}
+#timeline .brcr, .duefor .brcr{
+    margin-bottom: 3px;
+    display: block
+}
+.tpcdtl{
+    padding: 2px 6px 2px 0;
+    border-bottom: 1px dotted #eee;
+    border-top: 1px dotted #eee;
+    margin-top: 7px;
+    font-size: 85%;
+    text-align: right
+}
+.ts{
+    color: #999
 }

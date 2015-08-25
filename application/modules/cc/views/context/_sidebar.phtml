@@ -1,3 +1,18 @@
+<?php
+$add_context = site_url('/cc/context/create_form/' . $context);
+$add_topic = site_url('/cc/topic/add_form/' . $context);
+$add_lng = lang('add');
+
+$ld = <<<PQR
+<a href="#" id="add">+</a>
+<ul id="add_opt">
+    <li><a href="{$add_context}">{$add_lng} {$context_label}</a></li>
+    <li><a href="{$add_topic}">{$add_lng} {$topic_label}</a></li>
+</ul>
+PQR;
+echo logged_data($participants, $ld);
+?>
+
 <h3><?php echo lang('details'); ?></h3>
 <ul id="details">
     <?php
@@ -7,7 +22,7 @@ PQR;
     ?>
 </ul>
 <div id="contexts">
-    <h3><?php echo $context_label . nbs() . logged_data($participants, '<a href="' . site_url('/cc/context/create_form/' . $context) . '">[+]</a>') ?></h3>
+    <h3><?php echo $context_label ?></h3>
     <ul>
         <?php
         foreach ($info['contexts'] as $context_slug => $context_info) {
