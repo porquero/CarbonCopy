@@ -36,7 +36,7 @@ PQR;
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<link rel="stylesheet" href="../pub/css/reset.css" />
 		<link rel="stylesheet" href="../pub/formalize/css/formalize.css" />
-		<link rel="stylesheet" href="../pub/web_tpl/css/main.css" />
+		<link rel="stylesheet" href="../pub/' . _TEMPLATE . '/css/main.css" />
 		<style type="text/css">
 			.content{
 				text-align: left

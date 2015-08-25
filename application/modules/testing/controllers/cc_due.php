@@ -51,7 +51,7 @@ class cc_due extends MX_Controller {
 	{
 		$this->load->module('cc/due');
 
-		echo '<link href="http://localhost/cc/pub/web_tpl/css/main.css?1415117830" rel="stylesheet" type="text/css" />';
+		echo '<link href="http://localhost/cc/pub/' . _TEMPLATE . '/css/main.css?1415117830" rel="stylesheet" type="text/css" />';
 		$this->due->date_line();
 	}
 

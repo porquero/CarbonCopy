@@ -16,7 +16,7 @@ function process_validation(data) {
     }
 }
 
-$('.as_administrator').on('click', function () {
+$('#delegate').on('click', '.as_administrator', function () {
     if ($(this).prop('checked')) {
         aggressive_message('Setting as administrator.');
         $.ajax({

@@ -68,9 +68,11 @@ class topic extends MX_Controller {
         $info = $this->info($context);
         $date = account_date_format($info['info']['created_date']);
         $url = site_url('/account/participant/profile/' . $info['info']['created_by']);
-        $subtitle = <<<PQR
-<div id="usr-pub"><a href="{$url}" class="usr">{$info['info']['created_by']}</a>
-<span>{$date}</span></div>
+        $author = <<<PQR
+<div class="tpcdtl">
+    <div id="usr-pub"><a href="{$url}" class="usr">{$info['info']['created_by']}</a>
+    <span>{$date}</span></div>
+</div>
 PQR;
 
         $user_locking = $this->_user_locking($topic);
@@ -88,10 +90,9 @@ PQR;
 
         $this->tpl->variables(
           array(
-              'head' => link_tag('pub/web_tpl/css/topic.css'),
+              'head' => link_tag('pub/' . _TEMPLATE . '/css/topic.css'),
               'title' => $info['info']['title'],
-              'subtitle' => $subtitle,
-              'description' => $info['info']['description'],
+              'description' => $info['info']['description'] . $author,
               'participants' => Modules::run('account/participant/list_for_context', topic_real_path($topic), 'topic'),
               'manage_participants_link' => '/cc/topic/manage_participants_form/' . $context,
               'breadcrumb' => create_breadcrumb($context, get_name_from_slug($context)),
@@ -108,6 +109,7 @@ PQR;
         ));
 
         $this->tpl->section('_sidebar', '_sidebar.phtml');
+        $this->tpl->section('_aside', '_files.phtml');
         $this->tpl->section('_view', 'resume.phtml');
         $this->tpl->load_view(_TEMPLATE);
     }
@@ -144,12 +146,13 @@ PQR;
     {
         is_connected();
 
-        $this->load->helper(array('form'));
+        $this->load->helper(array('form', 'inflector'));
+        $labels = Modules::run('cc/context/labels', $context);
 
         $this->tpl->variables(
           array(
-              'title' => lang('add_topic'),
-              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/edit_topic.js'),
+              'title' => lang('add') . ' ' . singular($labels['topic_label']),
+              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/' . _TEMPLATE . '/js/edit_topic.js'),
               'description' => '',
               'breadcrumb' => create_breadcrumb($context),
               'context' => $context,
@@ -467,7 +470,7 @@ PQR;
         $this->tpl->variables(
           array(
               'title' => $info['info']['title'],
-              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/topic_reply.js'),
+              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/' . _TEMPLATE . '/js/topic_reply.js'),
               'description' => lang('topic_reply'),
               'breadcrumb' => create_breadcrumb($context, get_name_from_slug($context)),
               'context' => $context,
@@ -530,7 +533,7 @@ PQR;
         $this->tpl->variables(
           array(
               'title' => lang('manage_participants'),
-              'footer' => js_tag('pub/js/jquery.form.js'), // . js_tag('pub/web_tpl/js/topic_manage_participants.js'),
+              'footer' => js_tag('pub/js/jquery.form.js'), // . js_tag('pub/' . _TEMPLATE . '/js/topic_manage_participants.js'),
               'context' => $context,
               'id_topic' => get_name_from_slug($context),
               'participants' => empty($info['info']['participants']) ? array() : explode(',', $info['info']['participants']),
@@ -652,7 +655,7 @@ PQR;
         $this->tpl->variables(
           array(
               'title' => lang('modify_topic'),
-              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/edit_topic.js'),
+              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/' . _TEMPLATE . '/js/edit_topic.js'),
               'description' => '',
               'breadcrumb' => create_breadcrumb($context),
               'context' => $context,

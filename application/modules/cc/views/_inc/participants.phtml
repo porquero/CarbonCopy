@@ -4,11 +4,11 @@ if (isset($participants) === TRUE && connected_user() !== FALSE):
     <div id="participants">
         <h3><?php
             echo lang('participants');
-            if ($this->router->fetch_class() !== 'resume') {
+            if (in_array($this->router->fetch_class(), array('context', 'topic'))) {
                 echo logged_data($participants, '<a href="' . site_url($manage_participants_link) . '" class="config-ico man-lst"><span></span></a>', '', isset($user_locking) ? $user_locking : FALSE);
             }
             ?></h3>
-        <div id="manage_participants_div" class="mdl"></div>
+        <div id="manage_participants_div" class="mdl shadow"></div>
         <ul>
             <?php
             foreach ($participants as $participant) {
@@ -29,9 +29,4 @@ PQR;
     </div>
     <div class="clear"></div>
     <?php
-
-
-
-
-
 endif;

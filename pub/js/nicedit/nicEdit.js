@@ -1349,7 +1349,7 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
         this.setProgress(0);
 
         var fd = new FormData(); // https://hacks.mozilla.org/2011/01/how-to-develop-a-html5-image-uploader/
-        fd.append("image", file);
+        fd.append("userfile", file);
         fd.append("key", "b7ea18a4ecbda8e92203fa4968d10660");
         var xhr = new XMLHttpRequest();
         xhr.open("POST", this.ne.options.uploadURI || this.nicURI);

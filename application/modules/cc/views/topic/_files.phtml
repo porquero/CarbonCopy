@@ -1,0 +1,14 @@
+<h3 id="files-h"><?php echo lang('files') ?></h3>
+<ul id="files">
+    <?php
+    if (count($files) > 0):
+        foreach ($files as $file):
+            ?>
+            <li><a href="<?php echo site_url('/cc/file/download/' . $context . '_' . urlencode(basename($file))) ?>" target="_blank"><?php echo basename($file) ?></a></li>
+            <?php
+        endforeach;
+    else:
+        echo lang('no_files');
+    endif;
+    ?>
+</ul>

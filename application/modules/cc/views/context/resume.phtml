@@ -5,7 +5,7 @@ if (connected_user() !== FALSE && belongs_to('context', $context, connected_user
         <?php if ($user_locking === FALSE): ?>
             <li style="position: relative">
                 <a href="<?php echo site_url('/cc/context/move_form/' . $id_context . '|' . parent_context($context)) ?>" id="move_context"><?php echo lang('move'); ?></a>
-                <div id="move_form" class="mdl"></div>
+                <div id="move_form" class="mdl shadow"></div>
             </li>
             <li><a href="<?php echo site_url('/cc/context/delete/' . $id_context . '|' . parent_context($context)) ?>" id="delete_context"><?php echo lang('delete'); ?></a></li>
             <li><a href="<?php echo site_url('/cc/context/modify_form/' . $context) ?>"><?php echo lang('edit'); ?></a></li>

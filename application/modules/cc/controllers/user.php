@@ -30,7 +30,7 @@ class user extends MX_Controller {
           array(
               'title' => lang('register_new_user'),
               'description' => lang('complete_form'),
-              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/web_tpl/js/user_register.js'),
+              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/' . _TEMPLATE . '/js/user_register.js'),
               'invitation_hash' => $invitation_hash,
         ));
 
@@ -487,7 +487,7 @@ class user extends MX_Controller {
           array(
               'title' => lang('reset_form'),
               'description' => lang('reset_description'),
-              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/web_tpl/js/user_reset_password.js'),
+              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/' . _TEMPLATE . '/js/user_reset_password.js'),
         ));
 
         $this->tpl->section('_view', 'reset_password.phtml');

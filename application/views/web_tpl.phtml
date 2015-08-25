@@ -12,7 +12,7 @@ $current_account = current_account_info();
         . link_tag('pub/css/font-awesome.css')
         . link_tag('pub/css/ui-lightness/jquery-ui-1.10.3.custom.min.css')
         . link_tag('pub/formalize/css/formalize.css')
-        . link_tag('pub/web_tpl/css/main.css')
+        . link_tag('pub/' . _TEMPLATE . '/css/main.css')
         . @$head . @$_head;
         ?>
         <script type="text/javascript">
@@ -96,13 +96,13 @@ $current_account = current_account_info();
         echo
         js_tag('pub/js/jquery-1.9.1.js')
         . js_tag('pub/js/main.js')
-        . js_tag('pub/web_tpl/js/main.js')
+        . js_tag('pub/' . _TEMPLATE . '/js/main.js')
         . js_tag('pub/js/jquery-ui-1.10.3.custom.min.js')
         . js_tag('pub/js/jquery.form.js')
         . js_tag('pub/js/jquery.hotkeys/jquery.hotkeys.latam.js')
         . @$footer;
         ?>
-        <div id="aggressive_message"><div><span><?php echo @isset($aggressive_message) ? $aggressive_message : lang('wait_please'); ?></span> <img src="<?php echo base_url('pub/web_tpl/img/ajax-loader.gif') ?>" alt="" /></div></div>
+        <div id="aggressive_message"><div><span><?php echo @isset($aggressive_message) ? $aggressive_message : lang('wait_please'); ?></span> <img src="<?php echo base_url('pub/' . _TEMPLATE . '/img/ajax-loader.gif') ?>" alt="" /></div></div>
         <ul id="shortcuts"></ul>
     </body>
 </html>

@@ -264,7 +264,6 @@ PQR;
                   'url_to_me' => '',
                   'description' => $detail,
                   'participants' => Modules::run('account/participant/list_for_resume'),
-                  'breadcrumb' => create_breadcrumb(''),
                   'timeline' => $this->timeline->get_for_participant($username, TRUE, $participant_id, $ts_date),
                   'menu_act' => $this->timeline->menu_act,
                   'url_all' => site_url('/account/participant/profile/' . $username),
@@ -298,7 +297,7 @@ PQR;
         $this->tpl->variables(
           array(
               'title' => lang('people'),
-              'footer' => js_tag('pub/web_tpl/js/people.js'),
+              'footer' => js_tag('pub/' . _TEMPLATE . '/js/people.js'),
               'description' => lang('all_we_are'),
               'info_participants' => $this->m_user->where_in($where_in),
         ));
@@ -423,7 +422,7 @@ PQR;
               'title' => 'Account config',
               'description' => '',
               'user_language' => $user_config['info']['language'],
-              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/web_tpl/js/participant_config.js'),
+              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/' . _TEMPLATE . '/js/participant_config.js'),
               'language' => array(
                   'english' => 'english',
                   'spanish' => 'spanish',

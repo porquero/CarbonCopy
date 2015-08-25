@@ -40,7 +40,7 @@ define('FOPEN_WRITE_CREATE_STRICT', 'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
 // Templates.
-define('_TEMPLATE', 'pc_2015.phtml');
+define('_TEMPLATE', 'pc_2015');
 define('_TEMPLATE_BLANK_HTML', 'BLANK_html.phtml');
 define('_TEMPLATE_BLANK_TXT', 'BLANK_txt.phtml');
 

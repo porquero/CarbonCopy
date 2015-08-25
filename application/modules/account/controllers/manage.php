@@ -104,7 +104,7 @@ class manage extends MX_Controller {
               'topic_label' => $account_config['topic_label'],
               'account_name' => $account_info['name'],
               'account_info' => $account_info['info'],
-              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/account_config.js'),
+              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/' . _TEMPLATE . '/js/account_config.js'),
               'date_format' => array(
                   'd-m-Y' => 'dd-mm-yyyy',
                   'Y-m-d' => 'yyyy-mm-dd'
@@ -296,7 +296,7 @@ class manage extends MX_Controller {
               'msg' => isset($msg) ? $msg : '',
               'components' => Modules::run('extends/component/installed'),
               'sections' => Modules::run('extends/section/installed'),
-              'footer' => js_tag('pub/web_tpl/js/account_config.js'),
+              'footer' => js_tag('pub/' . _TEMPLATE . '/js/account_config.js'),
         ));
 
         $this->tpl->section('_sidebar', '_sidebar.phtml');

@@ -2,12 +2,14 @@
 $add_context = site_url('/cc/context/create_form/' . $context);
 $add_topic = site_url('/cc/topic/add_form/' . $context);
 $add_lng = lang('add');
+$singular_context_label = singular($context_label);
+$singular_topic_label = singular($topic_label);
 
 $ld = <<<PQR
-<a href="#" id="add">+</a>
-<ul id="add_opt">
-    <li><a href="{$add_context}">{$add_lng} {$context_label}</a></li>
-    <li><a href="{$add_topic}">{$add_lng} {$topic_label}</a></li>
+<a href="javascript:void()" id="add">+</a>
+<ul id="add_opt" class="shadow">
+    <li><a href="{$add_context}">{$add_lng} {$singular_context_label}</a></li>
+    <li><a href="{$add_topic}">{$add_lng} {$singular_topic_label}</a></li>
 </ul>
 PQR;
 echo logged_data($participants, $ld);

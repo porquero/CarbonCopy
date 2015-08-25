@@ -54,15 +54,15 @@ $current_account = current_account_info();
                                 <li><a href="<?php echo site_url('/account/participant/config_form') ?>"><?php echo connected_user() /* . lang('connected_in') . $current_account['name'] */ ?></a></li>
                                 <li><a href="<?php echo site_url('/account/participant/all_people') ?>"><?php echo lang('all_people') ?></a></li>
                                 <?php
-                                if ($this->router->fetch_class() !== 'manage' && $this->router->fetch_class() !== 'config_form' && is_administrator()) {
-                                    echo logged_data(isset($participants) ? $participants : array(), '<li><a href="' . site_url('account/manage/config_form') . '">config</a></li>', '', isset($user_locking) ? $user_locking : FALSE);
+                                if (is_administrator()) {
+                                    echo '<li><a href="' . site_url('account/manage/config_form') . '">config</a></li>';
                                 }
                                 ?>
                                 <li><a href="<?php echo site_url('/cc/user/logout') ?>"><?php echo lang('logout') ?></a></li>
                             <?php else: ?>
                                 <!--<li><a href="<?php echo site_url('/cc/user/register_form') ?>"><?php echo lang('register') ?></a></li>-->
                                 <li><a href="<?php echo site_url('/cc/user/login_form') ?>"><?php echo lang('login') ?></a></li>
-                            <?php endif; ?>
+<?php endif; ?>
                         </ul>
                     </nav>
                 </div>
@@ -80,14 +80,14 @@ $current_account = current_account_info();
                 <article>
                     <div id="context_breadcrumb">
                         <div class="pad">
-                            <a href="<?php echo site_url() ?>">[/]</a><?php echo!is_null($breadcrumb) ? ' &raquo; ' . $breadcrumb : null; ?>
+                            <a href="<?php echo site_url() ?>">[/]</a><?php echo ! is_null($breadcrumb) ? ' &raquo; ' . $breadcrumb : null; ?>
                         </div>
                     </div>
                     <p id="<?php echo @$msg_type; ?>" class="msg"><?php echo @$msg; ?></p>
                     <div class="pad">
                         <?php
                         echo '<h1>' . @ucfirst($title) . '</h1>';
-                        echo '<h2>' . @ucfirst($subtitle) . '</h2>';
+                        echo '<div id="subtitle">' . @ucfirst($subtitle) . '</div>';
                         echo @$_section_before_content;
                         echo '<div class="description">' . @ucfirst($description) . '</div>';
                         echo @$_section_after_content;
@@ -95,11 +95,11 @@ $current_account = current_account_info();
                         ?>
                     </div>
                 </article>
-                <?php if (isset($_aside)): ?>
+                    <?php if (isset($_aside)): ?>
                     <aside>
-                        <?php echo $_aside; ?>
+                    <?php echo $_aside; ?>
                     </aside>
-                <?php endif; ?>
+<?php endif; ?>
             </div>
         </div>
         <div id="aggressive_message"><div><span><?php echo @isset($aggressive_message) ? $aggressive_message : lang('wait_please'); ?></span> <img src="<?php echo base_url('pub/pc_2015/img/ajax-loader.gif') ?>" alt="" /></div></div>

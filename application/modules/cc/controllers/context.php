@@ -35,6 +35,7 @@ class context extends MX_Controller {
         }
 
         $this->load->module('cc/timeline');
+        $this->load->helper('inflector');
 
         $msg_type = $this->session->flashdata('msg_type');
         $msg = $this->session->flashdata('msg');
@@ -294,12 +295,13 @@ class context extends MX_Controller {
     {
         is_connected();
 
-        $this->load->helper(array('form'));
+        $this->load->helper(array('form', 'inflector'));
+        $labels = $this->labels($context);
 
         $this->tpl->variables(
           array(
-              'title' => lang('add_context'),
-              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/edit_context.js'),
+              'title' => lang('add') . ' ' . singular($labels['context_label']),
+              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/' . _TEMPLATE . '/js/edit_context.js'),
               'description' => '',
               'breadcrumb' => create_breadcrumb($context),
               'context' => $context,
@@ -393,7 +395,7 @@ class context extends MX_Controller {
         $this->tpl->variables(
           array(
               'title' => lang('modify_context'),
-              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/web_tpl/js/edit_context.js'),
+              'footer' => js_tag('pub/js/jquery.form.js') . js_tag('pub/js/nicedit/nicEdit.js') . js_tag('pub/' . _TEMPLATE . '/js/edit_context.js'),
               'description' => '',
               'breadcrumb' => create_breadcrumb($context),
               'context' => $context,
