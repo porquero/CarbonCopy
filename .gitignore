@@ -10,3 +10,4 @@
 /_accounts/cc/
 /application/config/database.php
 /application/config/config.php
+/application/config/constants.php

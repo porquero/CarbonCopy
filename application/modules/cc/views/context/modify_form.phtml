@@ -7,8 +7,8 @@ echo form_open('/cc/context/modify', $attributes);
 <label><span>Title</span><input type="text" name="title" id="title" value="<?php echo $info['info']['title'] ?>" /></label>
 <?php include dirname(__FILE__) . '/_inc/common_form.phtml'; ?>
 <div class="argt">
-	<button type="submit" name="submit" value="cancel"><?php echo lang('cancel'); ?></button>
-	<button type="submit" value="<?php echo $mode_edition ?>"><?php echo $mode_edition ?></button>
+    <button type="submit" name="submit" value="cancel"><?php echo lang('cancel'); ?></button>
+    <button type="submit" value="<?php echo $mode_edition ?>"><?php echo $mode_edition ?></button>
 </div>
 <?php
 echo form_close();

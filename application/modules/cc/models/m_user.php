@@ -139,7 +139,7 @@ class m_user extends CI_Model {
     public function where_in($participants)
     {
         $result = array();
-        $participants = implode("','", $participants);
+        $participants = implode("','", (array) $participants);
 
         $r = $this->db->select('username, name, email, ts')->from($this->_table_name)
             ->where('username in(\'' . $participants . '\')')->get();

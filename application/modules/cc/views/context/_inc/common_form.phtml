@@ -5,37 +5,37 @@ echo $mode_edition === 'create' ? '<label class="no-margin"><span>' . lang('part
 $label_responsible = '<label><span>' . lang('responsible') . '</span>';
 // Only can set visibility on top context!
 if (preg_replace('/\_*+' . $id . '$/', '', $context) === ''):
-	echo $mode_edition === 'create' ? Modules::run('account/participant/html_checkbox_for_account', 'participants', $context_participants) : NULL;
-	?>
-	<label class="no-margin"><span><?php echo lang('visibility'); ?></span></label>
-	<div class="checkbox">
-		<?php
-		$visibility = array(
-				'private' => FALSE,
-				'public' => FALSE,
-		);
-		if (isset($info['info']['visibility'])) {
-			$visibility[$info['info']['visibility']] = TRUE;
-		}
-		else {
-			$visibility['private'] = TRUE;
-		}
-		?>
-		<label><?php echo form_radio('visibility', 'private', $visibility['private']); ?> <span><?php echo lang('private'); ?></span></label>
-		<label><?php echo form_radio('visibility', 'public', $visibility['public']); ?> <span><?php echo lang('public'); ?></span></label>
-		<div class="clear"></div>
-	</div>
-	<?php
-	echo $label_responsible . Modules::run('account/participant/html_select_for_account', 'responsible', $responsible) . '</label>';
+    echo $mode_edition === 'create' ? Modules::run('account/participant/html_checkbox_for_account', 'participants', $context_participants) : NULL;
+    ?>
+    <label class="no-margin"><span><?php echo lang('visibility'); ?></span></label>
+    <div class="checkbox">
+        <?php
+        $visibility = array(
+            'private' => FALSE,
+            'public' => FALSE,
+        );
+        if (isset($info['info']['visibility'])) {
+            $visibility[$info['info']['visibility']] = TRUE;
+        }
+        else {
+            $visibility['private'] = TRUE;
+        }
+        ?>
+        <label><?php echo form_radio('visibility', 'private', $visibility['private']); ?> <span><?php echo lang('private'); ?></span></label>
+        <label><?php echo form_radio('visibility', 'public', $visibility['public']); ?> <span><?php echo lang('public'); ?></span></label>
+        <div class="clear"></div>
+    </div>
+    <?php
+    echo $label_responsible . Modules::run('account/participant/html_select_for_account', 'responsible', $responsible) . '</label>';
 else:
-	echo $mode_edition === 'create' ? Modules::run('account/participant/html_checkbox_for_context', $context, 'participants', $context_participants) : NULL;
-	echo $label_responsible . Modules::run('account/participant/html_select_for_context', $context, 'responsible', $responsible) . '</label>';
+    echo $mode_edition === 'create' ? Modules::run('account/participant/html_checkbox_for_context', $context, 'participants', $context_participants) : NULL;
+    echo $label_responsible . Modules::run('account/participant/html_select_for_context', $context, 'responsible', $responsible) . '</label>';
 endif;
 ?>
 <hr />
 <fieldset>
-	<legend><?php echo lang('config') ?></legend>
-	<label><input type="checkbox" value="1"<?php echo ( ! isset($info['info']['label_inherit']) || $info['info']['label_inherit'] === 1) ? 'checked="checked"' : '' ?> name="label_inherit" id="label_inherit" /> <span><?php echo lang('label_inherit') ?></span></label>
-	<label><span><?php echo lang('context_label'); ?></span><?php echo form_input('context_label', isset($info['info']['context_label']) ? $info['info']['context_label'] : '', 'maxlength="30"') ?></label>
-	<label><span><?php echo lang('topic_label'); ?></span><?php echo form_input('topic_label', isset($info['info']['topic_label']) ? $info['info']['topic_label'] : '', 'maxlength="30"') ?></label>
+    <legend><?php echo lang('config') ?></legend>
+    <label><input type="checkbox" value="1"<?php echo ( ! isset($info['info']['label_inherit']) || $info['info']['label_inherit'] === 1) ? 'checked="checked"' : '' ?> name="label_inherit" id="label_inherit" /> <span><?php echo lang('label_inherit') ?></span></label>
+    <label><span><?php echo lang('context_label'); ?></span><?php echo form_input('context_label', isset($info['info']['context_label']) ? $info['info']['context_label'] : '', 'maxlength="30"') ?></label>
+    <label><span><?php echo lang('topic_label'); ?></span><?php echo form_input('topic_label', isset($info['info']['topic_label']) ? $info['info']['topic_label'] : '', 'maxlength="30"') ?></label>
 </fieldset>

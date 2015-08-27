@@ -13,12 +13,7 @@ if (isset($participants) === TRUE && connected_user() !== FALSE):
             <?php
             foreach ($participants as $participant) {
                 $url = site_url('/account/participant/profile/' . trim($participant->info['id']));
-                if ($participant->active === TRUE) {
-                    $username = $participant->info['id'];
-                }
-                else {
-                    $username = '<strike>' . $participant->info['id'] . '</strike>';
-                }
+                $username = $participant->info['id'];
 
                 echo <<<PQR
 <li><a href="{$url}" class="usr">{$username}</a></li>
@@ -29,4 +24,5 @@ PQR;
     </div>
     <div class="clear"></div>
     <?php
+
 endif;

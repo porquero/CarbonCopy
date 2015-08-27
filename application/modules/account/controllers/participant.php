@@ -26,7 +26,10 @@ class participant extends MX_Controller {
         $result = array();
 
         foreach ($participants as $participant) {
-            $result[] = (object) $this->read->json_content($participant);
+            $participant_info = (object) $this->read->json_content($participant);
+            if ($participant_info->active === TRUE) {
+                $result[] = $participant_info;
+            }
         }
 
         return $result;
@@ -82,15 +85,25 @@ class participant extends MX_Controller {
 
     /**
      * Get participants for account
+     * 
+     * @param boolean $include_disabled Decides if include disabled participants.
      *
      * @return type
      */
-    public function list_for_account()
+    public function list_for_account($include_disabled = FALSE)
     {
-        $this->load->module('file/read');
-        $participants = $this->read->files_basename(_INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/_participants');
+        if ($include_disabled === TRUE) {
+            $this->load->module('file/read');
+            $result = $this->read->files_basename(_INC_ROOT . '_accounts/' . $this->session->userdata('current_account') . '/_participants');
+        }
+        else {
+            $participants = $this->list_for_resume();
+            foreach ($participants as $participant) {
+                $result[] = $participant->info['id'] . '.json';
+            }
+        }
 
-        return $participants;
+        return $result;
     }
 
     /**
@@ -290,7 +303,7 @@ PQR;
 
         $where_in = array();
 
-        foreach ($this->list_for_account() as $participant) {
+        foreach ($this->list_for_account(TRUE) as $participant) {
             $where_in[] = preg_replace('/\.json/', '', $participant);
         }
 
@@ -380,7 +393,7 @@ PQR;
     public function info($username)
     {
         $this->load->model('cc/m_user');
-        
+
         return $this->m_user->data($username);
     }
 
