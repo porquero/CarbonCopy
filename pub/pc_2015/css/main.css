@@ -146,7 +146,8 @@ article {
     flex: 1;
     border-right: 1px #eee solid;
     border-left: 1px #eee solid;
-    background: #fff
+    background: #fff;
+    position: relative
 }
 aside {
     width: 350px;
@@ -359,7 +360,8 @@ aside {
     width: 210px;
     border-right: 1px #999 solid;
     border-bottom: 1px #999 solid;
-    display: none
+    display: none;
+    z-index: 10
 }
 #add_opt li{
     padding: 4px 0;
@@ -408,7 +410,7 @@ aside {
 #timeline-s h3, #replies-h{
     border-bottom: 1px solid #eee;
     border-top: 1px solid #eee;
-    margin-bottom: 14px;
+    margin: 21px 0 14px;
     padding: 7px 0
 }
 #context_breadcrumb{
@@ -453,9 +455,11 @@ form label span{
     margin-top: 0 !important
 }
 #context-actions{
-    float: right;
-    margin: 14px 0;
-    padding: 3px 7px;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    padding: 0;
+    margin: 0;
 }
 #context-actions li{
     float: left;
@@ -465,7 +469,7 @@ form label span{
     height: 23px;
     vertical-align: middle
 }
-#context-actions li a:before, #search_results .brcr:before{
+#search_results .brcr:before{
     content: "\f0da  ";
     color: #c77405
 }
@@ -475,6 +479,20 @@ form label span{
 .gf textarea{
     clear: both;
     width: 100%
+}
+/* Experimental */
+.description{
+    -webkit-transition: height 2s ease;
+    -moz-transition: height 2s ease;
+    -ms-transition: height 2s ease;
+    -o-transition: height 2s ease;
+    transition: height 2s ease;
+    max-height: 200px;
+    overflow: hidden
+}
+.description:hover{
+    max-height: none;
+    height: auto
 }
 .description ul, ol, form ul, form ol{
     margin: 7px 0 7px 28px;
@@ -506,6 +524,7 @@ article p{
 }
 #manage_participants_div{
     position: absolute;
+    z-index: 10
 }
 #manage_participants_div b{
     margin-bottom: 7px;
@@ -543,6 +562,7 @@ button{
 #move_form{
     position: absolute;
     left: -220px;
+    z-index: 10
 }
 #move_form ul{
     margin-top: 7px
@@ -669,4 +689,19 @@ a.usr{
     -webkit-box-shadow: 3px 3px 8px -2px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 3px 8px -2px rgba(0,0,0,0.75);
     box-shadow: 3px 3px 8px -2px rgba(0,0,0,0.75);
+}
+.reply:before{
+    content: "\f112"
+}
+#move_context:before{
+    content: "\f0ec"
+}
+#delete_topic:before, #delete_context:before{
+    content: "\f014"
+}
+#edit_topic:before, #edit_context:before{
+    content: "\f044"
+}
+.no-border{
+    border: none !important
 }

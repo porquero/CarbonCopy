@@ -5,22 +5,24 @@ if (connected_user() !== FALSE && belongs_to('topic', $context, connected_user()
         <?php
         if ($user_locking === FALSE):
             ?>
-            <li>
-                <button class="<?php echo $info['status'] ?>" data-status="<?php echo $info['status'] ?>" data-context="<?php echo $context ?>" id="b_task">
-                    <span class="b_active"><?php echo lang($info['status']) ?></span>
-                    <span class="b_inactive"><?php echo lang($statuses[$info['status']]) ?></span>
-                </button>
-            </li>
             <?php if ($info['status'] === 'opened'): ?>
-                <li><a href="<?php echo site_url('/cc/topic/reply_form/' . $context) ?>"><?php echo lang('reply') ?></a></li>
+                <li><a href="<?php echo site_url('/cc/topic/reply_form/' . $context) ?>" class="reply" title="<?php echo lang('reply') ?>"></a></li>
                 <li style="position: relative">
-                    <a href="<?php echo site_url('/cc/topic/move_form/' . get_name_from_slug($context) . '|' . parent_context($context)) ?>" id="move_context"><?php echo lang('move'); ?></a>
+                    <a href="<?php echo site_url('/cc/topic/move_form/' . get_name_from_slug($context) . '|' . parent_context($context)) ?>" id="move_context" title="<?php echo lang('move'); ?>"></a>
                     <div id="move_form" class="mdl shadow"></div>
                 </li>
-                <li><a href="<?php echo site_url('/cc/topic/delete/' . get_name_from_slug($context) . '|' . parent_context($context)) ?>" id="delete_topic"><?php echo lang('delete') ?></a></li>
-                <li><a href="<?php echo site_url('/cc/topic/modify_form/' . $context) ?>"><?php echo lang('edit') ?></a></li>
+                <li><a href="<?php echo site_url('/cc/topic/delete/' . get_name_from_slug($context) . '|' . parent_context($context)) ?>" id="delete_topic" title="<?php echo lang('delete') ?>"></a></li>
+                <li><a href="<?php echo site_url('/cc/topic/modify_form/' . $context) ?>" title="<?php echo lang('edit') ?>" id="edit_topic"></a></li>
                 <?php
             endif;
+            ?>
+            <li>
+                <a href="javascript:void()" class="<?php echo $info['status'] ?>" data-status="<?php echo $info['status'] ?>" data-context="<?php echo $context ?>" id="b_task" title="<?php echo lang($statuses[$info['status']]) ?>">
+                    <span class="b_active"></span>
+                    <span class="b_inactive"></span>
+                </a>
+            </li>
+            <?php
         endif;
         ?>
     </ul>

@@ -69,7 +69,7 @@ class topic extends MX_Controller {
         $date = account_date_format($info['info']['created_date']);
         $url = site_url('/account/participant/profile/' . $info['info']['created_by']);
         $author = <<<PQR
-<div class="tpcdtl">
+<div class="tpcdtl no-border">
     <div id="usr-pub"><a href="{$url}" class="usr">{$info['info']['created_by']}</a>
     <span>{$date}</span></div>
 </div>
