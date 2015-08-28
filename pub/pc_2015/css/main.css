@@ -692,6 +692,9 @@ a.usr{
 .config-ico{
     background: transparent !important
 }
+.config-ico:hover{
+    text-decoration: none
+}
 .config-ico span:before{
     content: "\f085"
 }
