@@ -1,5 +1,4 @@
 <div class="tasks">
-
     <?php
     if (connected_user() !== FALSE):
         $key_date_due = key($due_date_topics);
@@ -74,8 +73,6 @@
         else:
             echo '<h2>' . lang('to_do') . '</h2><div class="duefor"><h3>&nbsp;</h3><ul><li>' . lang('nothing_happens') . '</li></ul></div>';
         endif;
-    else:
-        echo '<h2>' . lang('to_do') . '</h2><div class="duefor"><h3>&nbsp;</h3><ul><li>' . lang('only_user_tasks') . '</li></ul></div>';
     endif;
     ?>
 </div>

@@ -45,6 +45,7 @@ class resume extends MX_Controller {
         $this->tpl->variables(
                 array(
                     'title' => $info['name'],
+                    'head' => link_tag('pub/' . _TEMPLATE . '/css/resume.css'),
                     'tl_title' => lang('timeline') . $tl_date,
                     'description' => $info['info'],
                     'contexts' => $contexts,
