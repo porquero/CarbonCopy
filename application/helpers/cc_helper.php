@@ -13,7 +13,8 @@
  *
  * @return string Breadcrumb generated
  */
-function create_breadcrumb($path, $id_topic = NULL) {
+function create_breadcrumb($path, $id_topic = NULL)
+{
     if (strlen($path) === 0) {
         return NULL;
     }
@@ -47,7 +48,8 @@ PQR;
  *
  * @return string
  */
-function parent_context($full_context) {
+function parent_context($full_context)
+{
     $parent_context = preg_replace('/_[a-zA-Z0-9-\+\%\.]*$/', '', $full_context);
 
     if ($parent_context === $full_context) {
@@ -63,7 +65,8 @@ function parent_context($full_context) {
  * @param string $slug_path context/topic path slugged
  * @return string
  */
-function get_name_from_slug($slug_path) {
+function get_name_from_slug($slug_path)
+{
     $name = preg_match('/(\_[^\_]*)$/', $slug_path, $m);
     $name = preg_replace('/\_/', '', $m);
 
@@ -80,7 +83,8 @@ function get_name_from_slug($slug_path) {
  * @param string $topic_path
  * @return string
  */
-function topic_real_path($topic_path) {
+function topic_real_path($topic_path)
+{
     return preg_replace('/(\/[a-zA-Z0-9-]*)$/', '/_topics$1', $topic_path);
 }
 
@@ -90,7 +94,8 @@ function topic_real_path($topic_path) {
  * @param string $file_path
  * @return string
  */
-function file_real_path($file_path) {
+function file_real_path($file_path)
+{
     $file_path = preg_replace('/_/', '/', $file_path);
     $file_path = preg_replace('/(\/[^\/]*)$/', '/_files$1', $file_path);
     $expl = explode('/_files', $file_path);
@@ -107,7 +112,8 @@ function file_real_path($file_path) {
  *
  * @return string
  */
-function context_real_path($context) {
+function context_real_path($context)
+{
     $CI = & get_instance();
 
     return "_accounts/{$CI->session->userdata('current_account')}/contexts/" . unslug_path($context);
@@ -121,7 +127,8 @@ function context_real_path($context) {
  *
  * @return string
  */
-function account_date_format($date, $time = false) {
+function account_date_format($date, $time = false)
+{
     if (empty($date)) {
         return 'no date';
     }
@@ -141,7 +148,8 @@ function account_date_format($date, $time = false) {
  *
  * @return string
  */
-function account_date_format_mysql() {
+function account_date_format_mysql()
+{
     $CI = &get_instance();
     $info = Modules::run('file/read/json_content', "_accounts/{$CI->session->userdata('current_account')}/config.json");
 
@@ -154,7 +162,8 @@ function account_date_format_mysql() {
  * 
  * @param string $list_files
  */
-function file_basename(&$list_files, $key) {
+function file_basename(&$list_files, $key)
+{
     $list_files = basename($list_files);
 }
 
@@ -165,7 +174,8 @@ function file_basename(&$list_files, $key) {
  *
  * @return string
  */
-function nl2br_ml($string) {
+function nl2br_ml($string)
+{
     return preg_replace('/\n/m', '', nl2br($string));
 }
 
@@ -181,7 +191,8 @@ function nl2br_ml($string) {
  * @link http://cubiq.org/the-perfect-php-clean-url-generator
  * @link http://www.randomsequence.com/articles/removing-accented-utf-8-characters-with-php/
  */
-function slug_text($str, $replace = array(), $delimiter = '-') {
+function slug_text($str, $replace = array(), $delimiter = '-')
+{
     $str = urldecode($str);
     $s_pattern = 'ç,æ,œ,á,é,í,ó,ú,à,è,ì,ò,ù,ä,ë,ï,ö,ü,ÿ,â,ê,î,ô,û,å,e,i,ø,u,ñ,Ç,Æ,Œ,Á,É,Í,Ó,Ú,À,È,Ì,Ò,Ù,Ä,Ë,Ï,Ö,Ü,Ÿ,Â,Ê,Î,Ô,Û,Å,E,I,Ø,U,Ñ';
 
@@ -193,7 +204,7 @@ function slug_text($str, $replace = array(), $delimiter = '-') {
 
     $str = str_replace($_search, $_replace, $str);
 
-    if (!empty($replace)) {
+    if ( ! empty($replace)) {
         $str = str_replace((array) $replace, ' ', $str);
     }
 
@@ -212,7 +223,8 @@ function slug_text($str, $replace = array(), $delimiter = '-') {
  * @param type $str
  * @return type
  */
-function back2slash($str) {
+function back2slash($str)
+{
     return str_replace('\\', '/', $str);
 }
 
@@ -222,7 +234,8 @@ function back2slash($str) {
  * @param string $context
  * @return string
  */
-function final_slash($context) {
+function final_slash($context)
+{
     return preg_match("/\/$/", $context) ? $context : $context . '/';
 }
 
@@ -232,7 +245,8 @@ function final_slash($context) {
  * @param string $context
  * @return string
  */
-function slug_path($context) {
+function slug_path($context)
+{
     return preg_replace('/\//', '_', $context);
 }
 
@@ -242,7 +256,8 @@ function slug_path($context) {
  * @param type $context
  * @return type
  */
-function unslug_path($context) {
+function unslug_path($context)
+{
     return preg_replace('/\_/', '/', $context);
 }
 
@@ -252,7 +267,8 @@ function unslug_path($context) {
  * @param type $context
  * @return type
  */
-function unslug_for_timeline($context) {
+function unslug_for_timeline($context)
+{
     return '[' . preg_replace('/\_/', '][', $context) . ']';
 }
 
@@ -265,7 +281,8 @@ function unslug_for_timeline($context) {
  *
  * @see http://php.net/manual/en/function.glob.php#92565
  */
-function account_contexts($account_path) {
+function account_contexts($account_path)
+{
     $return = array();
     $ds = DIRECTORY_SEPARATOR;
     $path = _INC_ROOT . "_accounts{$ds}{$account_path}{$ds}contexts{$ds}";
@@ -297,7 +314,8 @@ function account_contexts($account_path) {
  * 
  * @return mixed string|false
  */
-function connected_user() {
+function connected_user()
+{
     $CI = & get_instance();
 
     return $CI->session->userdata('connected_user');
@@ -308,7 +326,8 @@ function connected_user() {
  * 
  * @return array
  */
-function current_account_info() {
+function current_account_info()
+{
     $CI = & get_instance();
 
     return $CI->session->userdata('current_account_info');
@@ -319,7 +338,8 @@ function current_account_info() {
  *
  * @return array
  */
-function user_info() {
+function user_info()
+{
     $CI = & get_instance();
 
     return $CI->session->userdata('user_info');
@@ -335,7 +355,8 @@ function user_info() {
  *
  * @return boolean
  */
-function belongs_to($context_type, $context_or_user, $user = NULL, $strict = FALSE) {
+function belongs_to($context_type, $context_or_user, $user = NULL, $strict = FALSE)
+{
     if ($context_type === 'account') {
         return Modules::run('cc/participant/belongs_to_account', $context_or_user);
     }
@@ -348,7 +369,8 @@ function belongs_to($context_type, $context_or_user, $user = NULL, $strict = FAL
  * 
  * @return boolean
  */
-function is_connected($type = array('participant')) {
+function is_connected($type = array('participant'))
+{
     $CI = & get_instance();
 
     $CI->load->helper('url');
@@ -364,7 +386,7 @@ function is_connected($type = array('participant')) {
 
     // Validate Privilegies.
     $user_info = user_info();
-    if (!(in_array($user_info['type'], (array) $type) || $user_info['type'] === 'administrator')) {
+    if ( ! (in_array($user_info['type'], (array) $type) || $user_info['type'] === 'administrator')) {
         $CI->session->set_flashdata('msg', 'No privilegies. Redirected to Home.');
         $CI->session->set_flashdata('msg_type', _MSG_WARNING);
 
@@ -379,7 +401,8 @@ function is_connected($type = array('participant')) {
  * 
  * @return boolean
  */
-function is_administrator() {
+function is_administrator()
+{
     $user_info = user_info();
 
     return $user_info['type'] === 'administrator';
@@ -395,14 +418,15 @@ function is_administrator() {
  *
  * @return string
  */
-function logged_data($participants, $data_logged, $data_not_logged = '', $user_locking = FALSE) {
+function logged_data($participants, $data_logged, $data_not_logged = '', $user_locking = FALSE)
+{
     if ($user_locking !== FALSE) {
         return '';
     }
 
     $plist = '';
     foreach ($participants as $participant) {
-        if (!isset($participant->info['id'])) {
+        if ( ! isset($participant->info['id'])) {
             continue;
         }
 
@@ -423,15 +447,18 @@ function logged_data($participants, $data_logged, $data_not_logged = '', $user_l
  * 
  * @return string Css class icon
  */
-function context_icon($info_context) {
+function context_icon($info_context)
+{
     if (isset($info_context['info']['visibility'])) {
         if ($info_context['info']['visibility'] === 'public') {
             return 'public';
-        } elseif ($info_context['info']['visibility'] === 'private' AND ! empty($info_context['info']['participants'])) {
+        }
+        elseif ($info_context['info']['visibility'] === 'private' AND ! empty($info_context['info']['participants'])) {
             return 'private-lock';
         }
-    } else {
-        if (!empty($info_context['info']['participants'])) {
+    }
+    else {
+        if ( ! empty($info_context['info']['participants'])) {
             return 'private-lock';
         }
     }
@@ -446,8 +473,9 @@ function context_icon($info_context) {
  * 
  * @return string Css class icon
  */
-function topic_icon($info_topic) {
-    if (!empty($info_topic['info']['participants'])) {
+function topic_icon($info_topic)
+{
+    if ( ! empty($info_topic['info']['participants'])) {
         return 'private-lock';
     }
 
@@ -459,7 +487,8 @@ function topic_icon($info_topic) {
  *
  * @return string
  */
-function site_url_ws() {
+function site_url_ws()
+{
     return preg_replace('/\/$/', '', site_url());
 }
 
@@ -470,14 +499,16 @@ function site_url_ws() {
  *
  * @see http://php.net/manual/en/function.rmdir.php#98622
  */
-function rrmdir($dir) {
+function rrmdir($dir)
+{
     if (is_dir($dir)) {
         $objects = scandir($dir);
         foreach ($objects as $object) {
             if ($object != "." && $object != "..") {
                 if (filetype($dir . "/" . $object) === "dir") {
                     rrmdir($dir . "/" . $object);
-                } else {
+                }
+                else {
                     unlink($dir . "/" . $object);
                 }
             }
@@ -493,7 +524,8 @@ function rrmdir($dir) {
  * @param type $file_name
  * @return string
  */
-function clean_uploaded_file_name($file_name) {
+function clean_uploaded_file_name($file_name)
+{
     $file_name = preg_replace('/[ -]{2,}/', '-', preg_replace('/[\_\(\)]/', '-', $file_name));
     preg_match('/\.[a-z0-9]*$/', $file_name, $ext);
     preg_match('/(.*)\.[a-z0-9]*$/', $file_name, $name);
@@ -514,7 +546,8 @@ function clean_uploaded_file_name($file_name) {
 
  * @return array
  */
-function glob_recursive($pattern, $flags = 0) {
+function glob_recursive($pattern, $flags = 0)
+{
     $files = glob($pattern, $flags);
 
     foreach (glob(dirname($pattern) . '/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
@@ -531,7 +564,8 @@ function glob_recursive($pattern, $flags = 0) {
  * 
  * @return string
  */
-function slug_full_topic_path($full_path) {
+function slug_full_topic_path($full_path)
+{
     $replace = array(
         '../_accounts/cc/contexts/',
         '/_topics',
@@ -544,16 +578,17 @@ function slug_full_topic_path($full_path) {
 /**
  * List enabled components
  */
-function list_enabled_components() {
+function list_enabled_components()
+{
     $enabled_components = Modules::run('extends/component/enabled');
 
-    if (!empty($enabled_components)) {
+    if ( ! empty($enabled_components)) {
         $components_list = '<div class="clear"></div><h3>' . lang('components') . '</h3><ul id="components_menu">';
         $in_menu = FALSE;
 
         foreach ($enabled_components as $component) {
 
-            if ($component['data']->in_menu === FALSE || ($component['data']->public === FALSE && !connected_user())) {
+            if ($component['data']->in_menu === FALSE || ($component['data']->public === FALSE && ! connected_user())) {
                 continue;
             }
 
@@ -567,4 +602,45 @@ function list_enabled_components() {
     }
 
     return '';
+}
+
+/**
+ * Functions for old php versions
+ */
+if ( ! function_exists('array_replace_recursive')) {
+
+    function array_replace_recursive($array, $array1)
+    {
+
+        function recurse($array, $array1)
+        {
+            foreach ($array1 as $key => $value) {
+                // create new key in $array, if it is empty or not an array
+                if ( ! isset($array[$key]) || (isset($array[$key]) && ! is_array($array[$key]))) {
+                    $array[$key] = array();
+                }
+
+                // overwrite the value in the base array
+                if (is_array($value)) {
+                    $value = recurse($array[$key], $value);
+                }
+                $array[$key] = $value;
+            }
+            return $array;
+        }
+
+        // handle the arguments, merge one by one
+        $args = func_get_args();
+        $array = $args[0];
+        if ( ! is_array($array)) {
+            return $array;
+        }
+        for ($i = 1; $i < count($args); $i ++ ) {
+            if (is_array($args[$i])) {
+                $array = recurse($array, $args[$i]);
+            }
+        }
+        return $array;
+    }
+
 }
