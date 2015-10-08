@@ -65,6 +65,9 @@ class topic extends MX_Controller {
             return;
         }
 
+        // Set user date participation.
+        $this->_set_last_participation($context);
+
         $info = $this->info($context);
         $date = account_date_format($info['info']['created_date']);
         $url = site_url('/account/participant/profile/' . $info['info']['created_by']);
@@ -106,6 +109,7 @@ PQR;
               'msg_type' => isset($msg_type) ? $msg_type : '',
               'msg' => isset($msg) ? $msg : '',
               'statuses' => array('opened' => 'close', 'closed' => 'open'),
+              'participation' => $this->_get_participations($topic),
         ));
 
         $this->tpl->section('_sidebar', '_sidebar.phtml');
@@ -213,6 +217,7 @@ PQR;
 
             if ($dir_created === TRUE) {
                 $this->write->dir($dir_path . '/_files');
+                $this->write->dir($dir_path . '/_participation');
                 $topic_info = array(
                     'id' => $this->input->post('id'),
                     'title' => trim($this->input->post('topic_title')),
@@ -1059,6 +1064,40 @@ PQR;
         else {
             echo 'Not allowed';
         }
+    }
+
+    /**
+     * Set last time date that user see the topic.
+     * 
+     * @param string $topic
+     * 
+     * @return bool
+     */
+    private function _set_last_participation($topic)
+    {
+        $this->load->module('file/write');
+
+        // Validate if participation dir exits.
+        $participation_dir = _INC_ROOT . '_accounts/' . $this->session->userdata('current_account')
+          . '/contexts/' . $this->misc->final_slash(topic_real_path(unslug_path($topic))) . '_participation/';
+
+        if ( ! is_dir($participation_dir)) {
+            $this->write->dir($participation_dir);
+        }
+
+        $participation_file = $participation_dir . connected_user();
+
+        return $this->write->archive($participation_file, account_date_format(date('Y-m-d H:i:s'), TRUE), 'w');
+    }
+
+    /**
+     * Get users participation for the topic.
+     * 
+     * @param mixed $topic
+     */
+    private function _get_participations($topic)
+    {
+        return $this->read->listing(topic_real_path($topic) . '/_participation', 'any');
     }
 
 }

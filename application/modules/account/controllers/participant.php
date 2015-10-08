@@ -376,7 +376,7 @@ PQR;
         $this->email->set_mailtype('html');
 
         $this->email->send();
-
+        
         echo json_encode(array(
             'result' => 'ok',
             'message' => ''

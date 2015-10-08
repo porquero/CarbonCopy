@@ -7,6 +7,13 @@ hr{
     padding: 7px;
     word-wrap: break-word
 }
+#replies ul ul{
+    list-style-type: circle;
+    list-style-position: inside;
+}
+#replies ul ul li, #replies ul ol li{
+    border: none;
+}
 .r-date{
     float: right;
     color: #4B5558

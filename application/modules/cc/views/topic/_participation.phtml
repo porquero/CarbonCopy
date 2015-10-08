@@ -1,0 +1,14 @@
+<h3>Participation</h3>
+<ul>
+    <?php
+    if (count($participation) > 0):
+        foreach ($participation as $user):
+            ?>
+            <li>
+                <a href="<?php echo site_url('/account/participant/profile/' . basename($user)) ?>" class="usr"><?php echo basename($user) ?></a>
+                 <?php echo $this->read->content($user) ?></li>
+                <?php
+            endforeach;
+        endif;
+        ?>
+</ul>
