@@ -330,7 +330,7 @@ aside {
     display: block;
     margin: 1px 0;
 }
-#contexts ul a, a.context{
+#contexts ul a, a.context, .context{
     padding: 0 1.5%;
     color: #fff;
     text-align: center;
