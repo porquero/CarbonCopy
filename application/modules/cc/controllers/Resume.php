@@ -10,7 +10,7 @@ if (!defined('BASEPATH'))
  * @subpackage cc
  * @author porquero
  */
-class resume extends MX_Controller {
+class Resume extends MX_Controller {
 
     function __construct()
     {

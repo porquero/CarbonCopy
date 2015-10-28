@@ -10,7 +10,7 @@ if ( ! defined('BASEPATH'))
  * @subpackage cc
  * @author porquero
  */
-class topic extends MX_Controller {
+class Topic extends MX_Controller {
 
     /**
      * Filename for topic replies.

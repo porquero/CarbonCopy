@@ -10,7 +10,7 @@ if ( ! defined('BASEPATH'))
  * @subpackage file
  * @author porquero
  */
-class read extends MX_Controller {
+class Read extends MX_Controller {
 
     /**
      * Get list of directories from path

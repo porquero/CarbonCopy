@@ -10,7 +10,7 @@ if ( ! defined('BASEPATH'))
  * @subpackage account
  * @author porquero
  */
-class participant extends MX_Controller {
+class Participant extends MX_Controller {
 
     /**
      * Get all participants from account

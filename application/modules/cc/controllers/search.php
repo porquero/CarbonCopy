@@ -10,7 +10,7 @@ if (!defined('BASEPATH'))
  * @subpackage cc
  * @author Cristian Riffo <criffoh@gmail.com>
  */
-class search extends MX_Controller {
+class Search extends MX_Controller {
 
     public function __construct() {
         parent::__construct();

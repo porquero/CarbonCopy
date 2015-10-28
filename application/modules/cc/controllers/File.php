@@ -10,7 +10,7 @@ if ( ! defined('BASEPATH'))
  * @subpackage cc
  * @author porquero
  */
-class file extends MX_Controller {
+class File extends MX_Controller {
 
     /**
      * Make downloable file from slug_context

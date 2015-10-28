@@ -8,7 +8,7 @@ if (!defined('BASEPATH'))
  *
  * @author Cristian Riffo <criffoh@gmail.com>
  */
-class tests extends MX_Controller {
+class Tests extends MX_Controller {
 
     public function all_topics($context) {
         $context = preg_replace('/\_/', '/', $context);

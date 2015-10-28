@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
  * Show contexts as sitemap format.
  * 
  */
-class sitemap extends component {
+class Sitemap extends component {
 
     /**
      * Template variables.

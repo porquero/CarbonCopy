@@ -7,7 +7,7 @@
  * @subpackage cc
  * @author Cristian Riffo <criffoh at gmail.com>
  */
-class m_cron extends CI_Model {
+class M_cron extends CI_Model {
 
     /**
      * Participation types to make query.

@@ -10,7 +10,7 @@ include_once dirname(__FILE__) . '/cc_extends.php';
  *
  * @author Cristian
  */
-class section extends cc_extends {
+class Section extends cc_extends {
 
 	/**
 	 * Load section and run.

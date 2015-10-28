@@ -5,7 +5,7 @@
  *
  * @author Cristian Riffo <criffoh at gmail.com>
  */
-class due extends MX_Controller {
+class Due extends MX_Controller {
 
     /**
      * Return date range to use it in due line

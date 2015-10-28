@@ -8,7 +8,7 @@
  * @author Cristian Riffo <criffoh@gmail.com>
  *
  */
-class user extends MX_Controller {
+class User extends MX_Controller {
 
     /**
      * Register form

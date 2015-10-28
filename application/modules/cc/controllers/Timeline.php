@@ -10,7 +10,7 @@ if ( ! defined('BASEPATH'))
  * @subpackage cc
  * @author porquero
  */
-class timeline extends MX_Controller {
+class Timeline extends MX_Controller {
 
     public $menu_act = array(
         'all' => '',

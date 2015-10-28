@@ -7,7 +7,7 @@
  * @subpackage cc
  * @author Cristian Riffo <criffoh at gmail.com>
  */
-class m_due extends CI_Model {
+class M_due extends CI_Model {
 
     /**
      * Due account table

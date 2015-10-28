@@ -8,7 +8,7 @@ if ( ! defined('BASEPATH'))
  *
  * @author Cristian Riffo <criffoh@gmail.com>
  */
-class cc_context extends MX_Controller {
+class Cc_context extends MX_Controller {
 
 	public function labels($context)
 	{

@@ -7,7 +7,7 @@
  * @subpackage cc
  * @author Cristian Riffo <criffoh@gmail.com>
  */
-class m_user extends CI_Model {
+class M_user extends CI_Model {
 
     protected $_table_name = 'user';
 

@@ -10,7 +10,7 @@ if ( ! defined('BASEPATH'))
  * @subpackage cc
  * @author porquero
  */
-class cron extends MX_Controller {
+class Cron extends MX_Controller {
 
     /**
      * Translation of interval for Mysql query

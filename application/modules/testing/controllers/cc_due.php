@@ -5,7 +5,7 @@
  *
  * @author Cristian Riffo <criffoh at gmail.com>
  */
-class cc_due extends MX_Controller {
+class Cc_due extends MX_Controller {
 
 	public function range()
 	{

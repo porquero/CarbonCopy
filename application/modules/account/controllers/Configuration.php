@@ -10,7 +10,7 @@ if (!defined('BASEPATH'))
  * @subpackage account
  * @author porquero
  */
-class configuration extends MX_Controller {
+class Configuration extends MX_Controller {
 
     /**
      * Get item value from account config file.

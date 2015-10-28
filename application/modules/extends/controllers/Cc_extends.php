@@ -5,7 +5,7 @@
  *
  * @author Cristian
  */
-class cc_extends extends MX_Controller {
+class Cc_extends extends MX_Controller {
 
     /**
      * Return installed extends indicating if it is enable (true) or not (false)

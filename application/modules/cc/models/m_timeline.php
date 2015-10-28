@@ -7,7 +7,7 @@
  * @subpackage cc
  * @author porquero
  */
-class m_timeline extends CI_Model {
+class M_timeline extends CI_Model {
 
     /**
      * Timeline account table

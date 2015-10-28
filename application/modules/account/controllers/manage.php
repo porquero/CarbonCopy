@@ -10,7 +10,7 @@ if ( ! defined('BASEPATH'))
  * @subpackage account
  * @author Cristian Riffo <criffoh@gmail.com>
  */
-class manage extends MX_Controller {
+class Manage extends MX_Controller {
 
     /**
      * Create a new CC account

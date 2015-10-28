@@ -4,7 +4,7 @@
  *
  * @author Cristian
  */
-class m_component extends CI_Model {
+class M_component extends CI_Model {
 
     public function __construct() {
         parent::__construct();

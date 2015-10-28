@@ -10,7 +10,7 @@ include_once dirname(__FILE__) . '/cc_extends.php';
  *
  * @author Cristian
  */
-class component extends cc_extends {
+class Component extends cc_extends {
 
     /**
      * Load component and its view.

@@ -8,7 +8,7 @@ if (!defined('BASEPATH'))
  *
  * @author Cristian
  */
-class m_example extends m_component {
+class M_example extends m_component {
 
     public function timeline() {
         $q = <<<PQR

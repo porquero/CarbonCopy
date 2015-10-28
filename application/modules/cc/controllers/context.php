@@ -10,7 +10,7 @@ if ( ! defined('BASEPATH'))
  * @subpackage cc
  * @author porquero
  */
-class context extends MX_Controller {
+class Context extends MX_Controller {
 
     /**
      * Used to cache method results

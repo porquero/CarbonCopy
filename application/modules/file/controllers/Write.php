@@ -10,7 +10,7 @@ if ( ! defined('BASEPATH'))
  * @subpackage file
  * @author porquero
  */
-class write extends MX_Controller {
+class Write extends MX_Controller {
 
 	/**
 	 * Create archive and add content using mode received

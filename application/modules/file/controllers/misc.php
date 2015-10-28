@@ -12,7 +12,7 @@ if ( ! defined('BASEPATH'))
  *
  * @deprecated All these function are helper now! Please see cc_helper.php
  */
-class misc extends MX_Controller {
+class Misc extends MX_Controller {
 
 	/**
 	 * Return path with final slash, if hasn't

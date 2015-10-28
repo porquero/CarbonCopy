@@ -3,7 +3,7 @@
 /**
  * Export all topics for current context.
  */
-class export extends section {
+class Export extends section {
 
     /**
      * Export butotn

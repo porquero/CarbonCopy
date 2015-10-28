@@ -7,7 +7,7 @@ if ( ! defined('BASEPATH'))
  *
  * @author Cristian Riffo <criffoh@gmail.com>
  */
-class nicedit extends MX_Controller {
+class Nicedit extends MX_Controller {
 
     private $nicupload_allowed_extensions = array('jpg', 'jpeg', 'png', 'gif', 'bmp');
 
