@@ -14,16 +14,16 @@ if ( ! defined('BASEPATH'))
  */
 
 $hook['pre_controller'][] = array(
-		'class' => 'PRE_C',
+		'class' => 'Precc',
 		'function' => 'current_accoount',
-		'filename' => 'PRE_C.php',
+		'filename' => 'Precc.php',
 		'filepath' => 'hooks',
 );
 
 $hook['pre_controller'][] = array(
-		'class' => 'PRE_C',
+		'class' => 'Precc',
 		'function' => 'user_language',
-		'filename' => 'PRE_C.php',
+		'filename' => 'Precc.php',
 		'filepath' => 'hooks',
 );
 

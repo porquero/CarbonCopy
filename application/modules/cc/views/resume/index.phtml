@@ -1,6 +1,6 @@
 <div class="tasks">
     <?php
-    if (connected_user() !== FALSE):
+    if (connected_user() !== NULL):
         $key_date_due = key($due_date_topics);
         if (!is_null($key_date_due) && count($due_date_topics[$key_date_due])):
             ?>

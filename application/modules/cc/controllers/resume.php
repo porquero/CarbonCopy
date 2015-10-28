@@ -12,6 +12,11 @@ if (!defined('BASEPATH'))
  */
 class resume extends MX_Controller {
 
+    function __construct()
+    {
+        parent::__construct();
+    }
+    
     /**
      *  Resume for all contexts
      *

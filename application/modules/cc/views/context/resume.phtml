@@ -1,5 +1,5 @@
 <?php
-if (connected_user() !== FALSE && belongs_to('context', $context, connected_user())):
+if (connected_user() !== NULL && belongs_to('context', $context, connected_user())):
     ?>
     <ul id="context-actions">
         <?php if ($user_locking === FALSE): ?>

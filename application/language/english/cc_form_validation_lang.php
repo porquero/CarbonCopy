@@ -2,16 +2,16 @@
 
 // NOTE: is not possible use MY_form_validation_lang and form_validation_lang. It's possible that CI has a Bug.
 
-$lang['id'] = 'id';
-$lang['due'] = 'due';
-$lang['description'] = 'description';
-$lang['topic_title'] = 'title';
-$lang['topic_description'] = 'description';
-$lang['valid_date_YYYYMMDD'] = 'The %s must a date';
-$lang['message'] = 'message';
-$lang['username'] = 'Username';
-$lang['email'] = 'Email';
-$lang['name'] = 'Name';
-$lang['account_name'] = 'Account name';
-$lang['home_info'] = 'Home info';
-$lang['date_format'] = 'Date format';
+$lang['form_validation_id'] = 'id';
+$lang['form_validation_due'] = 'due';
+$lang['form_validation_description'] = 'description';
+$lang['form_validation_topic_title'] = 'title';
+$lang['form_validation_topic_description'] = 'description';
+$lang['form_validation_valid_date_YYYYMMDD'] = 'The {field} must a date';
+$lang['form_validation_message'] = 'message';
+$lang['form_validation_username'] = 'Username';
+$lang['form_validation_email'] = 'Email';
+$lang['form_validation_name'] = 'Name';
+$lang['form_validation_account_name'] = 'Account name';
+$lang['form_validation_home_info'] = 'Home info';
+$lang['form_validation_date_format'] = 'Date format';

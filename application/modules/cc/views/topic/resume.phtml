@@ -1,5 +1,5 @@
 <?php
-if (connected_user() !== FALSE && belongs_to('topic', $context, connected_user(), TRUE)):
+if (connected_user() !== NULL && belongs_to('topic', $context, connected_user(), TRUE)):
     ?>
     <ul id="context-actions">
         <?php

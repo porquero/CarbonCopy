@@ -33,14 +33,14 @@ $current_account = current_account_info();
                         </div>
                     </div>
                     <?php
-                    if (connected_user() !== FALSE) {
+                    if (connected_user() !== NULL) {
                         echo Modules::run('cc/due/date_line', preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $this->uri->segment(5)) === 1 ? $this->uri->segment(5) : date('Y-m-d'), 15, TRUE);
                     }
                     ?>
                 </div>
                 <div class="flexc sn">
                     <?php
-                    if (connected_user() !== FALSE):
+                    if (connected_user() !== NULL):
                         ?>
                         <div id="search-box">
                             <input type="text" name="seach" id="search" placeholder="Search" tabindex="1" />
@@ -50,7 +50,7 @@ $current_account = current_account_info();
                     <nav>
                         <ul>
                             <li><a href="<?php echo site_url() ?>"><?php echo lang('home') ?></a></li>
-                            <?php if (FALSE !== connected_user()): ?>
+                            <?php if (NULL !== connected_user()): ?>
                                 <li><a href="<?php echo site_url('/account/participant/config_form') ?>"><?php echo connected_user() /* . lang('connected_in') . $current_account['name'] */ ?></a></li>
                                 <li><a href="<?php echo site_url('/account/participant/all_people') ?>"><?php echo lang('all_people') ?></a></li>
                                 <?php

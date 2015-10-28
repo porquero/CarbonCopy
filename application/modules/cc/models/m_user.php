@@ -265,7 +265,7 @@ class m_user extends CI_Model {
      */
     public function accounts($username)
     {
-        if ($username === FALSE) {
+        if ($username === NULL) {
             $r = new stdClass();
             $r->accounts = 'cc';
         }

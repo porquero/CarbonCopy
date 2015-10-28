@@ -4,6 +4,6 @@ echo '<b>' . $title . '</b>';
 $attributes = array('class' => 'gf', 'id' => 'manage_participants_form');
 echo form_open('/cc/topic/manage_participants/' . $context, $attributes);
 echo Modules::run('account/participant/html_checkbox_for_context', $context, 'participants', $participants, TRUE);
-echo form_button('submit', lang('cancel'), 'submit', 'value="cancel"') . nbs();
-echo form_button('submit', lang('ok'), 'submit', 'value="ok"') . nbs();
+echo form_button('submit', lang('cancel'), 'submit', 'value="cancel"') . '&nbsp;';
+echo form_button('submit', lang('ok'), 'submit', 'value="ok"') . '&nbsp;';
 echo form_close();

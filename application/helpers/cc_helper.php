@@ -379,7 +379,7 @@ function is_connected($type = array('participant'))
     $CI->output->set_header("Pragma: no-cache");
 
     // Validate if connected.
-    if (connected_user() === FALSE) {
+    if (connected_user() === NULL) {
         redirect('cc/user/login_form/' . base64_encode(current_url()));
         exit;
     }
@@ -433,7 +433,7 @@ function logged_data($participants, $data_logged, $data_not_logged = '', $user_l
         $plist .= $participant->info['id'] . '|';
     }
 
-    if (FALSE !== connected_user() && strstr($plist, connected_user()) !== FALSE) {
+    if (NULL !== connected_user() && strstr($plist, connected_user()) !== FALSE) {
         return $data_logged;
     }
 
