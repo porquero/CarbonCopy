@@ -34,7 +34,7 @@ Features
 Configuration
 -----------------
 
-CarbonCopy is developed using CodeIgniter 2.2.0 PHP Framework and wiredesignz HMVC.
+CarbonCopy is developed using CodeIgniter 3.0.2 PHP Framework and wiredesignz HMVC.
 
 * Modify file application/config/config.php to set Base Site URL.
 * Modify file application/config/database.php to set database conection settings.
