@@ -44,6 +44,9 @@ define('_TEMPLATE', 'pc_2015');
 define('_TEMPLATE_BLANK_HTML', 'BLANK_html.phtml');
 define('_TEMPLATE_BLANK_TXT', 'BLANK_txt.phtml');
 
+// View path.
+define('VIEWPATH', APPPATH . 'views/');
+
 // Include path.
 define('_INC', dirname(__FILE__) . '/../');
 define('_INC_ROOT', dirname(__FILE__) . '/../../');
