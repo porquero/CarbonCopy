@@ -20,7 +20,7 @@ class user extends MX_Controller {
     public function register_form($invitation_hash = '')
     {
         // Only for not connected.
-        if (connected_user() !== FALSE) {
+        if (connected_user() !== NULL) {
             redirect();
             return;
         }
@@ -152,7 +152,7 @@ class user extends MX_Controller {
      */
     public function login_form($redirect = '')
     {
-        if (connected_user() !== FALSE) {
+        if (connected_user() !== NULL) {
             redirect();
         }
 
@@ -476,7 +476,7 @@ class user extends MX_Controller {
     public function reset_password_form()
     {
         // Only for not connected.
-        if (connected_user() !== FALSE) {
+        if (connected_user() !== NULL) {
             redirect();
             return;
         }

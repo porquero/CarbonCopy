@@ -88,11 +88,12 @@ class read extends MX_Controller {
         if (file_exists($file_path) === TRUE && is_file($file_path) === TRUE) {
             $this->load->helper('file');
 
-            return read_file($file_path);
+            return file_get_contents($file_path);
         }
         else {
             $msg = 'File ' . $file_path . ' doesn\'t exists!';
             Plogger::log($msg);
+            Plogger::logVar(debug_backtrace());
             echo $msg . '<br />';
 
             return FALSE;

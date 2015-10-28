@@ -1011,7 +1011,7 @@ PQR;
     {
         is_connected();
 
-        if ($this->input->is_ajax_request() && $this->input->get('status') !== FALSE && $this->input->get('context') !== FALSE) {
+        if ($this->input->is_ajax_request() && $this->input->get('status') !== NULL && $this->input->get('context') !== NULL) {
             $this->load->module('file/misc');
             $this->load->model('m_timeline');
             $this->load->model('m_due');
