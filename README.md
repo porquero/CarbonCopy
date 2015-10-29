@@ -30,21 +30,3 @@ Features
 * It is 99% NoSQL.
 * Top calendar for due dates.
 * You can extend application with components and sections.
-
-Configuration
------------------
-
-CarbonCopy is developed using CodeIgniter 3.0.2 PHP Framework and wiredesignz HMVC.
-
-* Modify file application/config/config.php to set Base Site URL.
-* Modify file application/config/database.php to set database conection settings.
-* Make sure that _accounts/cc and application/logs is writeable recursively.
-* If rewrite engine is not use, disable it in .htaccess.
-
-
-Setup
--------
-
-* Create database using name used in database.php
-* Go to setup in the browser (http://installation-path/setup) and fill setup form with the first user account.
-* Delete setup directory.
