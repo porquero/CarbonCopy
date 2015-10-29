@@ -3,7 +3,7 @@
 if ( ! defined('BASEPATH'))
 	exit('No direct script access allowed');
 
-include_once dirname(__FILE__) . '/cc_extends.php';
+include_once dirname(__FILE__) . '/Cc_extends.php';
 
 /**
  * Sections manager

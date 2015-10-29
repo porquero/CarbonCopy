@@ -113,7 +113,7 @@ PQR;
 $lang['registration_successful'] = 'Registro completado';
 $lang['check_email'] = 'Por favor revisa tu correo.';
 $lang['login_form'] = 'Ingresar.';
-$lang['lconnect_cc'] = 'Conectar a CarbonCopy';
+$lang['connect_cc'] = 'Conectar a CarbonCopy';
 $lang['not_validated'] = 'No has validado tu cuenta aún. Por favor revisa tu correo.';
 $lang['invalid_login'] = 'Usuario o Contraseña inválidos.';
 $lang['invalid_data'] = 'Datos inválidos';
