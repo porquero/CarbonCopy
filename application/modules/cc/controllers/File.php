@@ -54,7 +54,6 @@ class file extends MX_Controller {
 
         $config['upload_path'] = $path_upload;
         $config['allowed_types'] = '*';
-        $config['max_size'] = 50000;
         $config['max_width'] = 4000;
         $config['max_height'] = 4000;
         $config['overwrite'] = FALSE;
