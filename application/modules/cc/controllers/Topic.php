@@ -239,14 +239,17 @@ PQR;
                 $message = '';
                 $attach_process = TRUE;
 
-                $this->file_upload_result = $this->file->upload($dir_path . '/_files');
+                // Only upload when user add file.
+                if (count($_FILES) > 0) {
+                    $this->file_upload_result = $this->file->upload($dir_path . '/_files');
 
-                if ($this->file_upload_result['result'] === 'ok') {
-                    $this->file_name = $this->file_upload_result['data']['upload_data']['file_name'];
-                }
-                else {
-                    $attach_process = FALSE;
-                    $message = strip_tags($this->file_upload_result['data']['error']);
+                    if ($this->file_upload_result['result'] === 'ok') {
+                        $this->file_name = $this->file_upload_result['data']['upload_data']['file_name'];
+                    }
+                    else {
+                        $attach_process = FALSE;
+                        $message = strip_tags($this->file_upload_result['data']['error']);
+                    }
                 }
 
                 $res = $dir_created == TRUE && $archive_created == TRUE && $attach_process == TRUE ? 'ok' : 'fail';
@@ -381,15 +384,18 @@ PQR;
             $message = '';
             $attach_process = TRUE;
 
-            $this->file_upload_result = $this->file->upload($path . '/_files');
+            // Only upload when user add file.
+            if (count($_FILES) > 0) {
+                $this->file_upload_result = $this->file->upload($path . '/_files');
 
-            if ($this->file_upload_result['result'] === 'ok') {
-                $this->file_name = $this->file_upload_result['data']['upload_data']['file_name'];
-            }
-            else {
-                $attach_process = FALSE;
-                $message = strip_tags($this->file_upload_result['data']['error']);
-                $reply_saved = FALSE;
+                if ($this->file_upload_result['result'] === 'ok') {
+                    $this->file_name = $this->file_upload_result['data']['upload_data']['file_name'];
+                }
+                else {
+                    $attach_process = FALSE;
+                    $message = strip_tags($this->file_upload_result['data']['error']);
+                    $reply_saved = FALSE;
+                }
             }
 
             if ($attach_process === TRUE) {
