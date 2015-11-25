@@ -41,9 +41,16 @@ class Precc {
         $this->_ci->lang->load('cc', $language);
     }
 
-    public function sections()
+    public function template()
     {
+        $this->_ci->load->library('user_agent');
         
+        if ($this->_ci->agent->is_mobile()) {
+            define('_TEMPLATE', 'mob_2015');
+        }
+        else {
+            define('_TEMPLATE', 'pc_2015');
+        }
     }
 
 }

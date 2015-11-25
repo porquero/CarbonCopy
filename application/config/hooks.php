@@ -27,6 +27,12 @@ $hook['pre_controller'][] = array(
 		'filepath' => 'hooks',
 );
 
+$hook['pre_controller'][] = array(
+		'class' => 'Precc',
+		'function' => 'template',
+		'filename' => 'Precc.php',
+		'filepath' => 'hooks',
+);
 
 /* End of file hooks.php */
 /* Location: ./application/config/hooks.php */
